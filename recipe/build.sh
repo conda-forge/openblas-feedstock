@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# We only want to use `gfortran` from `gcc`.
+# Using all of these has caused some problems.
+# See this issue.
+# ( https://github.com/conda-forge/numpy-feedstock/issues/15 )
+rm "${PREFIX}/bin/gcc"
+rm "${PREFIX}/bin/g++"
+
 # See this workaround
 # ( https://github.com/xianyi/OpenBLAS/issues/818#issuecomment-207365134 ).
 CF="${CFLAGS}"
