@@ -20,7 +20,7 @@ build:
 requirements:
   build:
     - python    # [win]
-    - perl      # [win]
+    - perl
     - gcc       # [unix]
 
   run:
