@@ -10,7 +10,7 @@ source:
   md5: 805e7f660877d588ea7e3792cda2ee65
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win]
   track_features:
     - vc9     # [win and py27]
@@ -20,11 +20,13 @@ build:
 requirements:
   build:
     - python    # [win]
-    - perl      # [win]
-    - gcc       # [unix]
+    - perl
+    - gcc  4.8.*       # [unix]
+    - isl 0.12.*
 
   run:
-    - libgcc    # [unix]
+    - libgcc  4.8.*    # [unix]
+    - isl 0.12.*
 
 test:
   commands:
@@ -43,3 +45,4 @@ extra:
     - gillins
     - groutr
     - jakirkham
+    - ocefpaf
