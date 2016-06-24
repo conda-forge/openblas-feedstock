@@ -19,13 +19,14 @@ build:
 
 requirements:
   build:
-    - python       # [win]
+    - python           # [win]
     - perl
-    - gcc          # [unix]
+    - gcc              # [unix]
+    - cloog 0.18.0 10  # [unix]
 
   run:
-    - libgfortran  # [linux]
-    - libgcc       # [osx]
+    - libgfortran      # [linux]
+    - libgcc           # [osx]
 
 test:
   commands:
