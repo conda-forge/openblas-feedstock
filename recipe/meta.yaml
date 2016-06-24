@@ -24,7 +24,8 @@ requirements:
     - gcc          # [unix]
 
   run:
-    - libgfortran  # [unix]
+    - libgfortran  # [linux]
+    - libgcc       # [osx]
 
 test:
   commands:
