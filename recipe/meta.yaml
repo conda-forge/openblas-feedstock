@@ -10,7 +10,7 @@ source:
   md5: 805e7f660877d588ea7e3792cda2ee65
 
 build:
-  number: 3
+  number: 4
   skip: true  # [win]
   track_features:
     - vc9     # [win and py27]
