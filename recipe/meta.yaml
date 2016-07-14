@@ -10,7 +10,7 @@ source:
   md5: 805e7f660877d588ea7e3792cda2ee65
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win]
   track_features:
     - vc9     # [win and py27]
@@ -22,11 +22,9 @@ requirements:
     - python           # [win]
     - perl
     - gcc              # [unix]
-    - cloog 0.18.0 10  # [unix]
 
   run:
-    - libgfortran      # [linux]
-    - libgcc           # [osx]
+    - libgfortran
 
 test:
   commands:
