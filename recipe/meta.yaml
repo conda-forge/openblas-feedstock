@@ -22,7 +22,6 @@ requirements:
     - python           # [win]
     - perl
     - gcc              # [unix]
-    - cloog 0.18.0 10  # [unix]
 
   run:
     - libgfortran      # [linux]
