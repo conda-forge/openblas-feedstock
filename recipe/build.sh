@@ -19,7 +19,7 @@ eval export ${LIBRARY_SEARCH_VAR}="${PREFIX}/lib"
 # Build LAPACK.
 # Enable threading. This can be controlled to a certain number by
 # setting OPENBLAS_NUM_THREADS before loading the library.
-make QUIET_MAKE=1 DYNAMIC_ARCH=1 BINARY=${ARCH} NO_LAPACK=0 NO_AFFINITY=1 USE_THREAD=0 CFLAGS="${CF}"
+make QUIET_MAKE=1 DYNAMIC_ARCH=1 BINARY=${ARCH} NO_LAPACK=0 NO_AFFINITY=1 USE_THREAD=1 CFLAGS="${CF}"
 # Fix paths to ensure they have the $PREFIX in them.
 if [[ `uname` == 'Darwin' ]]; then
     for OPENBLAS_LIB in $( find "${PREFIX}/lib" -name "libopenblas*.dylib" ); do
