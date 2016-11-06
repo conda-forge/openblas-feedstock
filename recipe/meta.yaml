@@ -1,4 +1,4 @@
-{% set version = "0.2.18" %}
+{% set version = "0.2.19" %}
 
 package:
   name: openblas
@@ -7,10 +7,10 @@ package:
 source:
   fn: openblas-{{ version }}.tar.gz
   url: https://github.com/xianyi/OpenBLAS/archive/v{{ version }}.tar.gz
-  md5: 805e7f660877d588ea7e3792cda2ee65
+  sha256: 9c40b5e4970f27c5f6911cb0a28aa26b6c83f17418b69f8e5a116bb983ca8557
 
 build:
-  number: 6
+  number: 0
   skip: true  # [win]
   track_features:
     - vc9     # [win and py27]
@@ -44,3 +44,4 @@ extra:
     - gillins
     - groutr
     - jakirkham
+    - jschueller
