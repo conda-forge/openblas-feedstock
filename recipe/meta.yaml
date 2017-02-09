@@ -24,7 +24,7 @@ requirements:
   build:
     - toolchain
     - python           # [win]
-    - perl
+    - perl 5.22.2.1
     - gcc              # [unix]
 
   run:
