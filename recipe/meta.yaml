@@ -8,9 +8,12 @@ source:
   fn: openblas-{{ version }}.tar.gz
   url: https://github.com/xianyi/OpenBLAS/archive/v{{ version }}.tar.gz
   sha256: 9c40b5e4970f27c5f6911cb0a28aa26b6c83f17418b69f8e5a116bb983ca8557
+  patches:
+    # Create pkg-config files, blas.pc, cblas.pc and lapack.pc
+    - pkg-config.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   track_features:
     - vc9     # [win and py27]
@@ -21,7 +24,7 @@ requirements:
   build:
     - toolchain
     - python           # [win]
-    - perl
+    - perl 5.22.2.1
     - gcc              # [unix]
 
   run:
