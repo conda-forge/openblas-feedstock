@@ -8,10 +8,10 @@ unset CFLAGS
 # Depending on our platform, shared libraries end with either .so or .dylib
 if [[ `uname` == 'Darwin' ]]; then
      export LIBRARY_SEARCH_VAR=DYLD_FALLBACK_LIBRARY_PATH
-#    DYLIB_EXT=dylib
+     DYLIB_EXT=dylib
 else
      export LIBRARY_SEARCH_VAR=LD_LIBRARY_PATH
-#    DYLIB_EXT=so
+     DYLIB_EXT=so
 fi
 eval export ${LIBRARY_SEARCH_VAR}="${PREFIX}/lib"
 
@@ -43,7 +43,7 @@ make install PREFIX="${PREFIX}"
 # As OpenBLAS, now will have all symbols that BLAS or LAPACK have,
 # create libraries with the standard names that are linked back to
 # OpenBLAS. This will make it easier for packages that are looking for them.
-#ln -fs $PREFIX/lib/libopenblas.a $PREFIX/lib/libblas.a
-#ln -fs $PREFIX/lib/libopenblas.a $PREFIX/lib/liblapack.a
-#ln -fs $PREFIX/lib/libopenblas.$DYLIB_EXT $PREFIX/lib/libblas.$DYLIB_EXT
-#ln -fs $PREFIX/lib/libopenblas.$DYLIB_EXT $PREFIX/lib/liblapack.$DYLIB_EXT
+ln -fs $PREFIX/lib/libopenblas.a $PREFIX/lib/libblas.a
+ln -fs $PREFIX/lib/libopenblas.a $PREFIX/lib/liblapack.a
+ln -fs $PREFIX/lib/libopenblas.$DYLIB_EXT $PREFIX/lib/libblas.$DYLIB_EXT
+ln -fs $PREFIX/lib/libopenblas.$DYLIB_EXT $PREFIX/lib/liblapack.$DYLIB_EXT
