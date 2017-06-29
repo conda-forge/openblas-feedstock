@@ -33,8 +33,7 @@ requirements:
 test:
   commands:
     - test -f ${PREFIX}/lib/libopenblas.a                            # [unix]
-    - python -c "import ctypes; ctypes.cdll['$PREFIX/lib/libopenblas.so']"  # [linux]
-    - python -c "import ctypes; ctypes.cdll['$PREFIX/lib/libopenblas.dylib']"  # [osx]
+    - python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblas${SHLIB_EXT}']"  # [unix]
     - if not exist %PREFIX%\\Library\\lib\\libopenblas.lib exit 1    # [win]
 
 about:
