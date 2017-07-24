@@ -40,11 +40,9 @@ make install PREFIX="${PREFIX}"
 # As OpenBLAS, now will have all symbols that BLAS or LAPACK have,
 # create libraries with the standard names that are linked back to
 # OpenBLAS. This will make it easier for packages that are looking for them.
-ln -fs $PREFIX/lib/libopenblas.a $PREFIX/lib/libblas.a
-ln -fs $PREFIX/lib/libopenblas.a $PREFIX/lib/liblapack.a
-ln -fs $PREFIX/lib/libopenblas$SHLIB_EXT $PREFIX/lib/libblas$SHLIB_EXT
-ln -fs $PREFIX/lib/libopenblas$SHLIB_EXT $PREFIX/lib/liblapack$SHLIB_EXT
 
-ln -fs $PREFIX/lib/pkgconfig/openblas.pc blas.pc
-ln -fs $PREFIX/lib/pkgconfig/openblas.pc cblas.pc
-ln -fs $PREFIX/lib/pkgconfig/openblas.pc lapack.pc
+for arg in blas cblas lapack; do
+    ln -fs $PREFIX/lib/pkgconfig/openblas.pc $PREFIX/lib/pkgconfig/$arg.pc
+    ln -fs $PREFIX/lib/libopenblas.a $PREFIX/lib/lib$arg.a
+    ln -fs $PREFIX/lib/libopenblas$SHLIB_EXT $PREFIX/lib/lib$arg$SHLIB_EXT
+done
