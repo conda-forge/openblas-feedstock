@@ -44,3 +44,7 @@ ln -fs $PREFIX/lib/libopenblas.a $PREFIX/lib/libblas.a
 ln -fs $PREFIX/lib/libopenblas.a $PREFIX/lib/liblapack.a
 ln -fs $PREFIX/lib/libopenblas$SHLIB_EXT $PREFIX/lib/libblas$SHLIB_EXT
 ln -fs $PREFIX/lib/libopenblas$SHLIB_EXT $PREFIX/lib/liblapack$SHLIB_EXT
+
+ln -fs $PREFIX/lib/pkgconfig/openblas.pc blas.pc
+ln -fs $PREFIX/lib/pkgconfig/openblas.pc cblas.pc
+ln -fs $PREFIX/lib/pkgconfig/openblas.pc lapack.pc

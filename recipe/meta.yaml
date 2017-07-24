@@ -1,4 +1,4 @@
-{% set version = "0.2.19" %}
+{% set version = "0.2.20" %}
 
 package:
   name: openblas
@@ -7,13 +7,10 @@ package:
 source:
   fn: openblas-{{ version }}.tar.gz
   url: https://github.com/xianyi/OpenBLAS/archive/v{{ version }}.tar.gz
-  sha256: 9c40b5e4970f27c5f6911cb0a28aa26b6c83f17418b69f8e5a116bb983ca8557
-  patches:
-    # Create pkg-config files, blas.pc, cblas.pc and lapack.pc
-    - pkg-config.patch
+  sha256: 5ef38b15d9c652985774869efd548b8e3e972e1e99475c673b25537ed7bcf394
 
 build:
-  number: 2
+  number: 0
   skip: true  # [win]
   track_features:
     - vc9     # [win and py27]
@@ -47,3 +44,4 @@ extra:
     - groutr
     - jakirkham
     - jschueller
+    - isuruf
