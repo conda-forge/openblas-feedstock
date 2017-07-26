@@ -45,3 +45,11 @@ for arg in blas cblas lapack; do
     ln -fs $PREFIX/lib/libopenblas.a $PREFIX/lib/lib$arg.a
     ln -fs $PREFIX/lib/libopenblas$SHLIB_EXT $PREFIX/lib/lib$arg$SHLIB_EXT
 done
+
+if [[ `uname` == 'Darwin' ]]; then
+    # Needs to fix the install name of the dylib so that the downstream projects will link
+    # to libopenblas.dylib instead of libopenblasp-r0.2.20.dylib
+    # In linux, SONAME is libopenblas.so.0 instead of libopenblasp-r0.2.20.so, so no change needed
+    install_name_tool -id ${PREFIX}/lib/libopenblas.dylib ${PREFIX}/lib/libopenblas.dylib;
+fi
+
