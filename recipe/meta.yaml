@@ -19,7 +19,7 @@ build:
 
 requirements:
   build:
-    - toolchain
+    - toolchain3
     - python           # [win]
     - perl 5.22.2.1
     - gcc              # [unix]
