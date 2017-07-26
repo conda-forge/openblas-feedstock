@@ -48,12 +48,8 @@ done
 
 if [[ `uname` == 'Darwin' ]]; then
     # Needs to fix the install name of the dylib so that the downstream projects will link
-    # to libopenblas.0.dylib instead of libopenblasp-r0.2.20.dylib
+    # to libopenblas.dylib instead of libopenblasp-r0.2.20.dylib
     # In linux, SONAME is libopenblas.so.0 instead of libopenblasp-r0.2.20.so, so no change needed
-    if [[ -f ${PREFIX}/lib/libopenblas.0.dylib ]]; then
-        install_name_tool -id ${PREFIX}/lib/libopenblas.0.dylib ${PREFIX}/lib/libopenblas.0.dylib;
-    else
-        exit 1;
-    fi
+    install_name_tool -id ${PREFIX}/lib/libopenblas.dylib ${PREFIX}/lib/libopenblas.dylib;
 fi
 
