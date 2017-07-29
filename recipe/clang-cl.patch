@@ -274,4 +274,17 @@ index a0784f0..776850e 100644
  if (${ARCH} STREQUAL "AMD64")
    set(ARCH "x86_64")
  endif ()
+
+diff --git a/utest/CMakeLists.txt b/utest/CMakeLists.txt
+index bd31ed9..46c46c5 100644
+--- a/utest/CMakeLists.txt
++++ b/utest/CMakeLists.txt
+@@ -35,7 +35,7 @@ endforeach()
+ if (MSVC)
+ add_custom_command(TARGET ${OpenBLAS_utest_bin}
+           POST_BUILD
+-          COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_BINARY_DIR}/lib/$<CONFIG>/${OpenBLAS_LIBNAME}.dll ${CMAKE_CURRENT_BINARY_DIR}/.
++          COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_BINARY_DIR}/lib/${CMAKE_CFG_INTDIR}/${OpenBLAS_LIBNAME}.dll ${CMAKE_CURRENT_BINARY_DIR}/.
+ )
+ endif()
  
