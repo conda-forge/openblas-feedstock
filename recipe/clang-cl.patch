@@ -1,0 +1,262 @@
+diff --git a/cmake/c_check.cmake b/cmake/c_check.cmake
+index 56ae612..a0784f0 100644
+--- a/cmake/c_check.cmake
++++ b/cmake/c_check.cmake
+@@ -28,6 +28,8 @@
+ set(FU "")
+ if(APPLE)
+ set(FU "_")
++elseif(MSVC AND ${CMAKE_C_COMPILER_ID} MATCHES "Clang")
++set(FU "")
+ elseif(MSVC)
+ set(FU "_")
+ elseif(UNIX)
+diff --git a/cmake/export.cmake b/cmake/export.cmake
+index 629f8fb..a9d1fc4 100644
+--- a/cmake/export.cmake
++++ b/cmake/export.cmake
+@@ -51,7 +51,8 @@ else()
+ endif()
+ 
+ add_custom_command(
+-  TARGET ${OpenBLAS_LIBNAME} PRE_LINK 
++  OUTPUT ${PROJECT_BINARY_DIR}/openblas.def
++  #TARGET ${OpenBLAS_LIBNAME} PRE_LINK
+   COMMAND perl 
+   ARGS "${PROJECT_SOURCE_DIR}/exports/gensymbol" "win2k" "${ARCH_IN}" "dummy" "${EXPRECISION_IN}" "${NO_CBLAS_IN}" "${NO_LAPACK_IN}" "${NO_LAPACKE_IN}" "${NEED2UNDERSCORES_IN}" "${ONLY_CBLAS_IN}" "${SYMBOLPREFIX}" "${SYMBOLSUFFIX}" > "${PROJECT_BINARY_DIR}/openblas.def"
+   COMMENT "Create openblas.def file"
+diff --git a/cmake/prebuild.cmake b/cmake/prebuild.cmake
+index a7f98bf..eacf518 100644
+--- a/cmake/prebuild.cmake
++++ b/cmake/prebuild.cmake
+@@ -63,15 +63,14 @@ set(GETARCH_SRC
+   ${CPUIDEMO}
+ )
+ 
+-if (NOT MSVC)
++if ("${CMAKE_C_COMPILER_ID}" STREQUAL "MSVC")
++  #Use generic for MSVC now
++  message("MSVC")
++  set(GETARCH_FLAGS ${GETARCH_FLAGS} -DFORCE_GENERIC)
++else()
+   list(APPEND GETARCH_SRC ${PROJECT_SOURCE_DIR}/cpuid.S)
+ endif ()
+ 
+-if (MSVC)
+-#Use generic for MSVC now
+-set(GETARCH_FLAGS ${GETARCH_FLAGS} -DFORCE_GENERIC)
+-endif()
+-
+ if ("${CMAKE_SYSTEM_NAME}" STREQUAL "WindowsStore")
+   # disable WindowsStore strict CRT checks
+   set(GETARCH_FLAGS ${GETARCH_FLAGS} -D_CRT_SECURE_NO_WARNINGS)
+diff --git a/common.h b/common.h
+index 4463141..ae98279 100644
+--- a/common.h
++++ b/common.h
+@@ -495,6 +495,33 @@ static void __inline blas_lock(volatile BLASULONG *address){
+ #define MMAP_POLICY (MAP_PRIVATE | MAP_ANONYMOUS)
+ #endif
+ 
++#ifndef ASSEMBLER
++/* C99 supports complex floating numbers natively, which GCC also offers as an
++   extension since version 3.0.  If neither are available, use a compatible
++   structure as fallback (see Clause 6.2.5.13 of the C99 standard). */
++#if ((defined(__STDC_IEC_559_COMPLEX__) || __STDC_VERSION__ >= 199901L || \
++      (__GNUC__ >= 3 && !defined(__cplusplus))) && !(defined(FORCE_OPENBLAS_COMPLEX_STRUCT))) && !defined(_MSC_VER)
++  #define OPENBLAS_COMPLEX_C99
++  #ifndef __cplusplus
++    #include <complex.h>
++  #endif
++  typedef float _Complex openblas_complex_float;
++  typedef double _Complex openblas_complex_double;
++  typedef xdouble _Complex openblas_complex_xdouble;
++  #define openblas_make_complex_float(real, imag)    ((real) + ((imag) * _Complex_I))
++  #define openblas_make_complex_double(real, imag)   ((real) + ((imag) * _Complex_I))
++  #define openblas_make_complex_xdouble(real, imag)  ((real) + ((imag) * _Complex_I))
++#else
++  #define OPENBLAS_COMPLEX_STRUCT
++  typedef struct { float real, imag; } openblas_complex_float;
++  typedef struct { double real, imag; } openblas_complex_double;
++  typedef struct { xdouble real, imag; } openblas_complex_xdouble;
++  #define openblas_make_complex_float(real, imag)    {(real), (imag)}
++  #define openblas_make_complex_double(real, imag)   {(real), (imag)}
++  #define openblas_make_complex_xdouble(real, imag)  {(real), (imag)}
++#endif
++#endif
++
+ #include "param.h"
+ #include "common_param.h"
+ 
+@@ -524,31 +551,6 @@ static void __inline blas_lock(volatile BLASULONG *address){
+ #include <stdio.h>
+ #endif  // NOINCLUDE
+ 
+-/* C99 supports complex floating numbers natively, which GCC also offers as an
+-   extension since version 3.0.  If neither are available, use a compatible
+-   structure as fallback (see Clause 6.2.5.13 of the C99 standard). */
+-#if ((defined(__STDC_IEC_559_COMPLEX__) || __STDC_VERSION__ >= 199901L || \
+-      (__GNUC__ >= 3 && !defined(__cplusplus))) && !(defined(FORCE_OPENBLAS_COMPLEX_STRUCT)))
+-  #define OPENBLAS_COMPLEX_C99
+-  #ifndef __cplusplus
+-    #include <complex.h>
+-  #endif
+-  typedef float _Complex openblas_complex_float;
+-  typedef double _Complex openblas_complex_double;
+-  typedef xdouble _Complex openblas_complex_xdouble;
+-  #define openblas_make_complex_float(real, imag)    ((real) + ((imag) * _Complex_I))
+-  #define openblas_make_complex_double(real, imag)   ((real) + ((imag) * _Complex_I))
+-  #define openblas_make_complex_xdouble(real, imag)  ((real) + ((imag) * _Complex_I))
+-#else
+-  #define OPENBLAS_COMPLEX_STRUCT
+-  typedef struct { float real, imag; } openblas_complex_float;
+-  typedef struct { double real, imag; } openblas_complex_double;
+-  typedef struct { xdouble real, imag; } openblas_complex_xdouble;
+-  #define openblas_make_complex_float(real, imag)    {(real), (imag)}
+-  #define openblas_make_complex_double(real, imag)   {(real), (imag)}
+-  #define openblas_make_complex_xdouble(real, imag)  {(real), (imag)}
+-#endif
+-
+ #ifdef XDOUBLE
+ #define OPENBLAS_COMPLEX_FLOAT openblas_complex_xdouble
+ #define OPENBLAS_MAKE_COMPLEX_FLOAT(r,i) openblas_make_complex_xdouble(r,i)
+diff --git a/common_param.h b/common_param.h
+index 36d6149..0513ace 100644
+--- a/common_param.h
++++ b/common_param.h
+@@ -333,8 +333,8 @@ BLASLONG (*icamin_k)(BLASLONG, float *, BLASLONG);
+   float (*cnrm2_k) (BLASLONG, float *, BLASLONG);
+   float (*casum_k) (BLASLONG, float *, BLASLONG);
+   int    (*ccopy_k) (BLASLONG, float *, BLASLONG, float *, BLASLONG);
+-  float _Complex (*cdotu_k) (BLASLONG, float *, BLASLONG, float *, BLASLONG);
+-  float _Complex (*cdotc_k) (BLASLONG, float *, BLASLONG, float *, BLASLONG);
++  openblas_complex_float (*cdotu_k) (BLASLONG, float *, BLASLONG, float *, BLASLONG);
++  openblas_complex_float (*cdotc_k) (BLASLONG, float *, BLASLONG, float *, BLASLONG);
+   int    (*csrot_k) (BLASLONG, float *, BLASLONG, float *, BLASLONG, float, float);
+ 
+   int    (*caxpy_k) (BLASLONG, BLASLONG, BLASLONG, float, float, float *, BLASLONG, float *, BLASLONG, float *, BLASLONG);
+@@ -496,8 +496,8 @@ BLASLONG (*izamin_k)(BLASLONG, double *, BLASLONG);
+   double (*znrm2_k) (BLASLONG, double *, BLASLONG);
+   double (*zasum_k) (BLASLONG, double *, BLASLONG);
+   int    (*zcopy_k) (BLASLONG, double *, BLASLONG, double *, BLASLONG);
+-  double _Complex (*zdotu_k) (BLASLONG, double *, BLASLONG, double *, BLASLONG);
+-  double _Complex (*zdotc_k) (BLASLONG, double *, BLASLONG, double *, BLASLONG);
++  openblas_complex_double (*zdotu_k) (BLASLONG, double *, BLASLONG, double *, BLASLONG);
++  openblas_complex_double (*zdotc_k) (BLASLONG, double *, BLASLONG, double *, BLASLONG);
+   int    (*zdrot_k) (BLASLONG, double *, BLASLONG, double *, BLASLONG, double, double);
+ 
+   int    (*zaxpy_k) (BLASLONG, BLASLONG, BLASLONG, double, double, double *, BLASLONG, double *, BLASLONG, double *, BLASLONG);
+@@ -661,8 +661,8 @@ BLASLONG (*ixamin_k)(BLASLONG, xdouble *, BLASLONG);
+   xdouble (*xnrm2_k) (BLASLONG, xdouble *, BLASLONG);
+   xdouble (*xasum_k) (BLASLONG, xdouble *, BLASLONG);
+   int    (*xcopy_k) (BLASLONG, xdouble *, BLASLONG, xdouble *, BLASLONG);
+-  xdouble _Complex (*xdotu_k) (BLASLONG, xdouble *, BLASLONG, xdouble *, BLASLONG);
+-  xdouble _Complex (*xdotc_k) (BLASLONG, xdouble *, BLASLONG, xdouble *, BLASLONG);
++  openblas_complex_xdouble (*xdotu_k) (BLASLONG, xdouble *, BLASLONG, xdouble *, BLASLONG);
++  openblas_complex_xdouble (*xdotc_k) (BLASLONG, xdouble *, BLASLONG, xdouble *, BLASLONG);
+   int    (*xqrot_k) (BLASLONG, xdouble *, BLASLONG, xdouble *, BLASLONG, xdouble, xdouble);
+ 
+   int    (*xaxpy_k) (BLASLONG, BLASLONG, BLASLONG, xdouble, xdouble, xdouble *, BLASLONG, xdouble *, BLASLONG, xdouble *, BLASLONG);
+diff --git a/kernel/CMakeLists.txt b/kernel/CMakeLists.txt
+index 8bfcccf..2a5cb0d 100644
+--- a/kernel/CMakeLists.txt
++++ b/kernel/CMakeLists.txt
+@@ -22,7 +22,7 @@ ParseMakefileVars("${KERNELDIR}/KERNEL")
+ ParseMakefileVars("${KERNELDIR}/KERNEL.${TARGET_CORE}")
+ 
+ if (${ARCH} STREQUAL "x86")
+-if (NOT MSVC)
++if (NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+   GenerateNamedObjects("${KERNELDIR}/cpuid.S" "" "" false "" "" true)
+ else()
+   GenerateNamedObjects("${KERNELDIR}/cpuid_win.c" "" "" false "" "" true)
+diff --git a/kernel/x86_64/cdot.c b/kernel/x86_64/cdot.c
+index ce396a2..5f01f7e 100644
+--- a/kernel/x86_64/cdot.c
++++ b/kernel/x86_64/cdot.c
+@@ -91,16 +91,15 @@ static void cdot_kernel_16(BLASLONG n, FLOAT *x, FLOAT *y, FLOAT *d)
+ 
+ #endif
+ 
+-FLOAT _Complex CNAME(BLASLONG n, FLOAT *x, BLASLONG inc_x, FLOAT *y, BLASLONG inc_y)
++OPENBLAS_COMPLEX_FLOAT CNAME(BLASLONG n, FLOAT *x, BLASLONG inc_x, FLOAT *y, BLASLONG inc_y)
+ {
+ 	BLASLONG i;
+ 	BLASLONG ix,iy;
+-	FLOAT _Complex result;
+ 	FLOAT  dot[8] = { 0.0, 0.0, 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0 } ; 
+ 
+ 	if ( n <= 0 ) 
+ 	{
+-	        result = OPENBLAS_MAKE_COMPLEX_FLOAT (0.0, 0.0) ;
++	    OPENBLAS_COMPLEX_FLOAT result = OPENBLAS_MAKE_COMPLEX_FLOAT (0.0, 0.0) ;
+ 		return(result);
+ 
+ 	}
+@@ -160,11 +159,11 @@ FLOAT _Complex CNAME(BLASLONG n, FLOAT *x, BLASLONG inc_x, FLOAT *y, BLASLONG in
+ 	}
+ 
+ #if !defined(CONJ)
+-	        result = OPENBLAS_MAKE_COMPLEX_FLOAT (dot[0]-dot[1], dot[4]+dot[5]) ;
++	OPENBLAS_COMPLEX_FLOAT result = OPENBLAS_MAKE_COMPLEX_FLOAT (dot[0]-dot[1], dot[4]+dot[5]) ;
+ //	CREAL(result) = dot[0] - dot[1];
+ //	CIMAG(result) = dot[4] + dot[5];
+ #else
+-	        result = OPENBLAS_MAKE_COMPLEX_FLOAT (dot[0]+dot[1], dot[4]-dot[5]) ;
++	OPENBLAS_COMPLEX_FLOAT result = OPENBLAS_MAKE_COMPLEX_FLOAT (dot[0]+dot[1], dot[4]-dot[5]) ;
+ //	CREAL(result) = dot[0] + dot[1];
+ //	CIMAG(result) = dot[4] - dot[5];
+ 
+diff --git a/kernel/x86_64/zdot.c b/kernel/x86_64/zdot.c
+index 2fcacc8..d11c766 100644
+--- a/kernel/x86_64/zdot.c
++++ b/kernel/x86_64/zdot.c
+@@ -86,18 +86,17 @@ static void zdot_kernel_8(BLASLONG n, FLOAT *x, FLOAT *y, FLOAT *d)
+ 
+ #endif
+ 
+-FLOAT _Complex CNAME(BLASLONG n, FLOAT *x, BLASLONG inc_x, FLOAT *y, BLASLONG inc_y)
++OPENBLAS_COMPLEX_FLOAT CNAME(BLASLONG n, FLOAT *x, BLASLONG inc_x, FLOAT *y, BLASLONG inc_y)
+ {
+ 	BLASLONG i;
+ 	BLASLONG ix,iy;
+-	FLOAT _Complex result;
+ 	FLOAT  dot[4] = { 0.0, 0.0, 0.0 , 0.0 } ; 
+ 
+ 	if ( n <= 0 ) 
+ 	{
+ //	        CREAL(result) = 0.0 ;
+ //        	CIMAG(result) = 0.0 ;
+-		result=OPENBLAS_MAKE_COMPLEX_FLOAT(0.0,0.0);
++		OPENBLAS_COMPLEX_FLOAT result=OPENBLAS_MAKE_COMPLEX_FLOAT(0.0,0.0);
+ 		return(result);
+ 
+ 	}
+@@ -151,11 +150,11 @@ FLOAT _Complex CNAME(BLASLONG n, FLOAT *x, BLASLONG inc_x, FLOAT *y, BLASLONG in
+ 	}
+ 
+ #if !defined(CONJ)
+-	result=OPENBLAS_MAKE_COMPLEX_FLOAT(dot[0]-dot[1],dot[2]+dot[3]);
++	OPENBLAS_COMPLEX_FLOAT result=OPENBLAS_MAKE_COMPLEX_FLOAT(dot[0]-dot[1],dot[2]+dot[3]);
+ //	CREAL(result) = dot[0] - dot[1];
+ //	CIMAG(result) = dot[2] + dot[3];
+ #else
+-	result=OPENBLAS_MAKE_COMPLEX_FLOAT(dot[0]+dot[1],dot[2]-dot[3]);
++	OPENBLAS_COMPLEX_FLOAT result=OPENBLAS_MAKE_COMPLEX_FLOAT(dot[0]+dot[1],dot[2]-dot[3]);
+ //	CREAL(result) = dot[0] + dot[1];
+ //	CIMAG(result) = dot[2] - dot[3];
+ 
+diff --git a/openblas_config_template.h b/openblas_config_template.h
+index fd61714..52dd49d 100644
+--- a/openblas_config_template.h
++++ b/openblas_config_template.h
+@@ -59,7 +59,7 @@ typedef int blasint;
+    extension since version 3.0.  If neither are available, use a compatible
+    structure as fallback (see Clause 6.2.5.13 of the C99 standard). */
+ #if ((defined(__STDC_IEC_559_COMPLEX__) || __STDC_VERSION__ >= 199901L || \
+-      (__GNUC__ >= 3 && !defined(__cplusplus))) && !(defined(FORCE_OPENBLAS_COMPLEX_STRUCT)))
++      (__GNUC__ >= 3 && !defined(__cplusplus))) && !(defined(FORCE_OPENBLAS_COMPLEX_STRUCT))) && !defined(_MSC_VER)
+   #define OPENBLAS_COMPLEX_C99
+ #ifndef __cplusplus
+   #include <complex.h>
+ 
