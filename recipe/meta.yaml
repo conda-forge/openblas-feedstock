@@ -26,6 +26,7 @@ requirements:
     - clangdev         # [win]
     - cmake            # [win]
     - ninja            # [win]
+    - curl             # [win]
 
   run:
     - vc 14            # [win]
