@@ -1,6 +1,6 @@
 mkdir build
 cd build
-if "%ARCH" == "64" (
+if "%ARCH%" == "64" (
     set OPENBLAS_ARCH=x86_64
 ) ELSE (
     set OPENBLAS_ARCH=x86
