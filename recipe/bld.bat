@@ -42,7 +42,7 @@ cmake -G "Ninja" ^
     ..
 
 cmake --build . -- -j%CPU_COUNT%
-cp lib/lapack.lib %LIBRARY_LIB%/lapack.lib
-cp lib/lapack.dll %LIBRARY_BIN%/lapack.dll
-move lib/*.h %LIBRARY_INC%
+cp SRC/lapack.lib %LIBRARY_LIB%/lapack.lib
+cp SRC/lapack.dll %LIBRARY_BIN%/lapack.dll
+move ../INCLUDE/*.h %LIBRARY_INC%
 
