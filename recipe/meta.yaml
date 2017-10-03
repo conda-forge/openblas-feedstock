@@ -10,12 +10,14 @@ source:
   sha256: 5ef38b15d9c652985774869efd548b8e3e972e1e99475c673b25537ed7bcf394
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win]
   track_features:
     - vc9     # [win and py27]
     - vc10    # [win and py34]
     - vc14    # [win and py35]
+  patches:
+    - gh_1247.patch
 
 requirements:
   build:
