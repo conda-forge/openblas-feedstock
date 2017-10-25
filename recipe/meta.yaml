@@ -8,16 +8,16 @@ source:
   fn: openblas-{{ version }}.tar.gz
   url: https://github.com/xianyi/OpenBLAS/archive/v{{ version }}.tar.gz
   sha256: 5ef38b15d9c652985774869efd548b8e3e972e1e99475c673b25537ed7bcf394
+  patches:
+    - gh_1247.patch
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win]
   track_features:
     - vc9     # [win and py27]
     - vc10    # [win and py34]
     - vc14    # [win and py35]
-  patches:
-    - gh_1247.patch
 
 requirements:
   build:
