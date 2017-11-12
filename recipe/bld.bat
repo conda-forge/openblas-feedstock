@@ -5,6 +5,9 @@ if "%ARCH%" == "64" (
 ) ELSE (
     set OPENBLAS_ARCH=x86
 )
+
+conda install -c isuruf/label/flang cmake
+
 cmake -G "NMake Makefiles" ^
     -DCMAKE_CXX_COMPILER=clang-cl ^
     -DCMAKE_C_COMPILER=clang-cl ^
