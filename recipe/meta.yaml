@@ -29,6 +29,7 @@ requirements:
     - cmake            # [win]
     - ninja            # [win]
     - curl             # [win]
+    - flang            # [win]
 
   run:
     - vc 14            # [win]
