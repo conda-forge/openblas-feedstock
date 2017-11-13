@@ -1,11 +1,24 @@
+mkdir build
+cd build
+if "%ARCH%" == "64" (
+    set OPENBLAS_ARCH=x86_64
+) ELSE (
+    set OPENBLAS_ARCH=x86
+)
 
-:: Set $HOME to the current dir so msys runs here
-set HOME=%cd%
+conda install --yes -c isuruf/label/flang cmake
 
-:: Configure, build, test, and install using `make`.
-bash -lc "make FC=gfortran DYNAMIC_ARCH=1 BINARY=$ARCH NO_LAPACK=0 NO_AFFINITY=1 USE_THREAD=0 PREFIX=`echo $LIBRARY_PREFIX | tr '\\' '/'`"
-if errorlevel 1 exit 1
-bash -lc "make test"
-if errorlevel 1 exit 1
-bash -lc "make PREFIX=`echo $LIBRARY_PREFIX | tr '\\' '/'` install"
-if errorlevel 1 exit 1
+cmake -G "NMake Makefiles" ^
+    -DCMAKE_CXX_COMPILER=clang-cl ^
+    -DCMAKE_C_COMPILER=clang-cl ^
+    -DCMAKE_Fortran_COMPILER=flang ^
+    -DBUILD_WITHOUT_LAPACK=no ^
+    -DNOFORTRAN=0 ^
+    -DDYNAMIC_ARCH=ON ^
+    ..
+
+cmake --build . --target install -- -j%CPU_COUNT%
+utest\openblas_utest.exe
+
+move ../INCLUDE/*.h %LIBRARY_INC%
+
