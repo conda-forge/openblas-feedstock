@@ -9,6 +9,7 @@ source:
   url: https://github.com/xianyi/OpenBLAS/archive/v{{ version }}.tar.gz
   sha256: 5ef38b15d9c652985774869efd548b8e3e972e1e99475c673b25537ed7bcf394
   patches:
+    - gh_1247.patch
     - gh_1259.patch
     - gh_1256.patch
     - gh_1264.patch
@@ -17,7 +18,8 @@ source:
     - gh_1350.patch
 
 build:
-  number: 0
+  number: 5
+  skip: true  # [win]
   features:
     - vc14    # [win]
   msvc_compiler: 14.0
