@@ -19,7 +19,7 @@ source:
 
 build:
   number: 5
-  skip: true  # [win]
+  skip: true  # [win32]
   features:
     - vc14    # [win]
   msvc_compiler: 14.0
