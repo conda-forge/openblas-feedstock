@@ -30,13 +30,14 @@ requirements:
     - perl 5.22.2.1
     - gcc              # [unix]
     - vc 14            # [win]
-    - clangdev         # [win]
+    - flang            # [win]
     - cmake            # [win]
-    - ninja            # [win]
     - curl             # [win]
+    - jom              # [win]
 
   run:
     - vc 14            # [win]
+    - libflang         # [win]
     - libgfortran      # [unix]
 
 test:

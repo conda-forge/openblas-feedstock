@@ -1,2 +1,0 @@
-add_library(blas UNKNOWN IMPORTED)
-set_property(TARGET blas PROPERTY IMPORTED_LOCATION $ENV{LIBRARY_PREFIX}/lib/libopenblas.lib)
