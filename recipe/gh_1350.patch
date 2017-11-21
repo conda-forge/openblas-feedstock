@@ -1,15 +1,97 @@
-From 632fc75d7758a831f3b529c6e9fa4cf1e7dd5433 Mon Sep 17 00:00:00 2001
-From: Ian Henriksen <insertinterestingnamehere@gmail.com>
-Date: Mon, 6 Nov 2017 14:39:12 -0600
-Subject: [PATCH 1/6] Allow using compilers other than gfortran in conjunction
- with MSVC or clang-cl.
-
----
- cmake/f_check.cmake | 6 ------
- 1 file changed, 6 deletions(-)
-
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 4fdfb3f..6c52b25 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -70,6 +70,10 @@ if (NOT DEFINED BUILD_SINGLE AND NOT DEFINED BUILD_DOUBLE AND NOT DEFINED BUILD_
+   set(BUILD_COMPLEX16 true)
+ endif ()
+ 
++if (NOT DEFINED BUILD_MATGEN)
++  set(BUILD_MATGEN true)
++endif()
++
+ set(FLOAT_TYPES "")
+ if (BUILD_SINGLE)
+   message(STATUS "Building Single Precision")
+@@ -163,7 +167,7 @@ set_target_properties( ${OpenBLAS_LIBNAME} PROPERTIES LIBRARY_OUTPUT_NAME_DEBUG
+ 
+ foreach (OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
+   string( TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG )
+-  
++
+   set_target_properties( ${OpenBLAS_LIBNAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${PROJECT_BINARY_DIR}/lib/${OUTPUTCONFIG} )
+   set_target_properties( ${OpenBLAS_LIBNAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${PROJECT_BINARY_DIR}/lib/${OUTPUTCONFIG} )
+   set_target_properties( ${OpenBLAS_LIBNAME} PROPERTIES ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${PROJECT_BINARY_DIR}/lib/${OUTPUTCONFIG} )
+@@ -194,7 +198,7 @@ if (NOT MSVC AND NOT NOFORTRAN)
+   endif()
+ endif()
+ 
+-set_target_properties(${OpenBLAS_LIBNAME} PROPERTIES 
++set_target_properties(${OpenBLAS_LIBNAME} PROPERTIES
+   VERSION ${OpenBLAS_MAJOR_VERSION}.${OpenBLAS_MINOR_VERSION}
+   SOVERSION ${OpenBLAS_MAJOR_VERSION}
+ )
+@@ -206,7 +210,7 @@ install(TARGETS ${OpenBLAS_LIBNAME}
+ 	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+ 	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} )
+-  
++
+ message(STATUS "Generating openblas_config.h in ${CMAKE_INSTALL_INCLUDEDIR}")
+ 
+ set(OPENBLAS_CONFIG_H ${CMAKE_BINARY_DIR}/openblas_config.h)
+@@ -250,7 +254,7 @@ if(NOT NO_LAPACKE)
+ 	add_dependencies( ${OpenBLAS_LIBNAME} genlapacke)
+ 	FILE(GLOB_RECURSE INCLUDE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/lapack-netlib/LAPACKE/*.h")
+ 	install (FILES ${INCLUDE_FILES} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+- 
++
+ 	ADD_CUSTOM_TARGET(genlapacke
+ 	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/lapack-netlib/LAPACKE/include/lapacke_mangling_with_flags.h.in "${CMAKE_BINARY_DIR}/lapacke_mangling.h"
+ 	)
+diff --git a/appveyor.yml b/appveyor.yml
+index 1c0474d..4eaae5e 100644
+--- a/appveyor.yml
++++ b/appveyor.yml
+@@ -24,23 +24,32 @@ skip_commits:
+   message: /\[av skip\]/
+ 
+ environment:
++  global:
++    CONDA_INSTALL_LOCN: C:\\Miniconda36-x64
+   matrix:
+     - COMPILER: clang-cl
+-      DYNAMIC_ARCH: ON
++      WITH_FORTRAN: yes
+     - COMPILER: clang-cl
++      DYNAMIC_ARCH: ON
++      WITH_FORTRAN: no
+     - COMPILER: cl
+ 
+ install:
+-  - if [%COMPILER%]==[clang-cl] call C:\Miniconda36-x64\Scripts\activate.bat
++  - if [%COMPILER%]==[clang-cl] call %CONDA_INSTALL_LOCN%\Scripts\activate.bat
+   - if [%COMPILER%]==[clang-cl] conda config --add channels conda-forge --force
+-  - if [%COMPILER%]==[clang-cl] conda install --yes clangdev ninja cmake
++  - if [%WITH_FORTRAN%]==[yes] conda config --add channels isuruf/label/flang --force
++  - if [%COMPILER%]==[clang-cl] conda install --yes --quiet clangdev ninja cmake
++  - if [%WITH_FORTRAN%]==[yes] conda install --yes --quiet flangdev clangdev cmake
+   - if [%COMPILER%]==[clang-cl] call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
++  - if [%COMPILER%]==[clang-cl] set "LIB=%CONDA_INSTALL_LOCN%\Library\lib;%LIB%"
++  - if [%COMPILER%]==[clang-cl] set "CPATH=%CONDA_INSTALL_LOCN%\Library\include;%CPATH%"
+ 
+ before_build:
+   - echo Running cmake...
+   - cd c:\projects\OpenBLAS
+   - if [%COMPILER%]==[cl] cmake -G "Visual Studio 12 Win64" .
+-  - if [%COMPILER%]==[clang-cl] cmake -G "Ninja" -DCMAKE_CXX_COMPILER=clang-cl -DCMAKE_C_COMPILER=clang-cl .
++  - if [%WITH_FORTRAN%]==[no] cmake -G "Ninja" -DCMAKE_CXX_COMPILER=clang-cl -DCMAKE_C_COMPILER=clang-cl .
++  - if [%WITH_FORTRAN%]==[yes] cmake -G "NMake Makefiles" -DCMAKE_CXX_COMPILER=clang-cl -DCMAKE_C_COMPILER=clang-cl -DCMAKE_Fortran_COMPILER=flang -DBUILD_WITHOUT_LAPACK=no -DNOFORTRAN=0 .
+   - if [%DYNAMIC_ARCH%]==[ON] cmake -DDYNAMIC_ARCH=ON .
+ 
+ build_script:
 diff --git a/cmake/f_check.cmake b/cmake/f_check.cmake
-index 4848553d9..f877fc3e1 100644
+index 4848553..f877fc3 100644
 --- a/cmake/f_check.cmake
 +++ b/cmake/f_check.cmake
 @@ -20,12 +20,6 @@
@@ -25,19 +107,8 @@ index 4848553d9..f877fc3e1 100644
  if (NOT NO_LAPACK)
    enable_language(Fortran)
  else()
-
-From 61587b0670b93b209a483f9d0823e2b7106bb783 Mon Sep 17 00:00:00 2001
-From: Ian Henriksen <insertinterestingnamehere@gmail.com>
-Date: Mon, 6 Nov 2017 14:41:02 -0600
-Subject: [PATCH 2/6] Update lapack.cmake with additional routines from LAPACK
- version 3.7.0.
-
----
- cmake/lapack.cmake | 818 ++++++++++++++++++++++++++++++-----------------------
- 1 file changed, 458 insertions(+), 360 deletions(-)
-
 diff --git a/cmake/lapack.cmake b/cmake/lapack.cmake
-index e6cd5373d..a4ac00eff 100644
+index e6cd537..a4ac00e 100644
 --- a/cmake/lapack.cmake
 +++ b/cmake/lapack.cmake
 @@ -1,387 +1,485 @@
@@ -886,18 +957,8 @@ index e6cd5373d..a4ac00eff 100644
 +  list(APPEND LA_SOURCES "${NETLIB_LAPACK_DIR}/TESTING/MATGEN/${LA_FILE}")
 +endforeach ()
  set_source_files_properties(${LA_SOURCES} PROPERTIES COMPILE_FLAGS "${LAPACK_FFLAGS}")
-
-From 505dc08635aa90c5485b5e8e16243493751d9abe Mon Sep 17 00:00:00 2001
-From: Ian Henriksen <insertinterestingnamehere@gmail.com>
-Date: Mon, 6 Nov 2017 14:43:33 -0600
-Subject: [PATCH 3/6] Update lapacke.cmake with routines added in LAPACK 3.7.0.
-
----
- cmake/lapacke.cmake | 177 ++++++++++++++++++++++++++--------------------------
- 1 file changed, 87 insertions(+), 90 deletions(-)
-
 diff --git a/cmake/lapacke.cmake b/cmake/lapacke.cmake
-index fd5aee134..93e2824a1 100644
+index fd5aee1..93e2824 100644
 --- a/cmake/lapacke.cmake
 +++ b/cmake/lapacke.cmake
 @@ -1,5 +1,5 @@
@@ -1112,131 +1173,8 @@ index fd5aee134..93e2824a1 100644
  # add lapack-netlib folder to the sources
  set(LAPACKE_SOURCES "")
  foreach (LAE_FILE ${LAPACKE_REL_SRC})
-
-From 72956e8950bfcf304be701174d8dedf8aefb7270 Mon Sep 17 00:00:00 2001
-From: Ian Henriksen <insertinterestingnamehere@gmail.com>
-Date: Mon, 6 Nov 2017 14:47:27 -0600
-Subject: [PATCH 4/6] Build MATGEN LAPACK routines by default when building
- with CMake.
-
----
- CMakeLists.txt | 12 ++++++++----
- 1 file changed, 8 insertions(+), 4 deletions(-)
-
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 4fdfb3ffa..6c52b2501 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -70,6 +70,10 @@ if (NOT DEFINED BUILD_SINGLE AND NOT DEFINED BUILD_DOUBLE AND NOT DEFINED BUILD_
-   set(BUILD_COMPLEX16 true)
- endif ()
- 
-+if (NOT DEFINED BUILD_MATGEN)
-+  set(BUILD_MATGEN true)
-+endif()
-+
- set(FLOAT_TYPES "")
- if (BUILD_SINGLE)
-   message(STATUS "Building Single Precision")
-@@ -163,7 +167,7 @@ set_target_properties( ${OpenBLAS_LIBNAME} PROPERTIES LIBRARY_OUTPUT_NAME_DEBUG
- 
- foreach (OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
-   string( TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG )
--  
-+
-   set_target_properties( ${OpenBLAS_LIBNAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${PROJECT_BINARY_DIR}/lib/${OUTPUTCONFIG} )
-   set_target_properties( ${OpenBLAS_LIBNAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${PROJECT_BINARY_DIR}/lib/${OUTPUTCONFIG} )
-   set_target_properties( ${OpenBLAS_LIBNAME} PROPERTIES ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${PROJECT_BINARY_DIR}/lib/${OUTPUTCONFIG} )
-@@ -194,7 +198,7 @@ if (NOT MSVC AND NOT NOFORTRAN)
-   endif()
- endif()
- 
--set_target_properties(${OpenBLAS_LIBNAME} PROPERTIES 
-+set_target_properties(${OpenBLAS_LIBNAME} PROPERTIES
-   VERSION ${OpenBLAS_MAJOR_VERSION}.${OpenBLAS_MINOR_VERSION}
-   SOVERSION ${OpenBLAS_MAJOR_VERSION}
- )
-@@ -206,7 +210,7 @@ install(TARGETS ${OpenBLAS_LIBNAME}
- 	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
- 	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} )
--  
-+
- message(STATUS "Generating openblas_config.h in ${CMAKE_INSTALL_INCLUDEDIR}")
- 
- set(OPENBLAS_CONFIG_H ${CMAKE_BINARY_DIR}/openblas_config.h)
-@@ -250,7 +254,7 @@ if(NOT NO_LAPACKE)
- 	add_dependencies( ${OpenBLAS_LIBNAME} genlapacke)
- 	FILE(GLOB_RECURSE INCLUDE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/lapack-netlib/LAPACKE/*.h")
- 	install (FILES ${INCLUDE_FILES} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-- 
-+
- 	ADD_CUSTOM_TARGET(genlapacke
- 	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/lapack-netlib/LAPACKE/include/lapacke_mangling_with_flags.h.in "${CMAKE_BINARY_DIR}/lapacke_mangling.h"
- 	)
-
-From 3cfc64404a42897fdd60d6fc753deb05aa9f60b2 Mon Sep 17 00:00:00 2001
-From: xoviat <xoviat@users.noreply.github.com>
-Date: Mon, 6 Nov 2017 15:05:20 -0600
-Subject: [PATCH 5/6] [appveyor] fixes
-
----
- appveyor.yml | 17 +++++++++++++----
- 1 file changed, 13 insertions(+), 4 deletions(-)
-
-diff --git a/appveyor.yml b/appveyor.yml
-index 1c0474d2d..4eaae5eed 100644
---- a/appveyor.yml
-+++ b/appveyor.yml
-@@ -24,23 +24,32 @@ skip_commits:
-   message: /\[av skip\]/
- 
- environment:
-+  global:
-+    CONDA_INSTALL_LOCN: C:\\Miniconda36-x64
-   matrix:
-     - COMPILER: clang-cl
--      DYNAMIC_ARCH: ON
-+      WITH_FORTRAN: yes
-     - COMPILER: clang-cl
-+      DYNAMIC_ARCH: ON
-+      WITH_FORTRAN: no
-     - COMPILER: cl
- 
- install:
--  - if [%COMPILER%]==[clang-cl] call C:\Miniconda36-x64\Scripts\activate.bat
-+  - if [%COMPILER%]==[clang-cl] call %CONDA_INSTALL_LOCN%\Scripts\activate.bat
-   - if [%COMPILER%]==[clang-cl] conda config --add channels conda-forge --force
--  - if [%COMPILER%]==[clang-cl] conda install --yes clangdev ninja cmake
-+  - if [%WITH_FORTRAN%]==[yes] conda config --add channels isuruf/label/flang --force
-+  - if [%COMPILER%]==[clang-cl] conda install --yes --quiet clangdev ninja cmake
-+  - if [%WITH_FORTRAN%]==[yes] conda install --yes --quiet flangdev clangdev cmake
-   - if [%COMPILER%]==[clang-cl] call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
-+  - if [%COMPILER%]==[clang-cl] set "LIB=%CONDA_INSTALL_LOCN%\Library\lib;%LIB%"
-+  - if [%COMPILER%]==[clang-cl] set "CPATH=%CONDA_INSTALL_LOCN%\Library\include;%CPATH%"
- 
- before_build:
-   - echo Running cmake...
-   - cd c:\projects\OpenBLAS
-   - if [%COMPILER%]==[cl] cmake -G "Visual Studio 12 Win64" .
--  - if [%COMPILER%]==[clang-cl] cmake -G "Ninja" -DCMAKE_CXX_COMPILER=clang-cl -DCMAKE_C_COMPILER=clang-cl .
-+  - if [%WITH_FORTRAN%]==[no] cmake -G "Ninja" -DCMAKE_CXX_COMPILER=clang-cl -DCMAKE_C_COMPILER=clang-cl .
-+  - if [%WITH_FORTRAN%]==[yes] cmake -G "NMake Makefiles" -DCMAKE_CXX_COMPILER=clang-cl -DCMAKE_C_COMPILER=clang-cl -DCMAKE_Fortran_COMPILER=flang -DBUILD_WITHOUT_LAPACK=no -DNOFORTRAN=0 .
-   - if [%DYNAMIC_ARCH%]==[ON] cmake -DDYNAMIC_ARCH=ON .
- 
- build_script:
-
-From 92683142907ca9f5807cdd93688d928ffeaf87f3 Mon Sep 17 00:00:00 2001
-From: Isuru Fernando <isuruf@gmail.com>
-Date: Mon, 6 Nov 2017 19:00:23 -0600
-Subject: [PATCH 6/6] Fix gensymbol script
-
----
- exports/gensymbol | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
-
 diff --git a/exports/gensymbol b/exports/gensymbol
-index 89c6e8320..f1983d458 100644
+index 89c6e83..f1983d4 100644
 --- a/exports/gensymbol
 +++ b/exports/gensymbol
 @@ -3411,13 +3411,17 @@
