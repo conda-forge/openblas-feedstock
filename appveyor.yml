@@ -9,15 +9,15 @@ environment:
     secure: MP4hZYylDyUWEsrt3u3cod2sbFeRwUziH02mvQOdbjsTO/l1yIxDkP/76rSIjcGC
 
   matrix:
-    - TARGET_ARCH: x64
-      CONDA_PERL: 5.22.2.1
-      CONDA_PY: 27
-      CONDA_INSTALL_LOCN: C:\\Miniconda-x64
-
     - TARGET_ARCH: x86
       CONDA_PERL: 5.22.2.1
       CONDA_PY: 27
       CONDA_INSTALL_LOCN: C:\\Miniconda
+
+    - TARGET_ARCH: x64
+      CONDA_PERL: 5.22.2.1
+      CONDA_PY: 27
+      CONDA_INSTALL_LOCN: C:\\Miniconda-x64
 
 
 # We always use a 64-bit machine, but can build x86 distributions
