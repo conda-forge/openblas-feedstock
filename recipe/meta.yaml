@@ -22,6 +22,7 @@ build:
   skip: true  # [win32]
   features:
     - vc14    # [win]
+    - flang   # [win]
   msvc_compiler: 14.0
 
 requirements:
@@ -41,6 +42,8 @@ requirements:
     - libgfortran      # [unix]
 
 test:
+  requires:
+    - flang-meta       # [win]
   commands:
     - test -f ${PREFIX}/lib/libopenblas.a                            # [unix]
     - python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblas${SHLIB_EXT}']"  # [unix]
