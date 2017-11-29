@@ -10,24 +10,35 @@ source:
   sha256: 5ef38b15d9c652985774869efd548b8e3e972e1e99475c673b25537ed7bcf394
   patches:
     - gh_1247.patch
+    - gh_1259.patch
+    - gh_1256.patch
+    - gh_1264.patch
+    - gh_1279.patch
+    - gh_1323.patch
+    - gh_1350.patch
 
 build:
-  number: 4
-  skip: true  # [win]
-  track_features:
-    - vc9     # [win and py27]
-    - vc10    # [win and py34]
-    - vc14    # [win and py35]
+  number: 5
+  skip: true  # [win32]
+  features:
+    - vc14    # [win]
+  msvc_compiler: 14.0
 
 requirements:
   build:
     - toolchain
-    - python           # [win]
     - perl 5.22.2.1
     - gcc              # [unix]
+    - vc 14            # [win]
+    - flang            # [win]
+    - cmake            # [win]
+    - curl             # [win]
+    - jom              # [win]
 
   run:
-    - libgfortran
+    - vc 14            # [win]
+    - libflang         # [win]
+    - libgfortran      # [unix]
 
 test:
   commands:
