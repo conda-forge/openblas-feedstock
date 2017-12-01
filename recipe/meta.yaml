@@ -16,9 +16,10 @@ source:
     - gh_1279.patch
     - gh_1323.patch
     - gh_1350.patch
+    - gh_1377.patch
 
 build:
-  number: 5
+  number: 6
   skip: true  # [win32]
   features:
     - vc14    # [win]

@@ -9,6 +9,7 @@ cmake -G "NMake Makefiles JOM"              ^
     -DDYNAMIC_ARCH=ON                       ^
     -DBUILD_WITHOUT_LAPACK=no               ^
     -DNOFORTRAN=0                           ^
+    -DNUM_THREADS=128                       ^
     ..
 
 jom install -j%CPU_COUNT%
