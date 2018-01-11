@@ -46,7 +46,7 @@ test:
   commands:
     - test -f ${PREFIX}/lib/libopenblas.a                            # [unix]
     - python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblas${SHLIB_EXT}']"  # [unix]
-    - if not exist %PREFIX%\\Library\\lib\\libopenblas.lib exit 1    # [win]
+    - if not exist %PREFIX%\\Library\\lib\\openblas.lib exit 1    # [win]
 
 about:
   home: http://www.openblas.net/
