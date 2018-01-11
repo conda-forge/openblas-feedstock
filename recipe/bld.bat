@@ -12,7 +12,7 @@ cmake -G "NMake Makefiles JOM"              ^
     -DNUM_THREADS=128                       ^
     ..
 
-cmake --build . --target install -- j%CPU_COUNT%
+jom install -j%CPU_COUNT%
 
 utest\openblas_utest.exe
 
