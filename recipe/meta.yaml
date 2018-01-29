@@ -18,6 +18,7 @@ source:
     - gh_1350.patch
     - gh_1377.patch
     - gh_1417.patch
+    - clang_lto.patch  # [win]
 
 build:
   number: 7
