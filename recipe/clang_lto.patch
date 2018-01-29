@@ -1,0 +1,11 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 4f933dae..3358fd0d 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -278,3 +278,6 @@ if(PKG_CONFIG_FOUND)
+ 	configure_file(${PROJECT_SOURCE_DIR}/cmake/openblas.pc.in ${PROJECT_BINARY_DIR}/openblas.pc @ONLY)
+ 	install (FILES ${PROJECT_BINARY_DIR}/openblas.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig/)
+ endif()
++
++
++target_compile_options(${OpenBLAS_LIBNAME} PRIVATE -flto)
