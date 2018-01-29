@@ -16,7 +16,7 @@ Current build status
 
 Linux: [![Circle CI](https://circleci.com/gh/conda-forge/openblas-feedstock.svg?style=shield)](https://circleci.com/gh/conda-forge/openblas-feedstock)
 OSX: [![TravisCI](https://travis-ci.org/conda-forge/openblas-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/openblas-feedstock)
-Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/conda-forge/openblas-feedstock?svg=True)](https://ci.appveyor.com/project/conda-forge/openblas-feedstock/branch/master)
+Windows: ![](https://cdn.rawgit.com/conda-forge/conda-smithy/90845bba35bec53edac7a16638aa4d77217a3713/conda_smithy/static/disabled.svg)
 
 Current release info
 ====================
