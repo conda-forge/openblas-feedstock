@@ -37,6 +37,7 @@ requirements:
     - cmake            # [win]
     - curl             # [win]
     - jom              # [win]
+    - lld              # [win]
 
   run:
     - vc 14            # [win]
