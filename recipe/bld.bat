@@ -4,7 +4,8 @@ cd build
 cmake -G "NMake Makefiles JOM"                     ^
     -DCMAKE_C_COMPILER=clang-cl                    ^
     -DCMAKE_Fortran_COMPILER=flang                 ^
-    -DCMAKE_LINKER=%LIBRARY_PREFIX%\bin\lld-link   ^
+    -CMAKE_C_LINK_EXECUTABLE=lld-link              ^
+    -CMAKE_Fortran_LINK_EXECUTABLE=lld-link        ^
     -DCMAKE_BUILD_TYPE=Release                     ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX%        ^
     -DDYNAMIC_ARCH=ON                              ^
