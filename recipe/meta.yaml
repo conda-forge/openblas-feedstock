@@ -18,16 +18,18 @@ source:
     - gh_1350.patch
     - gh_1377.patch
     - gh_1417.patch
+    - clang_lto.patch  # [win]
 
 build:
   number: 7
-  skip: true  # [win32]
+  skip: true  # [win32 or (win and py<35)]
   features:
-    - vc14    # [win]
+    - vc14    # [win and py>=35]
   msvc_compiler: 14.0
 
 requirements:
   build:
+    - python
     - toolchain
     - perl 5.22.2.1
     - gcc              # [unix]
@@ -36,6 +38,7 @@ requirements:
     - cmake            # [win]
     - curl             # [win]
     - jom              # [win]
+    - lld              # [win]
 
   run:
     - vc 14            # [win]

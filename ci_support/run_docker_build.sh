@@ -41,6 +41,7 @@ cat << EOF | docker run -i \
                         -v "${FEEDSTOCK_ROOT}":/feedstock_root \
                         -e HOST_USER_ID="${HOST_USER_ID}" \
                         -e CONDA_PERL="${CONDA_PERL}" \
+                        -e CONDA_PY="${CONDA_PY}" \
                         -a stdin -a stdout -a stderr \
                         condaforge/linux-anvil \
                         bash || exit 1
