@@ -1,4 +1,4 @@
-{% set version = "0.2.20" %}
+{% set version = "0.3.0" %}
 
 package:
   name: openblas
@@ -7,20 +7,10 @@ package:
 source:
   fn: openblas-{{ version }}.tar.gz
   url: https://github.com/xianyi/OpenBLAS/archive/v{{ version }}.tar.gz
-  sha256: 5ef38b15d9c652985774869efd548b8e3e972e1e99475c673b25537ed7bcf394
-  patches:
-    - gh_1247.patch
-    - gh_1259.patch
-    - gh_1256.patch
-    - gh_1264.patch
-    - gh_1279.patch
-    - gh_1323.patch
-    - gh_1350.patch
-    - gh_1377.patch
-    - gh_1417.patch
+  sha256: cf51543709abe364d8ecfb5c09a2b533d2b725ea1a66f203509b21a8e9d8f1a1
 
 build:
-  number: 8
+  number: 0
   skip: true  # [win32]
   features:
     - vc14    # [win]
