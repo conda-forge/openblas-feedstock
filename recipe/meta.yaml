@@ -20,7 +20,7 @@ source:
     - gh_1417.patch
 
 build:
-  number: 7
+  number: 8
   skip: true  # [win32]
   features:
     - vc14    # [win]
@@ -51,6 +51,7 @@ test:
 about:
   home: http://www.openblas.net/
   license: BSD 3-Clause
+  license_file: LICENSE
   summary: An optimized BLAS library based on GotoBLAS2 1.13 BSD version.
 
 extra:
