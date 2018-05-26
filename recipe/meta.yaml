@@ -20,7 +20,7 @@ source:
     - gh_1417.patch
 
 build:
-  number: 7
+  number: 8
   skip: true  # [win32]
   features:
     - vc14    # [win]
