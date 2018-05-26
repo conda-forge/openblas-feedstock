@@ -11,25 +11,23 @@ source:
 
 build:
   number: 0
-  features:
-    - vc14    # [win]
-  msvc_compiler: 14.0
+  skip: true  # [win and vc!=14]
 
 requirements:
   build:
-    - toolchain
-    - perl 5.22.2.1
-    - gcc              # [unix]
-    - vc 14            # [win]
-    - flang            # [win]
-    - cmake            # [win]
-    - curl             # [win]
-    - jom              # [win]
+    - {{ compiler("c") }}
+    - {{ compiler("fortran") }}  # [unix]
+    - perl
+    - flang                      # [win]
+    - cmake                      # [win]
+    - curl                       # [win]
+    - jom                        # [win]
+
+  host:
+    - libflang                   # [win]
 
   run:
-    - vc 14            # [win]
-    - libflang         # [win]
-    - libgfortran      # [unix]
+    - libflang                   # [win]
 
 test:
   commands:
