@@ -14,8 +14,7 @@ Summary: An optimized BLAS library based on GotoBLAS2 1.13 BSD version.
 Current build status
 ====================
 
-[![Linux](https://img.shields.io/circleci/project/github/conda-forge/openblas-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/openblas-feedstock)
-[![OSX](https://img.shields.io/travis/conda-forge/openblas-feedstock/master.svg?label=macOS)](https://travis-ci.org/conda-forge/openblas-feedstock)
+[![Linux,OSX](https://img.shields.io/circleci/project/github/conda-forge/openblas-feedstock/master.svg?label=Linux,OSX)](https://circleci.com/gh/conda-forge/openblas-feedstock)
 [![Windows](https://img.shields.io/appveyor/ci/conda-forge/openblas-feedstock/master.svg?label=Windows)](https://ci.appveyor.com/project/conda-forge/openblas-feedstock/branch/master)
 
 Current release info
