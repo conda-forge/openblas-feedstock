@@ -14,14 +14,15 @@ Summary: An optimized BLAS library based on GotoBLAS2 1.13 BSD version.
 Current build status
 ====================
 
-Linux: [![Circle CI](https://circleci.com/gh/conda-forge/openblas-feedstock.svg?style=shield)](https://circleci.com/gh/conda-forge/openblas-feedstock)
-OSX: [![TravisCI](https://travis-ci.org/conda-forge/openblas-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/openblas-feedstock)
-Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/conda-forge/openblas-feedstock?svg=True)](https://ci.appveyor.com/project/conda-forge/openblas-feedstock/branch/master)
+[![Linux,OSX](https://img.shields.io/circleci/project/github/conda-forge/openblas-feedstock/master.svg?label=Linux,OSX)](https://circleci.com/gh/conda-forge/openblas-feedstock)
+[![Windows](https://img.shields.io/appveyor/ci/conda-forge/openblas-feedstock/master.svg?label=Windows)](https://ci.appveyor.com/project/conda-forge/openblas-feedstock/branch/master)
 
 Current release info
 ====================
-Version: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/openblas/badges/version.svg)](https://anaconda.org/conda-forge/openblas)
-Downloads: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/openblas/badges/downloads.svg)](https://anaconda.org/conda-forge/openblas)
+
+| Name | Downloads | Version | Platforms |
+| --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-openblas-green.svg)](https://anaconda.org/conda-forge/openblas) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/openblas.svg)](https://anaconda.org/conda-forge/openblas) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/openblas.svg)](https://anaconda.org/conda-forge/openblas) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/openblas.svg)](https://anaconda.org/conda-forge/openblas) |
 
 Installing openblas
 ===================
