@@ -10,26 +10,19 @@ source:
   sha256: 1f5e956f35f3acdd3c74516e955d797a320c2e0135e31d838cbdb3ea94d0eb33
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win and vc!=14]
 
 requirements:
   build:
     - {{ compiler("c") }}
-    - {{ compiler("fortran") }}  # [unix]
+    - {{ compiler("fortran") }}
     - perl
-    - flang                      # [win]
     - cmake                      # [win]
     - curl                       # [win]
     - jom                        # [win]
 
-  host:
-    - libflang                   # [win]
-    - libgfortran-ng >=3.0       # [osx]
-    - libgfortran-ng >=4.9       # [linux]
-
-  run:
-    - libflang                   # [win]
+  host: []
 
 test:
   commands:
