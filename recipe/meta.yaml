@@ -22,14 +22,8 @@ requirements:
     - cmake                      # [win]
     - curl                       # [win]
     - jom                        # [win]
-
   host:
-    - libflang                   # [win]
-    - libgfortran-ng >=3.0       # [osx]
-    - libgfortran-ng >=4.9       # [linux]
-
   run:
-    - libflang                   # [win]
 
 test:
   commands:
