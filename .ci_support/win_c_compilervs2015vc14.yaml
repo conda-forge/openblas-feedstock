@@ -2,6 +2,8 @@ c_compiler:
 - vs2015
 curl:
 - '7.59'
+fortran_compiler:
+- flang
 perl:
 - '5.26'
 pin_run_as_build:
