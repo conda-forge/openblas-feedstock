@@ -10,7 +10,7 @@ pin_run_as_build:
   curl:
     max_pin: x
   perl:
-    max_pin: x.x
+    max_pin: x.x.x
   vc:
     max_pin: x
 vc:

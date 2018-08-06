@@ -2,8 +2,6 @@ MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
 c_compiler:
 - toolchain_c
-curl:
-- '7.59'
 fortran_compiler:
 - toolchain_fort
 macos_machine:
@@ -13,7 +11,5 @@ macos_min_version:
 perl:
 - '5.26'
 pin_run_as_build:
-  curl:
-    max_pin: x
   perl:
-    max_pin: x.x
+    max_pin: x.x.x

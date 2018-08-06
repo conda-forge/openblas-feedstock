@@ -1,4 +1,4 @@
-{% set version = "0.3.1" %}
+{% set version = "0.3.2" %}
 
 package:
   name: openblas
@@ -7,7 +7,7 @@ package:
 source:
   fn: openblas-{{ version }}.tar.gz
   url: https://github.com/xianyi/OpenBLAS/archive/v{{ version }}.tar.gz
-  sha256: 1f5e956f35f3acdd3c74516e955d797a320c2e0135e31d838cbdb3ea94d0eb33
+  sha256: e8ba64f6b103c511ae13736100347deb7121ba9b41ba82052b1a018a65c0cb15
 
 build:
   number: 0
@@ -16,20 +16,13 @@ build:
 requirements:
   build:
     - {{ compiler("c") }}
-    - {{ compiler("fortran") }}  # [unix]
+    - {{ compiler("fortran") }}
     - perl
-    - flang                      # [win]
     - cmake                      # [win]
     - curl                       # [win]
     - jom                        # [win]
-
   host:
-    - libflang                   # [win]
-    - libgfortran-ng >=3.0       # [osx]
-    - libgfortran-ng >=4.9       # [linux]
-
   run:
-    - libflang                   # [win]
 
 test:
   commands:
