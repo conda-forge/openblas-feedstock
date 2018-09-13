@@ -1,3 +1,5 @@
+build_number_decrement:
+- '1000'
 c_compiler:
 - toolchain_c
 channel_sources:
@@ -13,3 +15,10 @@ perl:
 pin_run_as_build:
   perl:
     max_pin: x.x.x
+zip_keys:
+- - c_compiler
+  - fortran_compiler
+  - channel_sources
+  - channel_targets
+  - docker_image
+  - build_number_decrement
