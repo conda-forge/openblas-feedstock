@@ -18,8 +18,8 @@ source:
     - 0003-turn-TLS-off.patch
 
 build:
-  number: 3
-  skip: true  # [win and vc<14]
+  number: 1001
+  skip: true  # [win and vc!=14]
 
 requirements:
   build:

@@ -7,3 +7,6 @@ appveyor:
 
 provider:
   osx: circle
+max_py_ver: '37'
+max_r_ver: '35'
+compiler_stack: comp7
