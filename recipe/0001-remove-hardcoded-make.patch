@@ -1,0 +1,60 @@
+From c7b41da6d116a1da4edb41c95a31d45d74c813ab Mon Sep 17 00:00:00 2001
+From: Michael Sarahan <msarahan@gmail.com>
+Date: Tue, 7 Aug 2018 17:22:06 -0500
+Subject: [PATCH] remove hardcoded make
+
+---
+ lapack-netlib/make.inc.example | 22 +++++++++++-----------
+ 1 file changed, 11 insertions(+), 11 deletions(-)
+
+diff --git a/lapack-netlib/make.inc.example b/lapack-netlib/make.inc.example
+index d780c3a..191c767 100644
+--- a/lapack-netlib/make.inc.example
++++ b/lapack-netlib/make.inc.example
+@@ -8,8 +8,8 @@ SHELL = /bin/sh
+ 
+ #  CC is the C compiler, normally invoked with options CFLAGS.
+ #
+-CC     = gcc
+-CFLAGS = -O3
++# CC     = gcc
++# CFLAGS = -O3
+ 
+ #  Modify the FORTRAN and OPTS definitions to refer to the compiler
+ #  and desired compiler options for your machine.  NOOPT refers to
+@@ -19,23 +19,23 @@ CFLAGS = -O3
+ #  and handle these quantities appropriately. As a consequence, one
+ #  should not compile LAPACK with flags such as -ffpe-trap=overflow.
+ #
+-FORTRAN = gfortran
+-OPTS    = -O2 -frecursive
+-DRVOPTS = $(OPTS)
+-NOOPT   = -O0 -frecursive
++# FORTRAN = gfortran
++# OPTS    = -O2 -frecursive
++# DRVOPTS = $(OPTS)
++# NOOPT   = -O0 -frecursive
+ 
+ #  Define LOADER and LOADOPTS to refer to the loader and desired
+ #  load options for your machine.
+ #
+-LOADER   = gfortran
+-LOADOPTS =
++# LOADER   = gfortran
++# LOADOPTS =
+ 
+ #  The archiver and the flag(s) to use when building an archive
+ #  (library).  If your system has no ranlib, set RANLIB = echo.
+ #
+-ARCH      = ar
+-ARCHFLAGS = cr
+-RANLIB    = ranlib
++# ARCH      = ar
++# ARCHFLAGS = cr
++# RANLIB    = ranlib
+ 
+ #  Timer for the SECOND and DSECND routines
+ #
+-- 
+2.17.1
+
