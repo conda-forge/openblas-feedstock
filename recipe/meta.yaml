@@ -109,7 +109,7 @@ outputs:
       run:
         - {{ pin_subpackage("libopenblas", exact=True) }}
         - {{ pin_subpackage("openblas-devel", exact=True) }}
-        - {{ pin_subpackage("blas", exact=True) }}
+        - blas * openblas
 
     about:
       home: http://www.openblas.net/
