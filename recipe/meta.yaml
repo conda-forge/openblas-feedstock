@@ -100,7 +100,6 @@ outputs:
     requirements:
       run:
         - {{ pin_subpackage("libopenblas", exact=True) }}
-        - {{ pin_subpackage("nomkl", exact=True) }}
     about:
       summary: OpenBLAS headers and libraries for developing software that used OpenBLAS.
 
@@ -111,7 +110,6 @@ outputs:
         - {{ pin_subpackage("libopenblas", exact=True) }}
         - {{ pin_subpackage("openblas-devel", exact=True) }}
         - {{ pin_subpackage("blas", exact=True) }}
-        - {{ pin_subpackage("nomkl", exact=True) }}
 
     about:
       home: http://www.openblas.net/
@@ -122,28 +120,6 @@ outputs:
       doc_url: http://www.openblas.net/
       doc_source_url: https://github.com/xianyi/OpenBLAS/blob/develop/README.md
       dev_url: https://github.com/xianyi/OpenBLAS
-
-  # mutex package to keep only one blas implementation in a given env
-  - name: blas
-    version: 1.0
-    build:
-      string: openblas
-
-  - name: nomkl
-    version: 3.0
-    build:
-      number: 0
-      # track_features doesn't really track anything anymore (blas metapackage
-      # dependencies do the same job better). This is still here, though, as it
-      # effectively "weighs down" nomkl packages, allowing mkl to take
-      # precedence when defaults is the top channel priority.
-      track_features:
-        - nomkl
-    requirements:
-      run:
-        - blas * openblas
-    about:
-      license: BSD
 
 extra:
   recipe-maintainers:
