@@ -9,7 +9,7 @@ patch < segfaults.patch
 
 # See this workaround
 # ( https://github.com/xianyi/OpenBLAS/issues/818#issuecomment-207365134 ).
-export CF="${CPPFLAGS} ${CFLAGS} -Wno-unused-parameter -Wno-old-style-declaration"
+export CF="${CPPFLAGS} ${CFLAGS} -fopenmp -Wno-unused-parameter -Wno-old-style-declaration"
 unset CFLAGS
 export LAPACK_FFLAGS="${FFLAGS}"
 
