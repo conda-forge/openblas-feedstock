@@ -1,4 +1,4 @@
-{% set version = "0.3.1" %}
+{% set version = "0.3.3" %}
 
 package:
   name: openblas
@@ -7,7 +7,7 @@ package:
 source:
   fn: openblas-{{ version }}.tar.gz
   url: https://github.com/xianyi/OpenBLAS/archive/v{{ version }}.tar.gz
-  sha256: 1f5e956f35f3acdd3c74516e955d797a320c2e0135e31d838cbdb3ea94d0eb33
+  sha256: 49d88f4494ae780e3d7fa51769c00d982d7cdb73e696054ac3baa81d42f13bab
 
 build:
   number: 1
@@ -21,7 +21,6 @@ requirements:
     - cmake                      # [win]
     - curl                       # [win]
     - jom                        # [win]
-
   host: []
 
 test:
