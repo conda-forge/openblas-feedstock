@@ -5,7 +5,12 @@ patch < segfaults.patch
 
 # See this workaround
 # ( https://github.com/xianyi/OpenBLAS/issues/818#issuecomment-207365134 ).
-CF="${CFLAGS}"
+if [[ ${target_platform} =~ linux-* && !${c_compiler} =~ .*toolchain.* ]]; then
+     export CF="${CPPFLAGS} ${CFLAGS} -fopenmp -Wno-unused-parameter -Wno-old-style-declaration"
+else
+     export CF="${CFLAGS}"
+fi
+
 unset CFLAGS
 
 if [[ `uname` == 'Darwin' ]]; then
