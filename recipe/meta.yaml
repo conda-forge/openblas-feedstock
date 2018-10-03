@@ -8,9 +8,15 @@ source:
   fn: openblas-{{ version }}.tar.gz
   url: https://github.com/xianyi/OpenBLAS/archive/v{{ version }}.tar.gz
   sha256: 49d88f4494ae780e3d7fa51769c00d982d7cdb73e696054ac3baa81d42f13bab
+  patches:
+    # new in 0.3 series
+    # requires glibc >=2.21; disable for the foreseeable future.
+    #   https://github.com/xianyi/OpenBLAS/blob/dbfd7524cd94fe15930ed2f78b7789f15b22fec0/Makefile.rule#L112-L116
+    # Also, see # https://github.com/xianyi/OpenBLAS/issues/1761
+    - 0003-turn-TLS-off.patch
 
 build:
-  number: 0
+  number: 1001
   skip: true  # [win and vc!=14]
 
 requirements:
