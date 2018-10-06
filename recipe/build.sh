@@ -16,6 +16,10 @@ else
     USE_OPENMP="0"
 fi
 
+if [ ! -z "$FFLAGS" ]; then
+     export FFLAGS="${FFLAGS/-fopenmp/ }";
+fi
+
 # Because -Wno-missing-include-dirs does not work with gfortran:
 [[ -d "${PREFIX}"/include ]] || mkdir "${PREFIX}"/include
 [[ -d "${PREFIX}"/lib ]] || mkdir "${PREFIX}"/lib
