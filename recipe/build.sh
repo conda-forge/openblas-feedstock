@@ -16,8 +16,6 @@ else
     USE_OPENMP="0"
 fi
 
-export FFLAGS="$FFLAGS -frecursive"
-
 # Because -Wno-missing-include-dirs does not work with gfortran:
 [[ -d "${PREFIX}"/include ]] || mkdir "${PREFIX}"/include
 [[ -d "${PREFIX}"/lib ]] || mkdir "${PREFIX}"/lib
@@ -33,8 +31,8 @@ export FFLAGS="$FFLAGS -frecursive"
 # Enable threading. This can be controlled to a certain number by
 # setting OPENBLAS_NUM_THREADS before loading the library.
 make DYNAMIC_ARCH=1 BINARY=${ARCH} NO_LAPACK=0 NO_AFFINITY=1 USE_THREAD=1 NUM_THREADS=128 \
-     USE_OPENMP="${USE_OPENMP}" USE_SIMPLE_THREADED_LEVEL3=1 CFLAGS="${CF}" FFLAGS="${FFLAGS}"
-OPENBLAS_NUM_THREADS="${CPU_COUNT}" CFLAGS="${CF}" FFLAGS="${FFLAGS}" make test
+     USE_OPENMP="${USE_OPENMP}" USE_SIMPLE_THREADED_LEVEL3=1 CFLAGS="${CF}" FFLAGS="${FFLAGS} -frecursive"
+OPENBLAS_NUM_THREADS="${CPU_COUNT}" CFLAGS="${CF}" FFLAGS="${FFLAGS} -frecursive" make test
 make install PREFIX="${PREFIX}"
 
 
