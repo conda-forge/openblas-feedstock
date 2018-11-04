@@ -15,4 +15,3 @@ cmake -G "NMake Makefiles JOM"              ^
 jom install -j%CPU_COUNT%
 
 utest\openblas_utest.exe
-
