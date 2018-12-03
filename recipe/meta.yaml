@@ -14,7 +14,7 @@ source:
     # requires glibc >=2.21; disable for the foreseeable future.
     #   https://github.com/xianyi/OpenBLAS/blob/dbfd7524cd94fe15930ed2f78b7789f15b22fec0/Makefile.rule#L112-L116
     # Also, see # https://github.com/xianyi/OpenBLAS/issues/1761
-    - 0003-turn-TLS-off.patch
+    # - 0003-turn-TLS-off.patch
 
 build:
   number: 1000
