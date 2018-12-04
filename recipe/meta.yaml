@@ -1,4 +1,4 @@
-{% set version = "0.3.3" %}
+{% set version = "0.3.4" %}
 
 package:
   name: openblas
@@ -7,17 +7,20 @@ package:
 source:
   fn: openblas-{{ version }}.tar.gz
   url: https://github.com/xianyi/OpenBLAS/archive/v{{ version }}.tar.gz
-  sha256: 49d88f4494ae780e3d7fa51769c00d982d7cdb73e696054ac3baa81d42f13bab
+  sha256: 4b4b4453251e9edb5f57465bf2b3cf67b19d811d50c8588cdf2ea1f201bb834f
   patches:
     - 0002-Fix-gfortran-detection-for-ctng-based-cross-compilers.patch    # [c_compiler == 'gcc']
     # new in 0.3 series
     # requires glibc >=2.21; disable for the foreseeable future.
     #   https://github.com/xianyi/OpenBLAS/blob/dbfd7524cd94fe15930ed2f78b7789f15b22fec0/Makefile.rule#L112-L116
     # Also, see # https://github.com/xianyi/OpenBLAS/issues/1761
-    - 0003-turn-TLS-off.patch
+    # - 0003-turn-TLS-off.patch
+
+    # https://github.com/xianyi/OpenBLAS/issues/1902
+    - p2align_osx.patch
 
 build:
-  number: 1001
+  number: 1000
   skip: true  # [win and vc!=14]
 
 requirements:
