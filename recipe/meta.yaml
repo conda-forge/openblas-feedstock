@@ -10,11 +10,6 @@ source:
   sha256: 0950c14bd77c90a6427e26210d6dab422271bc86f9fc69126725833ecdaa0e85
   patches:
     - 0002-Fix-gfortran-detection-for-ctng-based-cross-compilers.patch    # [c_compiler == 'gcc']
-    # new in 0.3 series
-    # requires glibc >=2.21; disable for the foreseeable future.
-    #   https://github.com/xianyi/OpenBLAS/blob/dbfd7524cd94fe15930ed2f78b7789f15b22fec0/Makefile.rule#L112-L116
-    # Also, see # https://github.com/xianyi/OpenBLAS/issues/1761
-    # - 0003-turn-TLS-off.patch
 
 build:
   number: 1000
