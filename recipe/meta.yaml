@@ -16,9 +16,6 @@ source:
     # Also, see # https://github.com/xianyi/OpenBLAS/issues/1761
     # - 0003-turn-TLS-off.patch
 
-    # https://github.com/xianyi/OpenBLAS/issues/1902
-    - p2align_osx.patch
-
 build:
   number: 1000
   skip: true  # [win and vc!=14]
