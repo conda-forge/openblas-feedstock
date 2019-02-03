@@ -29,6 +29,15 @@ fi
 #    https://github.com/xianyi/OpenBLAS/issues/294
 #    https://github.com/scikit-learn/scikit-learn/issues/636
 
+# Set CPU Target
+TARGET=""
+if [[ ${target_platform} == linux-aarch64 ]]; then
+  TARGET="TARGET=ARMV8"
+fi
+if [[ ${target_platform} == linux-ppc64le ]]; then
+  TARGET="TARGET=POWER8"
+fi
+
 
 # Build all CPU targets and allow dynamic configuration
 # Build LAPACK.
@@ -36,8 +45,8 @@ fi
 # setting OPENBLAS_NUM_THREADS before loading the library.
 make DYNAMIC_ARCH=1 BINARY=${ARCH} NO_LAPACK=0 NO_AFFINITY=1 USE_THREAD=1 NUM_THREADS=128 \
      USE_OPENMP="${USE_OPENMP}" USE_SIMPLE_THREADED_LEVEL3=1 CFLAGS="${CF}" FFLAGS="${FFLAGS} -frecursive" \
-     HOST=${HOST}
-OPENBLAS_NUM_THREADS="${CPU_COUNT}" CFLAGS="${CF}" FFLAGS="${FFLAGS} -frecursive" make test
+     HOST=${HOST} $TARGET
+OPENBLAS_NUM_THREADS="${CPU_COUNT}" CFLAGS="${CF}" FFLAGS="${FFLAGS} -frecursive" $TARGET make test
 make install PREFIX="${PREFIX}"
 
 
