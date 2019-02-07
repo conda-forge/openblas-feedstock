@@ -1,0 +1,15 @@
+c_compiler:
+- gcc
+channel_sources:
+- conda-forge,defaults
+channel_targets:
+- conda-forge main
+docker_image:
+- condaforge/linux-anvil-ppc64le
+fortran_compiler:
+- gfortran
+perl:
+- '5.26'
+pin_run_as_build:
+  perl:
+    max_pin: x.x.x
