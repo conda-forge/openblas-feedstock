@@ -10,6 +10,7 @@ source:
   sha256: 0950c14bd77c90a6427e26210d6dab422271bc86f9fc69126725833ecdaa0e85
   patches:
     - 0002-Fix-gfortran-detection-for-ctng-based-cross-compilers.patch    # [c_compiler == 'gcc']
+    - 0003-Fix-power-prefetch.patch
 
 build:
   number: 1000
