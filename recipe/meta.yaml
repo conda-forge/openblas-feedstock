@@ -21,6 +21,7 @@ requirements:
     - {{ compiler("c") }}
     - {{ compiler("fortran") }}
     - perl
+    - make                       # [not win]
     - cmake                      # [win]
     - curl                       # [win]
     - jom                        # [win]
