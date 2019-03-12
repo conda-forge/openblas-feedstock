@@ -13,7 +13,7 @@ source:
     - 0003-Fix-power-prefetch.patch
 
 build:
-  number: 1000
+  number: 1001
   skip: true  # [win and vc!=14]
 
 requirements:
