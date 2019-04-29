@@ -16,10 +16,10 @@ Current build status
 
 
 <table><tr>
-    <td>CircleCI</td>
+    <td>Travis</td>
     <td>
-      <a href="https://circleci.com/gh/conda-forge/openblas-feedstock">
-        <img alt="OSX" src="https://img.shields.io/circleci/project/github/conda-forge/openblas-feedstock/master.svg?label=OSX">
+      <a href="https://travis-ci.org/conda-forge/openblas-feedstock">
+        <img alt="macOS" src="https://img.shields.io/travis/conda-forge/openblas-feedstock/master.svg?label=macOS">
       </a>
     </td>
   </tr><tr>
