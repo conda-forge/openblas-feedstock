@@ -10,6 +10,7 @@ cmake -G "NMake Makefiles JOM"              ^
     -DBUILD_WITHOUT_LAPACK=no               ^
     -DNOFORTRAN=0                           ^
     -DNUM_THREADS=128                       ^
+    -DBUILD_SHARED_LIBS=on                  ^
     ..
 
 jom install -j%CPU_COUNT%
