@@ -12,7 +12,7 @@ source:
     - 0002-Fix-gfortran-detection-for-ctng-based-cross-compilers.patch    # [c_compiler == 'gcc']
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win and vc!=14]
 
 requirements:
@@ -30,8 +30,10 @@ requirements:
 test:
   commands:
     - test -f ${PREFIX}/lib/libopenblas.a                            # [unix]
+    - test -f ${PREFIX}/lib/libopenbla${SHLIB_EXT}                   # [unix]
     - python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblas${SHLIB_EXT}']"  # [unix]
-    - if not exist %PREFIX%\\Library\\lib\\openblas.lib exit 1    # [win]
+    - if not exist %PREFIX%\\Library\\lib\\openblas.lib exit 1       # [win]
+    - if not exist %PREFIX%\\Library\\bin\\openblas.dll exit 1       # [win]
 
 about:
   home: http://www.openblas.net/
