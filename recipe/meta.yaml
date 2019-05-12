@@ -10,10 +10,11 @@ source:
   sha256: e64c8fe083832ffbc1459ab6c72f71d53afd3b36e8497c922a15a06b72e9002f
   patches:
     - 0002-Fix-gfortran-detection-for-ctng-based-cross-compilers.patch    # [c_compiler == 'gcc']
+    - gh2111.patch
 
 build:
-  number: 1
-  skip: true  # [win and vc!=14]
+  number: 2
+  skip: true  # [win and vc<14]
 
 requirements:
   build:
