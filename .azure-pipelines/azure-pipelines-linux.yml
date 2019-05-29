@@ -10,11 +10,11 @@ jobs:
   strategy:
     maxParallel: 8
     matrix:
-      linux_aarch64_target_platformlinux-aarch64:
-        CONFIG: linux_aarch64_target_platformlinux-aarch64
+      linux_:
+        CONFIG: linux_
         UPLOAD_PACKAGES: True
-      linux_target_platformlinux-64:
-        CONFIG: linux_target_platformlinux-64
+      linux_aarch64_:
+        CONFIG: linux_aarch64_
         UPLOAD_PACKAGES: True
   steps:
   - script: |
