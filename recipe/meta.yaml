@@ -30,8 +30,9 @@ requirements:
 
 outputs:
   - name: libopenblas
-    run_exports:
-      - {{ pin_subpackage("libopenblas") }}
+    build:
+      run_exports:
+        - {{ pin_subpackage("libopenblas") }}
     files:
       - lib/*{{ SHLIB_EXT }}*  # [not win]
     test:
