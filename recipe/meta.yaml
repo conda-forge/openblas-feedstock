@@ -44,7 +44,7 @@ outputs:
       - Library/bin/*.dll                  # [win]
     test:
       commands:
-        - test -f ${PREFIX}/lib/libopenblasp{{ SHLIB_EXT }}  # [not win]
+        - test -f ${PREFIX}/lib/libopenblasp-r{{ version }}{{ SHLIB_EXT }}  # [not win]
         - python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblasp-r{{ version }}{{ SHLIB_EXT }}']"  # [not win]
         - if not exist %PREFIX%\\Library\\bin\\openblas.dll exit 1  # [win]
 
