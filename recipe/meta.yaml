@@ -30,11 +30,16 @@ requirements:
 outputs:
   - name: libopenblas
     build:
+      skip: true  # [win and vc<14]
       run_exports:
         - {{ pin_subpackage("libopenblas") }}
+    requirements:
+      build:
+        - {{ compiler("c") }}
+        - {{ compiler("fortran") }}
     files:
       - lib/*{{ SHLIB_EXT }}*  # [not win]
-      - Library/bin/*.dll  # [win]
+      - Library/bin/*.dll      # [win]
     test:
       commands:
         - test -f ${PREFIX}/lib/libopenblas{{ SHLIB_EXT }}  # [not win]
@@ -42,14 +47,16 @@ outputs:
         - if not exist %PREFIX%\\Library\\bin\\openblas.dll exit 1  # [win]
 
   - name: openblas
+    build:
+      skip: true  # [win and vc<14]
     files:
       - include/*.h  # [not win]
       - lib/*.a  # [not win]
       - lib/pkgconfig/*.pc  # [not win]
       - lib/cmake/openblas/*  # [not win]
-      - /Library/include/*  # [win]
-      - /Library/lib/*  # [win]
-      - /Library/share/*  # [win]
+      - Library/include/*  # [win]
+      - Library/lib/*  # [win]
+      - Library/share/*  # [win]
     requirements:
       run:
         - {{ pin_subpackage("libopenblas", exact=True) }}
