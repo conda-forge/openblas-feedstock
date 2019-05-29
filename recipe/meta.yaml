@@ -27,7 +27,6 @@ requirements:
   host:
   run:
 
-
 outputs:
   - name: libopenblas
     build:
@@ -35,6 +34,7 @@ outputs:
         - {{ pin_subpackage("libopenblas") }}
     files:
       - lib/*{{ SHLIB_EXT }}*  # [not win]
+      - Library/bin/*.dll  # [win]
     test:
       commands:
         - test -f ${PREFIX}/lib/libopenblas{{ SHLIB_EXT }}  # [not win]
@@ -44,10 +44,13 @@ outputs:
 
   - name: openblas
     files:
-      - include/*.h
-      - lib/*.a
-      - lib/pkgconfig/*.pc
-      - lib/cmake/openblas/*
+      - include/*.h  # [not win]
+      - lib/*.a  # [not win]
+      - lib/pkgconfig/*.pc  # [not win]
+      - lib/cmake/openblas/*  # [not win]
+      - /Library/include/*  # [win]
+      - /Library/lib/*  # [win]
+      - /Library/share/*  # [win]
     requirements:
       run:
         - {{ pin_subpackage("libopenblas", exact=True) }}
