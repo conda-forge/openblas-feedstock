@@ -12,7 +12,7 @@ source:
     - gh2111.patch
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win and vc<14]
 
 requirements:
@@ -37,6 +37,8 @@ outputs:
       build:
         - {{ compiler("c") }}
         - {{ compiler("fortran") }}
+      run_constrained:
+        - {{ pin_subpackage("openblas", exact=True) }}
     files:
       - lib/libopenblasp*{{ SHLIB_EXT }}   # [not win]
       - lib/libopenblas.so.*               # [linux]
