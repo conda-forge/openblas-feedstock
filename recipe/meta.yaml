@@ -5,11 +5,10 @@ package:
   version: {{ version }}
 
 source:
-  fn: openblas-{{ version }}.tar.gz
   url: https://github.com/xianyi/OpenBLAS/archive/v{{ version }}.tar.gz
   sha256: e64c8fe083832ffbc1459ab6c72f71d53afd3b36e8497c922a15a06b72e9002f
   patches:
-    - 0002-Fix-gfortran-detection-for-ctng-based-cross-compilers.patch    # [c_compiler == 'gcc']
+    - 0002-Fix-gfortran-detection-for-ctng-based-cross-compilers.patch
     - gh2111.patch
 
 build:
@@ -21,26 +20,45 @@ requirements:
     - {{ compiler("c") }}
     - {{ compiler("fortran") }}
     - perl
-    - make                       # [not win]
-    - cmake                      # [win]
-    - curl                       # [win]
-    - jom                        # [win]
+    - make  # [not win]
+    - cmake  # [win]
+    - curl  # [win]
+    - jom  # [win]
   host:
   run:
 
-test:
-  commands:
-    - test -f ${PREFIX}/lib/libopenblas.a                            # [unix]
-    - test -f ${PREFIX}/lib/libopenblas${SHLIB_EXT}                  # [unix]
-    - python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblas${SHLIB_EXT}']"  # [unix]
-    - if not exist %PREFIX%\\Library\\lib\\openblas.lib exit 1       # [win]
-    - if not exist %PREFIX%\\Library\\bin\\openblas.dll exit 1       # [win]
+
+outputs:
+  - name: libopenblas
+    run_exports:
+      - {{ pin_subpackage("libopenblas") }}
+    files:
+      - lib/*{{ SHLIB_EXT }}*  # [not win]
+    test:
+      commands:
+        - test -f ${PREFIX}/lib/libopenblas{{ SHLIB_EXT }}  # [not win]
+        - python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblas{{ SHLIB_EXT }}']"  # [not win]
+        - if not exist %PREFIX%\\Library\\lib\\openblas.lib exit 1  # [win]
+        - if not exist %PREFIX%\\Library\\bin\\openblas.dll exit 1  # [win]
+
+  - name: openblas
+    files:
+      - include/*.h
+      - lib/*.a
+      - lib/pkgconfig/*.pc
+      - lib/cmake/openblas/*
+    requirements:
+      run:
+        - {{ pin_subpackage("libopenblas", exact=True) }}
+    test:
+      commands:
+        - test -f ${PREFIX}/lib/libopenblas.a  # [not win]
 
 about:
   home: http://www.openblas.net/
-  license: BSD 3-Clause
+  license: BSD-3-Clause
   license_file: LICENSE
-  summary: An optimized BLAS library based on GotoBLAS2 1.13 BSD version.
+  summary: An optimized BLAS library based on GotoBLAS2 1.13 BSD version
 
 extra:
   recipe-maintainers:
