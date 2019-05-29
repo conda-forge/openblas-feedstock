@@ -3,11 +3,11 @@ About openblas
 
 Home: http://www.openblas.net/
 
-Package license: BSD 3-Clause
+Package license: BSD-3-Clause
 
 Feedstock license: BSD 3-Clause
 
-Summary: An optimized BLAS library based on GotoBLAS2 1.13 BSD version.
+Summary: An optimized BLAS library based on GotoBLAS2 1.13 BSD version
 
 
 
@@ -90,6 +90,7 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libopenblas-green.svg)](https://anaconda.org/conda-forge/libopenblas) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libopenblas.svg)](https://anaconda.org/conda-forge/libopenblas) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libopenblas.svg)](https://anaconda.org/conda-forge/libopenblas) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libopenblas.svg)](https://anaconda.org/conda-forge/libopenblas) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-openblas-green.svg)](https://anaconda.org/conda-forge/openblas) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/openblas.svg)](https://anaconda.org/conda-forge/openblas) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/openblas.svg)](https://anaconda.org/conda-forge/openblas) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/openblas.svg)](https://anaconda.org/conda-forge/openblas) |
 
 Installing openblas
@@ -101,16 +102,16 @@ Installing `openblas` from the `conda-forge` channel can be achieved by adding `
 conda config --add channels conda-forge
 ```
 
-Once the `conda-forge` channel has been enabled, `openblas` can be installed with:
+Once the `conda-forge` channel has been enabled, `libopenblas, openblas` can be installed with:
 
 ```
-conda install openblas
+conda install libopenblas openblas
 ```
 
-It is possible to list all of the versions of `openblas` available on your platform with:
+It is possible to list all of the versions of `libopenblas` available on your platform with:
 
 ```
-conda search openblas --channel conda-forge
+conda search libopenblas --channel conda-forge
 ```
 
 

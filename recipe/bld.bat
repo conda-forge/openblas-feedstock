@@ -11,9 +11,8 @@ cmake -G "NMake Makefiles JOM"              ^
     -DNOFORTRAN=0                           ^
     -DNUM_THREADS=128                       ^
     -DBUILD_SHARED_LIBS=on                  ^
-    ..
+    %SRC_DIR%
 
 jom install -j%CPU_COUNT%
 
 utest\openblas_utest.exe
-
