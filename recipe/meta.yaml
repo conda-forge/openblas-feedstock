@@ -12,7 +12,7 @@ source:
     - gh2111.patch
 
 build:
-  number: 4
+  number: 5
   skip: true  # [win and vc<14]
 
 requirements:
@@ -42,7 +42,7 @@ outputs:
     files:
       - lib/libopenblasp*{{ SHLIB_EXT }}   # [not win]
       - lib/libopenblas.so.*               # [linux]
-      - lib/libopenblas.*.dylib            # [osx]
+      - lib/libopenblas.*dylib             # [osx]
       - Library/bin/*.dll                  # [win]
     test:
       commands:
