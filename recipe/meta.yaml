@@ -12,7 +12,7 @@ source:
     - gh2111.patch
 
 build:
-  number: 5
+  number: 6
   skip: true  # [win and vc<14]
 
 requirements:
@@ -43,7 +43,7 @@ outputs:
       - lib/libopenblasp*{{ SHLIB_EXT }}   # [not win]
       - lib/libopenblas.so.*               # [linux]
       - lib/libopenblas.*.dylib            # [osx]
-      - Library/bin/*.dll                  # [win]
+      - Library/bin/openblas.dll           # [win]
     test:
       commands:
         - test -f ${PREFIX}/lib/libopenblasp-r{{ version }}{{ SHLIB_EXT }}  # [not win]
@@ -55,13 +55,14 @@ outputs:
       skip: true  # [win and vc<14]
     files:
       - include/*.h  # [not win]
-      - lib/*.a  # [not win]
+      - lib/libopenblas*.a  # [not win]
       - lib/libopenblas${SHLIB_EXT}  # [not win]
-      - lib/pkgconfig/*.pc  # [not win]
+      - lib/pkgconfig/openblas.pc  # [not win]
       - lib/cmake/openblas/*  # [not win]
-      - Library/include/*  # [win]
-      - Library/lib/*  # [win]
-      - Library/share/*  # [win]
+      - Library/include/openblas  # [win]
+      - Library/lib/openblas.lib  # [win]
+      - Library/lib/pkgconfig/openblas.pc  # [win]
+      - Library/share/cmake/OpenBLAS  # [win]
     requirements:
       run:
         - {{ pin_subpackage("libopenblas", exact=True) }}
