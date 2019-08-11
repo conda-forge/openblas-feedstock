@@ -49,11 +49,3 @@ make QUIET_MAKE=1 DYNAMIC_ARCH=1 BINARY=${ARCH} NO_LAPACK=0 NO_AFFINITY=1 USE_TH
 OPENBLAS_NUM_THREADS="${CPU_COUNT}" CFLAGS="${CF}" FFLAGS="${FFLAGS} -frecursive" make test
 make install PREFIX="${PREFIX}"
 
-if [[ `uname` == 'Darwin' ]]; then
-    # Needs to fix the install name of the dylib so that the downstream projects will link
-    # to libopenblas.dylib instead of libopenblasp-r0.2.20.dylib
-    # In linux, SONAME is libopenblas.so.0 instead of libopenblasp-r0.2.20.so, so no change needed
-    ln -s ${PREFIX}/lib/libopenblas.dylib ${PREFIX}/lib/libopenblas.0.dylib
-    install_name_tool -id ${PREFIX}/lib/libopenblas.0.dylib ${PREFIX}/lib/libopenblas.dylib;
-fi
-
