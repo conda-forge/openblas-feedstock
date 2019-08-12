@@ -1,4 +1,4 @@
-{% set version = "0.3.6" %}
+{% set version = "0.3.7" %}
 
 package:
   name: openblas
@@ -6,13 +6,12 @@ package:
 
 source:
   url: https://github.com/xianyi/OpenBLAS/archive/v{{ version }}.tar.gz
-  sha256: e64c8fe083832ffbc1459ab6c72f71d53afd3b36e8497c922a15a06b72e9002f
+  sha256: bde136122cef3dd6efe2de1c6f65c10955bbb0cc01a520c2342f5287c28f9379
   patches:
     - 0002-Fix-gfortran-detection-for-ctng-based-cross-compilers.patch  # [c_compiler == 'gcc']
-    - gh2111.patch
 
 build:
-  number: 6
+  number: 0
   skip: true  # [win and vc<14]
 
 requirements:
