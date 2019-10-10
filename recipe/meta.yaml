@@ -41,13 +41,11 @@ outputs:
     files:
       - lib/libopenblasp*{{ SHLIB_EXT }}   # [not win]
       - lib/libopenblas.so.*               # [linux]
-      - lib/libopenblas.so                 # [linux]
       - lib/libopenblas.*.dylib            # [osx]
       - Library/bin/openblas.dll           # [win]
     test:
       commands:
         - test -f ${PREFIX}/lib/libopenblasp-r{{ version }}{{ SHLIB_EXT }}  # [not win]
-        - test -f ${PREFIX}/lib/libopenblas.so  # [linux]
         - python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblasp-r{{ version }}{{ SHLIB_EXT }}']"  # [not win]
         - if not exist %PREFIX%\\Library\\bin\\openblas.dll exit 1  # [win]
 
@@ -57,6 +55,7 @@ outputs:
     files:
       - include/*.h  # [not win]
       - lib/libopenblas*.a  # [not win]
+      - lib/libopenblas.so  # [linux]
       - lib/libopenblas${SHLIB_EXT}  # [not win]
       - lib/pkgconfig/openblas.pc  # [not win]
       - lib/cmake/openblas/*  # [not win]
@@ -70,6 +69,7 @@ outputs:
     test:
       commands:
         - test -f ${PREFIX}/lib/libopenblas.a  # [not win]
+        - test -f ${PREFIX}/lib/libopenblas.so  # [linux]
         - if not exist %PREFIX%\\Library\\lib\\openblas.lib exit 1  # [win]
 
 about:
