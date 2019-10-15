@@ -11,7 +11,7 @@ source:
     - 0002-Fix-gfortran-detection-for-ctng-based-cross-compilers.patch  # [c_compiler == 'gcc']
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win and vc<14]
 
 requirements:
@@ -55,7 +55,7 @@ outputs:
     files:
       - include/*.h  # [not win]
       - lib/libopenblas*.a  # [not win]
-      - lib/libopenblas${SHLIB_EXT}  # [not win]
+      - lib/libopenblas{{ SHLIB_EXT }}  # [not win]
       - lib/pkgconfig/openblas.pc  # [not win]
       - lib/cmake/openblas/*  # [not win]
       - Library/include/openblas  # [win]
@@ -68,6 +68,7 @@ outputs:
     test:
       commands:
         - test -f ${PREFIX}/lib/libopenblas.a  # [not win]
+        - test -f ${PREFIX}/lib/libopenblas${SHLIB_EXT}  # [not win]
         - if not exist %PREFIX%\\Library\\lib\\openblas.lib exit 1  # [win]
 
 about:
