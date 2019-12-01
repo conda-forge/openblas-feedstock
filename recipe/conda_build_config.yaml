@@ -1,0 +1,16 @@
+SYMBOLSUFFIX:
+  - ""
+  - "64_"     # [not win]
+
+name_suffix:
+  - ""
+  - "_ilp64"  # [not win]
+
+INTERFACE64:
+  - 0
+  - 1         # [not win]
+
+zip_keys:
+  - - SYMBOLSUFFIX
+    - name_suffix
+    - INTERFACE64

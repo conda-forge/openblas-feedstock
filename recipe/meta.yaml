@@ -11,7 +11,7 @@ source:
     - 0002-Fix-gfortran-detection-for-ctng-based-cross-compilers.patch  # [c_compiler == 'gcc']
 
 build:
-  number: 3
+  number: 4
   skip: true  # [win and vc<14]
 
 requirements:
@@ -27,49 +27,49 @@ requirements:
   run:
 
 outputs:
-  - name: libopenblas
+  - name: libopenblas{{ name_suffix }}
     build:
       skip: true  # [win and vc<14]
       run_exports:
-        - {{ pin_subpackage("libopenblas") }}
+        - {{ pin_subpackage("libopenblas" ~ name_suffix) }}
     requirements:
       build:
         - {{ compiler("c") }}
         - {{ compiler("fortran") }}
       run_constrained:
-        - {{ pin_subpackage("openblas", max_pin="x.x.x") }}
+        - {{ pin_subpackage("openblas" ~ name_suffix, max_pin="x.x.x") }}
     files:
-      - lib/libopenblasp*{{ SHLIB_EXT }}   # [not win]
-      - lib/libopenblas.so.*               # [linux]
-      - lib/libopenblas.*.dylib            # [osx]
-      - Library/bin/openblas.dll           # [win]
+      - lib/libopenblas{{ SYMBOLSUFFIX }}p*{{ SHLIB_EXT }}   # [not win]
+      - lib/libopenblas{{ SYMBOLSUFFIX }}.so.*               # [linux]
+      - lib/libopenblas{{ SYMBOLSUFFIX }}.*.dylib            # [osx]
+      - Library/bin/openblas{{ SYMBOLSUFFIX }}.dll           # [win]
     test:
       commands:
-        - test -f ${PREFIX}/lib/libopenblasp-r{{ version }}{{ SHLIB_EXT }}  # [not win]
-        - python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblasp-r{{ version }}{{ SHLIB_EXT }}']"  # [not win]
-        - if not exist %PREFIX%\\Library\\bin\\openblas.dll exit 1  # [win]
+        - test -f ${PREFIX}/lib/libopenblasp{{ SYMBOLSUFFIX }}-r{{ version }}{{ SHLIB_EXT }}  # [not win]
+        - python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblasp{{ SYMBOLSUFFIX }}-r{{ version }}{{ SHLIB_EXT }}']"  # [not win]
+        - if not exist %PREFIX%\\Library\\bin\\openblas{{ SYMBOLSUFFIX }}.dll exit 1  # [win]
 
-  - name: openblas
+  - name: openblas{{ name_suffix }}
     build:
       skip: true  # [win and vc<14]
     files:
       - include/*.h  # [not win]
-      - lib/libopenblas*.a  # [not win]
-      - lib/libopenblas{{ SHLIB_EXT }}  # [not win]
+      - lib/libopenblas{{ SYMBOLSUFFIX }}*.a  # [not win]
+      - lib/libopenblas{{ SYMBOLSUFFIX }}{{ SHLIB_EXT }}  # [not win]
       - lib/pkgconfig/openblas.pc  # [not win]
       - lib/cmake/openblas/*  # [not win]
       - Library/include/openblas  # [win]
-      - Library/lib/openblas.lib  # [win]
+      - Library/lib/openblas{{ SYMBOLSUFFIX }}.lib  # [win]
       - Library/lib/pkgconfig/openblas.pc  # [win]
       - Library/share/cmake/OpenBLAS  # [win]
     requirements:
       run:
-        - {{ pin_subpackage("libopenblas", exact=True) }}
+        - {{ pin_subpackage("libopenblas" ~ name_suffix, exact=True) }}
     test:
       commands:
-        - test -f ${PREFIX}/lib/libopenblas.a  # [not win]
-        - test -f ${PREFIX}/lib/libopenblas${SHLIB_EXT}  # [not win]
-        - if not exist %PREFIX%\\Library\\lib\\openblas.lib exit 1  # [win]
+        - test -f ${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}.a  # [not win]
+        - test -f ${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}{{ SHLIB_EXT }}  # [not win]
+        - if not exist %PREFIX%\\Library\\lib\\openblas{{ SYMBOLSUFFIX }}.lib exit 1  # [win]
 
 about:
   home: http://www.openblas.net/
@@ -77,7 +77,8 @@ about:
   license_file:
     - LICENSE
     - lapack-netlib/LICENSE
-  summary: An optimized BLAS library based on GotoBLAS2 1.13 BSD version
+  summary: An optimized BLAS library based on GotoBLAS2 1.13 BSD version   # [SYMBOLSUFFIX != "64_"]
+  summary: An optimized BLAS library (ILP64 interface) based on GotoBLAS2 1.13 BSD version   # [SYMBOLSUFFIX == "64_"]
 
 extra:
   recipe-maintainers:
