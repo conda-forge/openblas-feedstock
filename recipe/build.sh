@@ -45,8 +45,7 @@ fi
 # setting OPENBLAS_NUM_THREADS before loading the library.
 make QUIET_MAKE=1 DYNAMIC_ARCH=1 BINARY=${ARCH} NO_LAPACK=0 NO_AFFINITY=1 USE_THREAD=1 NUM_THREADS=128 \
      USE_OPENMP="${USE_OPENMP}" USE_SIMPLE_THREADED_LEVEL3=1 CFLAGS="${CF}" FFLAGS="${FFLAGS} -frecursive" \
-     INTERFACE64=${INTERFACE64} SYMBOLSUFFIX=${SYMBOLSUFFIX} HOST=${HOST} $TARGET CROSS_SUFFIX="${HOST}-" \
-     || (find "/Users/runner/Library/Logs/DiagnosticReports" -name "clang-9*.crash" -exec cat {} + && find "/var/folders/" -name "dsymv_L-*" -exec cat {} +)
+     INTERFACE64=${INTERFACE64} SYMBOLSUFFIX=${SYMBOLSUFFIX} HOST=${HOST} $TARGET CROSS_SUFFIX="${HOST}-"
 OPENBLAS_NUM_THREADS="${CPU_COUNT}" CFLAGS="${CF}" FFLAGS="${FFLAGS} -frecursive" make test
 make install PREFIX="${PREFIX}"
 
