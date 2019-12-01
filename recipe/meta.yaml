@@ -45,8 +45,8 @@ outputs:
       - Library/bin/openblas{{ SYMBOLSUFFIX }}.dll           # [win]
     test:
       commands:
-        - test -f ${PREFIX}/lib/libopenblasp{{ SYMBOLSUFFIX }}-r{{ version }}{{ SHLIB_EXT }}  # [not win]
-        - python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblasp{{ SYMBOLSUFFIX }}-r{{ version }}{{ SHLIB_EXT }}']"  # [not win]
+        - test -f ${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}p-r{{ version }}{{ SHLIB_EXT }}  # [not win]
+        - python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}p-r{{ version }}{{ SHLIB_EXT }}']"  # [not win]
         - if not exist %PREFIX%\\Library\\bin\\openblas{{ SYMBOLSUFFIX }}.dll exit 1  # [win]
 
   - name: openblas{{ name_suffix }}
