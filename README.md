@@ -7,7 +7,7 @@ Package license: BSD-3-Clause
 
 Feedstock license: BSD 3-Clause
 
-Summary: An optimized BLAS library based on GotoBLAS2 1.13 BSD version
+Summary: An optimized BLAS library (ILP64 interface) based on GotoBLAS2 1.13 BSD version
 
 
 
@@ -18,8 +18,8 @@ Current build status
 <table><tr>
     <td>Travis</td>
     <td>
-      <a href="https://travis-ci.org/conda-forge/openblas-feedstock">
-        <img alt="macOS" src="https://img.shields.io/travis/conda-forge/openblas-feedstock/master.svg?label=macOS">
+      <a href="https://travis-ci.com/conda-forge/openblas-feedstock">
+        <img alt="macOS" src="https://img.shields.io/travis/com/conda-forge/openblas-feedstock/master.svg?label=macOS">
       </a>
     </td>
   </tr><tr>
@@ -43,6 +43,20 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
+              <td>linux_SYMBOLSUFFIX64_name_suffix-ilp64target_platformlinux-64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_SYMBOLSUFFIX64_name_suffix-ilp64target_platformlinux-64" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_SYMBOLSUFFIXname_suffixtarget_platformlinux-64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_SYMBOLSUFFIXname_suffixtarget_platformlinux-64" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
               <td>linux_aarch64_target_platformlinux-aarch64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
@@ -50,24 +64,31 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_target_platformlinux-ppc64le</td>
+              <td>linux_ppc64le_SYMBOLSUFFIX64_name_suffix-ilp64target_platformlinux-ppc64le</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_target_platformlinux-ppc64le" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_SYMBOLSUFFIX64_name_suffix-ilp64target_platformlinux-ppc64le" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_target_platformlinux-64</td>
+              <td>linux_ppc64le_SYMBOLSUFFIXname_suffixtarget_platformlinux-ppc64le</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_target_platformlinux-64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_SYMBOLSUFFIXname_suffixtarget_platformlinux-ppc64le" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_target_platformosx-64</td>
+              <td>osx_SYMBOLSUFFIX64_name_suffix-ilp64target_platformosx-64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=osx&configuration=osx_target_platformosx-64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=osx&configuration=osx_SYMBOLSUFFIX64_name_suffix-ilp64target_platformosx-64" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_SYMBOLSUFFIXname_suffixtarget_platformosx-64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=osx&configuration=osx_SYMBOLSUFFIXname_suffixtarget_platformosx-64" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -91,7 +112,9 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libopenblas-green.svg)](https://anaconda.org/conda-forge/libopenblas) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libopenblas.svg)](https://anaconda.org/conda-forge/libopenblas) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libopenblas.svg)](https://anaconda.org/conda-forge/libopenblas) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libopenblas.svg)](https://anaconda.org/conda-forge/libopenblas) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libopenblas--ilp64-green.svg)](https://anaconda.org/conda-forge/libopenblas-ilp64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libopenblas-ilp64.svg)](https://anaconda.org/conda-forge/libopenblas-ilp64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libopenblas-ilp64.svg)](https://anaconda.org/conda-forge/libopenblas-ilp64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libopenblas-ilp64.svg)](https://anaconda.org/conda-forge/libopenblas-ilp64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-openblas-green.svg)](https://anaconda.org/conda-forge/openblas) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/openblas.svg)](https://anaconda.org/conda-forge/openblas) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/openblas.svg)](https://anaconda.org/conda-forge/openblas) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/openblas.svg)](https://anaconda.org/conda-forge/openblas) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-openblas--ilp64-green.svg)](https://anaconda.org/conda-forge/openblas-ilp64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/openblas-ilp64.svg)](https://anaconda.org/conda-forge/openblas-ilp64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/openblas-ilp64.svg)](https://anaconda.org/conda-forge/openblas-ilp64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/openblas-ilp64.svg)](https://anaconda.org/conda-forge/openblas-ilp64) |
 
 Installing openblas
 ===================
@@ -102,10 +125,10 @@ Installing `openblas` from the `conda-forge` channel can be achieved by adding `
 conda config --add channels conda-forge
 ```
 
-Once the `conda-forge` channel has been enabled, `libopenblas, openblas` can be installed with:
+Once the `conda-forge` channel has been enabled, `libopenblas, libopenblas-ilp64, openblas, openblas-ilp64` can be installed with:
 
 ```
-conda install libopenblas openblas
+conda install libopenblas libopenblas-ilp64 openblas openblas-ilp64
 ```
 
 It is possible to list all of the versions of `libopenblas` available on your platform with:
@@ -129,7 +152,7 @@ A feedstock is made up of a conda recipe (the instructions on what and how to bu
 the package) and the necessary configurations for automatic building using freely
 available continuous integration services. Thanks to the awesome service provided by
 [CircleCI](https://circleci.com/), [AppVeyor](https://www.appveyor.com/)
-and [TravisCI](https://travis-ci.org/) it is possible to build and upload installable
+and [TravisCI](https://travis-ci.com/) it is possible to build and upload installable
 packages to the [conda-forge](https://anaconda.org/conda-forge)
 [Anaconda-Cloud](https://anaconda.org/) channel for Linux, Windows and OSX respectively.
 
