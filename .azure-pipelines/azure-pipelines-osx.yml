@@ -10,8 +10,8 @@ jobs:
   strategy:
     maxParallel: 8
     matrix:
-      osx_SYMBOLSUFFIX64_name_suffix_ilp64target_platformosx-64:
-        CONFIG: osx_SYMBOLSUFFIX64_name_suffix_ilp64target_platformosx-64
+      osx_SYMBOLSUFFIX64_name_suffix-ilp64target_platformosx-64:
+        CONFIG: osx_SYMBOLSUFFIX64_name_suffix-ilp64target_platformosx-64
         UPLOAD_PACKAGES: True
       osx_SYMBOLSUFFIXname_suffixtarget_platformosx-64:
         CONFIG: osx_SYMBOLSUFFIXname_suffixtarget_platformosx-64
