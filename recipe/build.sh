@@ -8,8 +8,8 @@ patch < segfaults.patch
 CF="${CFLAGS}"
 unset CFLAGS
 
-if [[ `uname` == 'Darwin' ]]; then
-     USE_OPENMP="0"
+if [[ "${target_platform}" == "osx-64" ]]; then
+    USE_OPENMP="1"
 else
     # Gnu OpenMP is not fork-safe.  We disable openmp right now, so that downstream packages don't hang as a result of this.
     # USE_OPENMP="1"
