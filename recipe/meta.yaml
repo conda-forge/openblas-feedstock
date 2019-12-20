@@ -12,7 +12,7 @@ source:
     - gh2329.patch
 
 build:
-  number: 5
+  number: 6
   skip: true  # [win and vc<14]
 
 requirements:
@@ -39,6 +39,7 @@ outputs:
       build:
         - {{ compiler("c") }}
         - {{ compiler("fortran") }}
+        - llvm-openmp  # [osx]
       run_constrained:
         - {{ pin_subpackage("openblas" ~ name_suffix, max_pin="x.x.x") }}
     files:
