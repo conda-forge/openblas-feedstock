@@ -26,10 +26,10 @@ requirements:
     - jom  # [win]
     - objconv  # [osx]
     - llvm-openmp  # [osx]
-    - libgomp  # [linux]
+    - libgomp  # [linux64 or aarch64]
   host:
   run:
-    - _openmp_mutex * *llvm  # [linux]
+    - _openmp_mutex * *llvm  # [linux64 or aarch64]
 
 outputs:
   - name: libopenblas{{ name_suffix }}
@@ -42,9 +42,9 @@ outputs:
         - {{ compiler("c") }}
         - {{ compiler("fortran") }}
         - llvm-openmp  # [osx]
-        - libgomp  # [linux]
+        - libgomp  # [linux64 or aarch64]
       run:
-        - _openmp_mutex * *llvm  # [linux]
+        - _openmp_mutex * *llvm  # [linux64 or aarch64]
       run_constrained:
         - {{ pin_subpackage("openblas" ~ name_suffix, max_pin="x.x.x") }}
     files:
