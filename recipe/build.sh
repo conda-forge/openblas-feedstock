@@ -12,7 +12,7 @@ if [[ "${target_platform}" == "osx-64" ]]; then
     USE_OPENMP="1"
 elif [[ "${target_platform}" == "linux-aarch64" ]]; then
     # Gnu OpenMP is not fork-safe and we do not have llvm OpenMP
-    USE_OPENMP="0"
+    # USE_OPENMP="1"
 else
     # We will have to build with GNU and then use LLVM on run
     USE_OPENMP="1"
