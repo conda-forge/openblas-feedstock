@@ -29,7 +29,7 @@ requirements:
     - libgomp  # [linux]
   host:
   run:
-    - _openmp_mutex * *llvm
+    - _openmp_mutex * *llvm  # [linux]
 
 outputs:
   - name: libopenblas{{ name_suffix }}
@@ -44,7 +44,7 @@ outputs:
         - llvm-openmp  # [osx]
         - libgomp  # [linux]
       run:
-        - _openmp_mutex * *llvm
+        - _openmp_mutex * *llvm  # [linux]
       run_constrained:
         - {{ pin_subpackage("openblas" ~ name_suffix, max_pin="x.x.x") }}
     files:
