@@ -25,8 +25,9 @@ requirements:
     - curl  # [win]
     - jom  # [win]
     - objconv  # [osx]
-    - llvm-openmp  # [osx]
+    - llvm-openmp  # [osx or linux64 or ppc64le]
     - libgomp  # [linux64 or ppc64le]
+    - _openmp_mutex * *llvm  # [linux64 or ppc64le]
   host:
   run:
     - _openmp_mutex * *llvm  # [linux64 or ppc64le]
