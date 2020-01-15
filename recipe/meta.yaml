@@ -12,7 +12,7 @@ source:
     - gh2329.patch
 
 build:
-  number: 6
+  number: 7
   skip: true  # [win and vc<14]
 
 requirements:
@@ -25,7 +25,8 @@ requirements:
     - curl  # [win]
     - jom  # [win]
     - objconv  # [osx]
-    - llvm-openmp  # [osx]
+    - llvm-openmp  # [osx or linux64 or ppc64le]
+    #- libgomp  # [aarch64]
   host:
   run:
 
@@ -39,7 +40,8 @@ outputs:
       build:
         - {{ compiler("c") }}
         - {{ compiler("fortran") }}
-        - llvm-openmp  # [osx]
+        - llvm-openmp  # [osx or linux64 or ppc64le]
+        #- libgomp  # [aarch64]
       run_constrained:
         - {{ pin_subpackage("openblas" ~ name_suffix, max_pin="x.x.x") }}
     files:
