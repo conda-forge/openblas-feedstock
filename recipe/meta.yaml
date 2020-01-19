@@ -26,6 +26,8 @@ requirements:
     - jom  # [win]
     - objconv  # [osx]
     - llvm-openmp  # [osx or linux64 or ppc64le]
+    # Following is needed because the Fortran compiler add an rpath to the BUILD_PREFIX
+    - _openmp_mutex * *_llvm  # [linux64 or ppc64le]
     #- libgomp  # [aarch64]
   host:
   run:

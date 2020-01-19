@@ -8,6 +8,9 @@ patch < segfaults.patch
 CF="${CFLAGS}"
 unset CFLAGS
 
+# Fix ctest not automatically discovering tests
+LDFLAGS=$(echo "${LDFLAGS}" | sed "s/-Wl,--gc-sections//g")
+
 # silly if statement but makes things clear
 if [[ "${target_platform}" == "osx-64" ]]; then
     USE_OPENMP="1"
@@ -19,8 +22,13 @@ else
     USE_OPENMP="1"
 fi
 
+if [[ "$USE_OPENMP" == "1" ]]; then
+    # Run the the fork test
+    sed -i.bak 's/test_potrs.o/test_potrs.o test_fork.o/g' utest/Makefile
+fi
+
 if [ ! -z "$FFLAGS" ]; then
-     export FFLAGS="${FFLAGS/-fopenmp/ }";
+    export FFLAGS="${FFLAGS/-fopenmp/ }";
 fi
 
 # Because -Wno-missing-include-dirs does not work with gfortran:
@@ -41,14 +49,12 @@ if [[ ${target_platform} == linux-ppc64le ]]; then
   TARGET="TARGET=POWER8"
 fi
 
-
 # Build all CPU targets and allow dynamic configuration
 # Build LAPACK.
 # Enable threading. This can be controlled to a certain number by
 # setting OPENBLAS_NUM_THREADS before loading the library.
+# Tests are run as part of build
 make QUIET_MAKE=1 DYNAMIC_ARCH=1 BINARY=${ARCH} NO_LAPACK=0 NO_AFFINITY=1 USE_THREAD=1 NUM_THREADS=128 \
      USE_OPENMP="${USE_OPENMP}" USE_SIMPLE_THREADED_LEVEL3=1 CFLAGS="${CF}" FFLAGS="${FFLAGS} -frecursive" \
      INTERFACE64=${INTERFACE64} SYMBOLSUFFIX=${SYMBOLSUFFIX} HOST=${HOST} $TARGET CROSS_SUFFIX="${HOST}-"
-OPENBLAS_NUM_THREADS="${CPU_COUNT}" CFLAGS="${CF}" FFLAGS="${FFLAGS} -frecursive" make test
 make install PREFIX="${PREFIX}"
-
