@@ -1,18 +1,11 @@
-From 4326dcb460c78a062743fd5d7c7f0ac520ff7b56 Mon Sep 17 00:00:00 2001
-From: Isuru Fernando <isuruf@gmail.com>
-Date: Sun, 16 Feb 2020 15:11:40 -0600
-Subject: [PATCH] Pass CFLAGS from  env to Makefile.prebuild and remove iOS
- hack
+commit f8f5116f170b0e192a3299d6013e91282528d48c
+Author: Isuru Fernando <isuruf@gmail.com>
+Date:   Sun Feb 16 15:11:40 2020 -0600
 
----
- .travis.yml       |  2 +-
- Makefile.prebuild |  8 ++++----
- Makefile.system   |  2 +-
- c_check           | 28 ++++++++--------------------
- 4 files changed, 14 insertions(+), 26 deletions(-)
+    Pass CFLAGS from  env to Makefile.prebuild and remove iOS hack
 
 diff --git a/.travis.yml b/.travis.yml
-index 9e18412e8..0f20aef5c 100644
+index 9e18412e..0f20aef5 100644
 --- a/.travis.yml
 +++ b/.travis.yml
 @@ -176,7 +176,7 @@ matrix:
@@ -25,7 +18,7 @@ index 9e18412e8..0f20aef5c 100644
          - BTYPE="TARGET=ARMV8 BINARY=64 HOSTCC=clang NOFORTRAN=1"
  
 diff --git a/Makefile.prebuild b/Makefile.prebuild
-index a366004a1..b00f13368 100644
+index a366004a..b00f1336 100644
 --- a/Makefile.prebuild
 +++ b/Makefile.prebuild
 @@ -42,7 +42,7 @@ all: getarch_2nd
@@ -55,7 +48,7 @@ index a366004a1..b00f13368 100644
  
  dummy:
 diff --git a/Makefile.system b/Makefile.system
-index c0e45515f..cf9e9bafa 100644
+index c0e45515..cf9e9baf 100644
 --- a/Makefile.system
 +++ b/Makefile.system
 @@ -214,7 +214,7 @@ ifndef GOTOBLAS_MAKEFILE
@@ -68,7 +61,7 @@ index c0e45515f..cf9e9bafa 100644
  ifndef TARGET_CORE
  include $(TOPDIR)/Makefile.conf
 diff --git a/c_check b/c_check
-index 555b2eccf..c7899c84f 100644
+index fbd1838a..c7899c84 100644
 --- a/c_check
 +++ b/c_check
 @@ -18,11 +18,12 @@ $binary = $ENV{"BINARY"};
@@ -99,7 +92,7 @@ index 555b2eccf..c7899c84f 100644
  	print $tmpf "void main(void){ __asm__ volatile($code); }\n";
  
  	$args = "$msa_flags -o $tmpf.o $tmpf";
--	my @cmd = ("$compiler_name $args >/dev/null 2>/dev/null");
+-	my @cmd = ("$compiler_name $args");
 +	my @cmd = ("$compiler_name $flags $args >/dev/null 2>/dev/null");
  	system(@cmd) == 0;
  	if ($? != 0) {
