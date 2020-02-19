@@ -25,10 +25,9 @@ requirements:
     - curl  # [win]
     - jom  # [win]
     - objconv  # [osx]
-    - llvm-openmp  # [osx or linux64 or ppc64le]
+    - llvm-openmp  # [osx or linux]
     # Following is needed because the Fortran compiler add an rpath to the BUILD_PREFIX
-    - _openmp_mutex * *_llvm  # [linux64 or ppc64le]
-    #- libgomp  # [aarch64]
+    - _openmp_mutex * *_llvm  # [linux]
   host:
   run:
 
@@ -42,8 +41,7 @@ outputs:
       build:
         - {{ compiler("c") }}
         - {{ compiler("fortran") }}
-        - llvm-openmp  # [osx or linux64 or ppc64le]
-        #- libgomp  # [aarch64]
+        - llvm-openmp  # [osx or linux]
       run_constrained:
         - {{ pin_subpackage("openblas" ~ name_suffix, max_pin="x.x.x") }}
     files:
