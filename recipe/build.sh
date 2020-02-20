@@ -19,6 +19,7 @@ fi
 if [ ! -z "$FFLAGS" ]; then
     export FFLAGS="${FFLAGS/-fopenmp/ }";
 fi
+export FFLAGS="${FFLAGS} -frecursive"
 
 # Because -Wno-missing-include-dirs does not work with gfortran:
 [[ -d "${PREFIX}"/include ]] || mkdir "${PREFIX}"/include
@@ -44,6 +45,6 @@ fi
 # setting OPENBLAS_NUM_THREADS before loading the library.
 # Tests are run as part of build
 make QUIET_MAKE=1 DYNAMIC_ARCH=1 BINARY=${ARCH} NO_LAPACK=0 NO_AFFINITY=1 USE_THREAD=1 NUM_THREADS=128 \
-     USE_OPENMP="${USE_OPENMP}" CFLAGS="${CFLAGS}" FFLAGS="${FFLAGS} -frecursive" \
+     USE_OPENMP="${USE_OPENMP}" \
      INTERFACE64=${INTERFACE64} SYMBOLSUFFIX=${SYMBOLSUFFIX} HOST=${HOST} $TARGET CROSS_SUFFIX="${HOST}-"
 make install PREFIX="${PREFIX}"
