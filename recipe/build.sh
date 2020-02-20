@@ -42,9 +42,9 @@ elif [[ "${target_platform}" == *-64 ]]; then
   BINARY="64"
 fi
 
-QUIET_MAKE=1
+QUIET_MAKE=0
 if [[ "$CI" == "travis" ]]; then
-  QUIET_MAKE=0
+  QUIET_MAKE=1
 fi
 
 # Build all CPU targets and allow dynamic configuration
