@@ -42,12 +42,17 @@ elif [[ "${target_platform}" == *-64 ]]; then
   BINARY="64"
 fi
 
+QUIET_MAKE=1
+if [[ "$CI" == "travis" ]]; then
+  QUIET_MAKE=0
+fi
+
 # Build all CPU targets and allow dynamic configuration
 # Build LAPACK.
 # Enable threading. This can be controlled to a certain number by
 # setting OPENBLAS_NUM_THREADS before loading the library.
 # Tests are run as part of build
-make DYNAMIC_ARCH=1 BINARY=${BINARY} NO_LAPACK=0 CFLAGS="${CF}" \
+make QUIET_MAKE=${QUIET_MAKE} DYNAMIC_ARCH=1 BINARY=${BINARY} NO_LAPACK=0 CFLAGS="${CF}" \
      HOST=${HOST} TARGET=${TARGET} CROSS_SUFFIX="${HOST}-" \
      NO_AFFINITY=1 USE_THREAD=1 NUM_THREADS=128 USE_OPENMP="${USE_OPENMP}" \
      INTERFACE64=${INTERFACE64} SYMBOLSUFFIX=${SYMBOLSUFFIX}
