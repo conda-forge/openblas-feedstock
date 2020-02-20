@@ -1,4 +1,4 @@
-{% set version = "0.3.7" %}
+{% set version = "0.3.8" %}
 
 package:
   name: openblas
@@ -6,13 +6,13 @@ package:
 
 source:
   url: https://github.com/xianyi/OpenBLAS/archive/v{{ version }}.tar.gz
-  sha256: bde136122cef3dd6efe2de1c6f65c10955bbb0cc01a520c2342f5287c28f9379
+  sha256: 8f86ade36f0dbed9ac90eb62575137388359d97d8f93093b38abe166ad7ef3a8
   patches:
     - 0002-Fix-gfortran-detection-for-ctng-based-cross-compilers.patch  # [c_compiler == 'gcc']
-    - gh2329.patch
+    - gh2424.patch
 
 build:
-  number: 7
+  number: 0
   skip: true  # [win and vc<14]
 
 requirements:
@@ -25,10 +25,9 @@ requirements:
     - curl  # [win]
     - jom  # [win]
     - objconv  # [osx]
-    - llvm-openmp  # [osx or linux64 or ppc64le]
+    - llvm-openmp  # [osx or linux]
     # Following is needed because the Fortran compiler add an rpath to the BUILD_PREFIX
-    - _openmp_mutex * *_llvm  # [linux64 or ppc64le]
-    #- libgomp  # [aarch64]
+    - _openmp_mutex * *_llvm  # [linux]
   host:
   run:
 
@@ -42,8 +41,7 @@ outputs:
       build:
         - {{ compiler("c") }}
         - {{ compiler("fortran") }}
-        - llvm-openmp  # [osx or linux64 or ppc64le]
-        #- libgomp  # [aarch64]
+        - llvm-openmp  # [osx or linux]
       run_constrained:
         - {{ pin_subpackage("openblas" ~ name_suffix, max_pin="x.x.x") }}
     files:
