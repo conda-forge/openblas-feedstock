@@ -1,4 +1,4 @@
-{% set version = "0.3.8" %}
+{% set version = "0.3.9" %}
 
 package:
   name: openblas
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/xianyi/OpenBLAS/archive/v{{ version }}.tar.gz
-  sha256: 8f86ade36f0dbed9ac90eb62575137388359d97d8f93093b38abe166ad7ef3a8
+  sha256: 17d4677264dfbc4433e97076220adc79b050e4f8a083ea3f853a53af253bc380
   patches:
     - 0002-Fix-gfortran-detection-for-ctng-based-cross-compilers.patch  # [c_compiler == 'gcc']
     - gh2424.patch
@@ -83,8 +83,8 @@ about:
   license_file:
     - LICENSE
     - lapack-netlib/LICENSE
-  summary: An optimized BLAS library based on GotoBLAS2 1.13 BSD version   # [SYMBOLSUFFIX != "64_"]
-  summary: An optimized BLAS library (ILP64 interface) based on GotoBLAS2 1.13 BSD version   # [SYMBOLSUFFIX == "64_"]
+  summary: An optimized BLAS library based on GotoBLAS2 1.13 BSD version  # [SYMBOLSUFFIX != "64_"]
+  summary: An optimized BLAS library (ILP64 interface) based on GotoBLAS2 1.13 BSD version  # [SYMBOLSUFFIX == "64_"]
 
 extra:
   recipe-maintainers:
