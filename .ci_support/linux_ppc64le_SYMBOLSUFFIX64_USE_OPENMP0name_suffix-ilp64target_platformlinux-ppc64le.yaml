@@ -2,6 +2,8 @@ INTERFACE64:
 - '1'
 SYMBOLSUFFIX:
 - '64_'
+USE_OPENMP:
+- '0'
 c_compiler:
 - gcc
 c_compiler_version:
