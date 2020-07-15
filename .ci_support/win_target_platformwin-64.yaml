@@ -2,6 +2,8 @@ INTERFACE64:
 - '0'
 SYMBOLSUFFIX:
 - ''
+USE_OPENMP:
+- '0'
 c_compiler:
 - vs2017
 channel_sources:

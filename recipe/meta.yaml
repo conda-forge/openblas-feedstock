@@ -1,4 +1,5 @@
 {% set version = "0.3.10" %}
+{% set build_number = "1" %}
 
 package:
   name: openblas
@@ -11,8 +12,10 @@ source:
     - 0002-Fix-gfortran-detection-for-ctng-based-cross-compilers.patch  # [c_compiler == 'gcc']
 
 build:
-  number: 0
+  number: {{ build_number }}
   skip: true  # [win and vc<14]
+  string: openmp_h{{ PKG_HASH }}_{{ build_number }}         # [USE_OPENMP == 1]
+  string: pthreads_h{{ PKG_HASH }}_{{ build_number }}       # [USE_OPENMP == 0]
 
 requirements:
   build:
@@ -24,9 +27,9 @@ requirements:
     - curl  # [win]
     - jom  # [win]
     - objconv  # [osx]
-    - llvm-openmp  # [osx or linux]
+    - llvm-openmp  # [(osx or linux) and USE_OPENMP == 1]
     # Following is needed because the Fortran compiler add an rpath to the BUILD_PREFIX
-    - _openmp_mutex * *_llvm  # [linux]
+    - _openmp_mutex * *_llvm  # [linux and USE_OPENMP == 1]
   host:
   run:
 
@@ -34,6 +37,10 @@ outputs:
   - name: libopenblas{{ name_suffix }}
     build:
       skip: true  # [win and vc<14]
+      string: openmp_h{{ PKG_HASH }}_{{ build_number }}         # [USE_OPENMP == 1]
+      string: pthreads_h{{ PKG_HASH }}_{{ build_number }}       # [USE_OPENMP == 0]
+      track_features:
+        - openblas_threading_openmp  # [linux and USE_OPENMP == 1]
       run_exports:
         - {{ pin_subpackage("libopenblas" ~ name_suffix) }}
     requirements:
@@ -57,6 +64,10 @@ outputs:
   - name: openblas{{ name_suffix }}
     build:
       skip: true  # [win and vc<14]
+      string: openmp_h{{ PKG_HASH }}_{{ build_number }}         # [USE_OPENMP == 1]
+      string: pthreads_h{{ PKG_HASH }}_{{ build_number }}        # [USE_OPENMP == 0]
+      track_features:
+        - openblas_threading_openmp  # [linux and USE_OPENMP == 1]
     files:
       - include/*.h  # [not win]
       - lib/libopenblas{{ SYMBOLSUFFIX }}*.a  # [not win]
