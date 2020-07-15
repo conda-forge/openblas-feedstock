@@ -11,7 +11,7 @@ source:
     - 0002-Fix-gfortran-detection-for-ctng-based-cross-compilers.patch  # [c_compiler == 'gcc']
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win and vc<14]
 
 requirements:
@@ -34,6 +34,10 @@ outputs:
   - name: libopenblas{{ name_suffix }}
     build:
       skip: true  # [win and vc<14]
+      string: openmp_h{{ PKG_HASH }}_{{ build_number }} # [USE_OPENMP == "1"]
+      string: pthreads_h{{ PKG_HASH }}_{{ build_number }} # [USE_OPENMP == "0"]
+      track_features:
+        - openblas_threading  # [linux and USE_OPENMP == "1"]
       run_exports:
         - {{ pin_subpackage("libopenblas" ~ name_suffix) }}
     requirements:
@@ -57,6 +61,10 @@ outputs:
   - name: openblas{{ name_suffix }}
     build:
       skip: true  # [win and vc<14]
+      string: openmp_h{{ PKG_HASH }}_{{ build_number }} # [USE_OPENMP == "1"]
+      string: pthreads_h{{ PKG_HASH }}_{{ build_number }} # [USE_OPENMP == "0"]
+      track_features:
+        - openblas_threading  # [linux and USE_OPENMP == "1"]
     files:
       - include/*.h  # [not win]
       - lib/libopenblas{{ SYMBOLSUFFIX }}*.a  # [not win]

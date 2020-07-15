@@ -8,14 +8,6 @@ LDFLAGS=$(echo "${LDFLAGS}" | sed "s/-Wl,--gc-sections//g")
 CF="${CFLAGS}"
 unset CFLAGS
 
-# silly if statement but makes things clear
-if [[ "${target_platform}" == "osx-64" ]]; then
-    USE_OPENMP="1"
-elif [[ "${target_platform}" == linux-* ]]; then
-    # We will have to build with GNU and then use LLVM on run
-    USE_OPENMP="1"
-fi
-
 if [[ "$USE_OPENMP" == "1" ]]; then
     # Run the the fork test
     sed -i.bak 's/test_potrs.o/test_potrs.o test_fork.o/g' utest/Makefile
