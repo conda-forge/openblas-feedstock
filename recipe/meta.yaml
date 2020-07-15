@@ -24,9 +24,9 @@ requirements:
     - curl  # [win]
     - jom  # [win]
     - objconv  # [osx]
-    - llvm-openmp  # [osx or linux]
+    - llvm-openmp  # [(osx or linux) and USE_OPENMP == "1"]
     # Following is needed because the Fortran compiler add an rpath to the BUILD_PREFIX
-    - _openmp_mutex * *_llvm  # [linux]
+    - _openmp_mutex * *_llvm  # [linux and USE_OPENMP == "1"]
   host:
   run:
 
