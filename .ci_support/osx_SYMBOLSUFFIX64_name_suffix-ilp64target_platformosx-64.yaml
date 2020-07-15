@@ -4,10 +4,12 @@ MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
 SYMBOLSUFFIX:
 - '64_'
+USE_OPENMP:
+- '1'
 c_compiler:
 - clang
 c_compiler_version:
-- '9'
+- '10'
 channel_sources:
 - conda-forge,defaults
 channel_targets:
