@@ -1,4 +1,5 @@
 {% set version = "0.3.10" %}
+{% set build_number = "1" %}
 
 package:
   name: openblas
@@ -11,8 +12,10 @@ source:
     - 0002-Fix-gfortran-detection-for-ctng-based-cross-compilers.patch  # [c_compiler == 'gcc']
 
 build:
-  number: 1
+  number: {{ build_number }}
   skip: true  # [win and vc<14]
+  string: openmp_h{{ PKG_HASH }}_{{ build_number }}         # [USE_OPENMP == "1"]
+  string: pthreads_h{{ PKG_HASH }}_{{ build_number }}       # [USE_OPENMP == "0"]
 
 requirements:
   build:
