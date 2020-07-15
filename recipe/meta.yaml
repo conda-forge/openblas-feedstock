@@ -34,8 +34,8 @@ outputs:
   - name: libopenblas{{ name_suffix }}
     build:
       skip: true  # [win and vc<14]
-      string: openmp_h{{ PKG_HASH }}_{{ build_number }} # [USE_OPENMP == "1"]
-      string: pthreads_h{{ PKG_HASH }}_{{ build_number }} # [USE_OPENMP == "0"]
+      string: openmp_h{{ PKG_HASH }}_{{ build_number }}         # [USE_OPENMP == "1"]
+      string: pthreads_h{{ PKG_HASH }}_{{ build_number }}       # [USE_OPENMP == "0"]
       track_features:
         - openblas_threading  # [linux and USE_OPENMP == "1"]
       run_exports:
@@ -61,8 +61,8 @@ outputs:
   - name: openblas{{ name_suffix }}
     build:
       skip: true  # [win and vc<14]
-      string: openmp_h{{ PKG_HASH }}_{{ build_number }} # [USE_OPENMP == "1"]
-      string: pthreads_h{{ PKG_HASH }}_{{ build_number }} # [USE_OPENMP == "0"]
+      string: openmp_h{{ PKG_HASH }}_{{ build_number }}         # [USE_OPENMP == "1"]
+      string: pthreads_h{{ PKG_HASH }}_{{ build_number }}        # [USE_OPENMP == "0"]
       track_features:
         - openblas_threading  # [linux and USE_OPENMP == "1"]
     files:
