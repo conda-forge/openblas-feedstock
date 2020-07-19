@@ -1,0 +1,44 @@
+commit c91ef54b18f90b695208887b12ab42c9a5060ce9
+Author: Isuru Fernando <isuruf@gmail.com>
+Date:   Sun Jul 19 17:29:24 2020 -0500
+
+    Revert xianyi/OpenBLAS#2516
+
+diff --git a/kernel/x86_64/KERNEL.HASWELL b/kernel/x86_64/KERNEL.HASWELL
+index ef8b36a5..f6ca5c2d 100644
+--- a/kernel/x86_64/KERNEL.HASWELL
++++ b/kernel/x86_64/KERNEL.HASWELL
+@@ -77,10 +77,10 @@ ZGEMMITCOPYOBJ =  zgemm_itcopy$(TSUFFIX).$(SUFFIX)
+ ZGEMMONCOPYOBJ =  zgemm_oncopy$(TSUFFIX).$(SUFFIX)
+ ZGEMMOTCOPYOBJ =  zgemm_otcopy$(TSUFFIX).$(SUFFIX)
+ 
+-STRSMKERNEL_LN	=  strsm_kernel_8x4_haswell_LN.c
+-STRSMKERNEL_LT	=  strsm_kernel_8x4_haswell_LT.c
+-STRSMKERNEL_RN	=  strsm_kernel_8x4_haswell_RN.c
+-STRSMKERNEL_RT	=  strsm_kernel_8x4_haswell_RT.c
++STRSMKERNEL_LN	=  ../generic/trsm_kernel_LN.c
++STRSMKERNEL_LT	=  ../generic/trsm_kernel_LT.c
++STRSMKERNEL_RN	=  ../generic/trsm_kernel_RN.c
++STRSMKERNEL_RT	=  ../generic/trsm_kernel_RT.c
+ 
+ DTRSMKERNEL_LN	= ../generic/trsm_kernel_LN.c
+ DTRSMKERNEL_LT	= ../generic/trsm_kernel_LT.c
+diff --git a/kernel/x86_64/KERNEL.ZEN b/kernel/x86_64/KERNEL.ZEN
+index 7bb308fe..1cd02db7 100644
+--- a/kernel/x86_64/KERNEL.ZEN
++++ b/kernel/x86_64/KERNEL.ZEN
+@@ -74,10 +74,10 @@ ZGEMMITCOPYOBJ =  zgemm_itcopy$(TSUFFIX).$(SUFFIX)
+ ZGEMMONCOPYOBJ =  zgemm_oncopy$(TSUFFIX).$(SUFFIX)
+ ZGEMMOTCOPYOBJ =  zgemm_otcopy$(TSUFFIX).$(SUFFIX)
+ 
+-STRSMKERNEL_LN	=  strsm_kernel_8x4_haswell_LN.c
+-STRSMKERNEL_LT	=  strsm_kernel_8x4_haswell_LT.c
+-STRSMKERNEL_RN	=  strsm_kernel_8x4_haswell_RN.c
+-STRSMKERNEL_RT	=  strsm_kernel_8x4_haswell_RT.c
++STRSMKERNEL_LN	=  ../generic/trsm_kernel_LN.c
++STRSMKERNEL_LT	=  ../generic/trsm_kernel_LT.c
++STRSMKERNEL_RN	=  ../generic/trsm_kernel_RN.c
++STRSMKERNEL_RT	=  ../generic/trsm_kernel_RT.c
+ 
+ DTRSMKERNEL_LN	= ../generic/trsm_kernel_LN.c
+ DTRSMKERNEL_LT	= ../generic/trsm_kernel_LT.c
