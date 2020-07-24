@@ -1,5 +1,5 @@
 {% set version = "0.3.10" %}
-{% set build_number = "3" %}
+{% set build_number = "4" %}
 
 package:
   name: openblas
@@ -9,8 +9,9 @@ source:
   url: https://github.com/xianyi/OpenBLAS/archive/v{{ version }}.tar.gz
   sha256: 0484d275f87e9b8641ff2eecaa9df2830cbe276ac79ad80494822721de6e1693
   patches:
-    - 0002-Fix-gfortran-detection-for-ctng-based-cross-compilers.patch  # [c_compiler == 'gcc']
-    - revert-gh2516.patch
+    - patches/0001-Fix-gfortran-detection-for-ctng-based-cross-compiler.patch  # [c_compiler == 'gcc']
+    # from xianyi/OpenBLAS/pull/2729, can be dropped for 0.3.11
+    - patches/0002-Unify-BUFFER_SIZE-settings-for-x86_64-again-to-fix-p.patch
 
 build:
   number: {{ build_number }}
