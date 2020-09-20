@@ -39,6 +39,10 @@ if [[ "$CI" == "travis" ]]; then
   QUIET_MAKE=1
 fi
 
+# try this hack for now to see if we can get the build to go
+# needs an if statement to do this only for osx arm64
+export HOSTCC=clang
+
 # Build all CPU targets and allow dynamic configuration
 # Build LAPACK.
 # Enable threading. This can be controlled to a certain number by
