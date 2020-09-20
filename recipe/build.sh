@@ -42,6 +42,8 @@ fi
 # try this hack for now to see if we can get the build to go
 # needs an if statement to do this only for osx arm64
 export HOSTCC=clang
+# turn this on when the build with apple silicon specific support comes out
+# TARGET=VORTEX
 
 # Build all CPU targets and allow dynamic configuration
 # Build LAPACK.
