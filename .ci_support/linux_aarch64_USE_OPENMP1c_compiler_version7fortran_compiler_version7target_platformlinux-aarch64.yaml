@@ -5,7 +5,7 @@ INTERFACE64:
 SYMBOLSUFFIX:
 - ''
 USE_OPENMP:
-- '0'
+- '1'
 c_compiler:
 - gcc
 c_compiler_version:
@@ -37,3 +37,5 @@ zip_keys:
 - - SYMBOLSUFFIX
   - name_suffix
   - INTERFACE64
+- - c_compiler_version
+  - fortran_compiler_version

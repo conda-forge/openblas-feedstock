@@ -5,14 +5,20 @@
 jobs:
 - job: osx
   pool:
-    vmImage: macOS-10.14
+    vmImage: macOS-10.15
   strategy:
     matrix:
-      osx_SYMBOLSUFFIX64_name_suffix-ilp64target_platformosx-64:
-        CONFIG: osx_SYMBOLSUFFIX64_name_suffix-ilp64target_platformosx-64
+      osx_64_SYMBOLSUFFIX64_fortran_compiler_version7name_suffix-ilp64target_platformosx-64:
+        CONFIG: osx_64_SYMBOLSUFFIX64_fortran_compiler_version7name_suffix-ilp64target_platformosx-64
         UPLOAD_PACKAGES: 'True'
-      osx_SYMBOLSUFFIXname_suffixtarget_platformosx-64:
-        CONFIG: osx_SYMBOLSUFFIXname_suffixtarget_platformosx-64
+      osx_64_SYMBOLSUFFIX64_fortran_compiler_version9name_suffix-ilp64target_platformosx-64:
+        CONFIG: osx_64_SYMBOLSUFFIX64_fortran_compiler_version9name_suffix-ilp64target_platformosx-64
+        UPLOAD_PACKAGES: 'True'
+      osx_64_SYMBOLSUFFIXfortran_compiler_version7name_suffixtarget_platformosx-64:
+        CONFIG: osx_64_SYMBOLSUFFIXfortran_compiler_version7name_suffixtarget_platformosx-64
+        UPLOAD_PACKAGES: 'True'
+      osx_64_SYMBOLSUFFIXfortran_compiler_version9name_suffixtarget_platformosx-64:
+        CONFIG: osx_64_SYMBOLSUFFIXfortran_compiler_version9name_suffixtarget_platformosx-64
         UPLOAD_PACKAGES: 'True'
     maxParallel: 8
   timeoutInMinutes: 360

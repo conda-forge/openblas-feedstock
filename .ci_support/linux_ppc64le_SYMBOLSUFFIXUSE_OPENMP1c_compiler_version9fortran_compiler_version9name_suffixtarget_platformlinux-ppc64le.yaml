@@ -7,7 +7,7 @@ USE_OPENMP:
 c_compiler:
 - gcc
 c_compiler_version:
-- '8'
+- '9'
 channel_sources:
 - conda-forge,defaults
 channel_targets:
@@ -17,7 +17,7 @@ docker_image:
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
-- '8'
+- '9'
 name_suffix:
 - ''
 perl:
@@ -31,3 +31,5 @@ zip_keys:
 - - SYMBOLSUFFIX
   - name_suffix
   - INTERFACE64
+- - c_compiler_version
+  - fortran_compiler_version

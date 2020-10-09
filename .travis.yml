@@ -3,26 +3,39 @@
 
 language: generic
 
-env:
-  global:
-    # The BINSTAR_TOKEN secure variable. This is defined canonically in conda-forge.yml.
-    - secure: "H3GgaVwc4/tgmlX4oNx6wrFlO84GmO5WnkSZrtfb2EsRUv26w52Gtr0zsMEv3fSJcheAzgBGlKcMoHNU9170LkKR20NmaxbVUzg6Cdhba4ylQhUIj9ClpMXcqCSc8bhnPY/+gLcxwlKuThUbybVMSEBfWoMp66IclFh+T5uY8uw10Ov601I0PF2qjly9DwY2nGT0kRGUM9lvr3WdWRBGYiC7oF2fFhH/zqTxBPuJnSJ5pz94NnsnfrITmdAUGlgp+Lgfpr/AKHhKv9J4xeDorc3qKG2+Xf7g/1eAH9W0jS8SxGOPTAPAQwzZezJep+Xr+vwVhnz/z8X5qNbQUUJaFHMXvPonEt4nOyeHloxiZrN8KjPb5ODyIsUdY6jCUxwZunx9qKOQeidwKPgbDhdCLYXSKL5H19PLvBQAK9ZK7h1YKlE4LEoODXhZ5qmnQkxfkGmhr4WYhiVsRSwrD3tyachIIrUKuzjNuBdq4i1gLiLPmnScPlj5xu4Lw+XNRPSdUewceC6Qr4w8dPCl5yPRAbVGegaxgxL4B1qZDG26XTDO/SL9ZNghuLH1AIZsFn4zrKsVRbdzTWoCAmmwsPLRUX5q0Z26yuJ9j0HFlM1Inl+Muxrl7m119LJCfq4irpF8jX/jd7dl9dd+Qizwp6rahXArxYOIHStze+iFgCyAppk="
+
 
 matrix:
   include:
-    - env: CONFIG=linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64target_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
+    - env: CONFIG=linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP0c_compiler_version8fortran_compiler_version8name_suffix-ilp64target_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
       os: linux
       arch: ppc64le
 
-    - env: CONFIG=linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64target_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
+    - env: CONFIG=linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP0c_compiler_version9fortran_compiler_version9name_suffix-ilp64target_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
       os: linux
       arch: ppc64le
 
-    - env: CONFIG=linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP0name_suffixtarget_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
+    - env: CONFIG=linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP1c_compiler_version8fortran_compiler_version8name_suffix-ilp64target_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
       os: linux
       arch: ppc64le
 
-    - env: CONFIG=linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP1name_suffixtarget_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
+    - env: CONFIG=linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP1c_compiler_version9fortran_compiler_version9name_suffix-ilp64target_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
+      os: linux
+      arch: ppc64le
+
+    - env: CONFIG=linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP0c_compiler_version8fortran_compiler_version8name_suffixtarget_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
+      os: linux
+      arch: ppc64le
+
+    - env: CONFIG=linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP0c_compiler_version9fortran_compiler_version9name_suffixtarget_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
+      os: linux
+      arch: ppc64le
+
+    - env: CONFIG=linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP1c_compiler_version8fortran_compiler_version8name_suffixtarget_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
+      os: linux
+      arch: ppc64le
+
+    - env: CONFIG=linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP1c_compiler_version9fortran_compiler_version9name_suffixtarget_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
       os: linux
       arch: ppc64le
 
