@@ -40,7 +40,6 @@ jobs:
         CONFIG: linux_64_SYMBOLSUFFIXUSE_OPENMP1c_compiler_version9fortran_compiler_version9name_suffixtarget_platformlinux-64
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: condaforge/linux-anvil-comp7
-    maxParallel: 8
   timeoutInMinutes: 360
 
   steps:
