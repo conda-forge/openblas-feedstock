@@ -10,7 +10,7 @@ unset CFLAGS
 
 if [[ "$PKG_VERSION" == "0.3.11" ]]; then
     # see https://github.com/xianyi/OpenBLAS/pull/2909
-    sed -i.bak 's/$(BUILD_COMPLEX16)> $(@F)/$(BUILD_COMPLEX16) > $(@F)/g'
+    sed -i.bak 's/$(BUILD_COMPLEX16)> $(@F)/$(BUILD_COMPLEX16) > $(@F)/g' exports/Makefile
 fi
 
 if [[ "$USE_OPENMP" == "1" ]]; then
