@@ -209,6 +209,20 @@ Current build status
                 </a>
               </td>
             </tr><tr>
+              <td>osx_arm64_SYMBOLSUFFIX64_name_suffix-ilp64target_platformosx-arm64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=osx&configuration=osx_arm64_SYMBOLSUFFIX64_name_suffix-ilp64target_platformosx-arm64" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_arm64_SYMBOLSUFFIXname_suffixtarget_platformosx-arm64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=osx&configuration=osx_arm64_SYMBOLSUFFIXname_suffixtarget_platformosx-arm64" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
               <td>win_64_target_platformwin-64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
