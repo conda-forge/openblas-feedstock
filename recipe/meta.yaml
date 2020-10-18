@@ -10,8 +10,10 @@ source:
   sha256: bc4617971179e037ae4e8ebcd837e46db88422f7b365325bd7aba31d1921a673
   patches:
     - patches/0001-Fix-gfortran-detection-for-ctng-based-cross-compiler.patch  # [c_compiler == 'gcc']
+    {% if version == "0.3.11" %}
     - patches/gh2913.diff
     - patches/gh2915.diff
+    {% endif %}
 
 build:
   number: {{ build_number }}
