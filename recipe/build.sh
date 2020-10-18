@@ -8,6 +8,11 @@ LDFLAGS=$(echo "${LDFLAGS}" | sed "s/-Wl,--gc-sections//g")
 CF="${CFLAGS}"
 unset CFLAGS
 
+if [[ "$PKG_VERSION" == "0.3.11" ]]; then
+    # see https://github.com/xianyi/OpenBLAS/pull/2909
+    sed -i.bak 's/$(BUILD_COMPLEX16)> $(@F)/$(BUILD_COMPLEX16) > $(@F)/g'
+fi
+
 if [[ "$USE_OPENMP" == "1" ]]; then
     # Run the the fork test
     sed -i.bak 's/test_potrs.o/test_potrs.o test_fork.o/g' utest/Makefile
