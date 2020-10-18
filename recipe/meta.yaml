@@ -11,6 +11,7 @@ source:
   patches:
     - patches/0001-Fix-gfortran-detection-for-ctng-based-cross-compiler.patch  # [c_compiler == 'gcc']
     - patches/gh2913.diff
+    - patches/gh2915.diff
 
 build:
   number: {{ build_number }}
