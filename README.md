@@ -7,7 +7,7 @@ Package license: BSD-3-Clause
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/openblas-feedstock/blob/master/LICENSE.txt)
 
-Summary: An optimized BLAS library based on GotoBLAS2 1.13 BSD version
+Summary: An optimized BLAS library (ILP64 interface) based on GotoBLAS2 1.13 BSD version
 
 Current build status
 ====================
@@ -206,6 +206,13 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=osx&configuration=osx_64_SYMBOLSUFFIXfortran_compiler_version9name_suffixtarget_platformosx-64" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_arm64_target_platformosx-arm64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=osx&configuration=osx_arm64_target_platformosx-arm64" alt="variant">
                 </a>
               </td>
             </tr><tr>

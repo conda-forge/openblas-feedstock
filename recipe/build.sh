@@ -34,8 +34,14 @@ if [[ "${target_platform}" == linux-aarch64 ]]; then
 elif [[ "${target_platform}" == linux-ppc64le ]]; then
   TARGET="POWER8"
   BINARY="64"
-elif [[ "${target_platform}" == *-64 ]]; then
+elif [[ "${target_platform}" == linux-64 ]]; then
   TARGET="PRESCOTT"
+  BINARY="64"
+elif [[ "${target_platform}" == osx-64 ]]; then
+  TARGET="CORE2"
+  BINARY="64"
+elif [[ "${target_platform}" == osx-arm64 ]]; then
+  TARGET="VORTEX"
   BINARY="64"
 fi
 
@@ -43,6 +49,8 @@ QUIET_MAKE=0
 if [[ "$CI" == "travis" ]]; then
   QUIET_MAKE=1
 fi
+
+export HOSTCC=$CC_FOR_BUILD
 
 # Build all CPU targets and allow dynamic configuration
 # Build LAPACK.

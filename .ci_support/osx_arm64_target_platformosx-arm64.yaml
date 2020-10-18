@@ -1,0 +1,37 @@
+INTERFACE64:
+- '0'
+MACOSX_DEPLOYMENT_TARGET:
+- '11.0'
+SYMBOLSUFFIX:
+- ''
+USE_OPENMP:
+- '1'
+c_compiler:
+- clang
+c_compiler_version:
+- '11'
+channel_sources:
+- conda-forge/label/rust_dev,conda-forge,https://conda-web.anaconda.org/conda-forge
+channel_targets:
+- conda-forge main
+fortran_compiler:
+- gfortran
+fortran_compiler_version:
+- '11'
+macos_machine:
+- arm64-apple-darwin20.0.0
+name_suffix:
+- ''
+perl:
+- 5.26.2
+pin_run_as_build:
+  perl:
+    max_pin: x.x.x
+target_platform:
+- osx-arm64
+zip_keys:
+- - SYMBOLSUFFIX
+  - name_suffix
+  - INTERFACE64
+- - c_compiler_version
+  - fortran_compiler_version
