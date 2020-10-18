@@ -20,7 +20,6 @@ jobs:
       osx_64_SYMBOLSUFFIXfortran_compiler_version9name_suffixtarget_platformosx-64:
         CONFIG: osx_64_SYMBOLSUFFIXfortran_compiler_version9name_suffixtarget_platformosx-64
         UPLOAD_PACKAGES: 'True'
-    maxParallel: 8
   timeoutInMinutes: 360
 
   steps:

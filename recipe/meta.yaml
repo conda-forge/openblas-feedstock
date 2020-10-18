@@ -1,5 +1,5 @@
-{% set version = "0.3.10" %}
-{% set build_number = 5 %}
+{% set version = "0.3.11" %}
+{% set build_number = 0 %}
 
 package:
   name: openblas
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/xianyi/OpenBLAS/archive/v{{ version }}.tar.gz
-  sha256: 0484d275f87e9b8641ff2eecaa9df2830cbe276ac79ad80494822721de6e1693
+  sha256: bc4617971179e037ae4e8ebcd837e46db88422f7b365325bd7aba31d1921a673
   patches:
     - patches/0001-Fix-gfortran-detection-for-ctng-based-cross-compiler.patch  # [c_compiler == 'gcc']
     # from xianyi/OpenBLAS/pull/2729, can be dropped for 0.3.11
@@ -16,8 +16,8 @@ source:
 build:
   number: {{ build_number }}
   skip: true  # [win and vc<14]
-  string: openmp_h{{ PKG_HASH }}_{{ build_number }}         # [USE_OPENMP == 1]
-  string: pthreads_h{{ PKG_HASH }}_{{ build_number }}       # [USE_OPENMP == 0]
+  string: openmp_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 1]
+  string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
 
 requirements:
   build:
@@ -39,8 +39,8 @@ outputs:
   - name: libopenblas{{ name_suffix }}
     build:
       skip: true  # [win and vc<14]
-      string: openmp_h{{ PKG_HASH }}_{{ build_number }}         # [USE_OPENMP == 1]
-      string: pthreads_h{{ PKG_HASH }}_{{ build_number }}       # [USE_OPENMP == 0]
+      string: openmp_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 1]
+      string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
       track_features:
         - openblas_threading_openmp  # [linux and USE_OPENMP == 1]
       run_exports:
@@ -66,8 +66,8 @@ outputs:
   - name: openblas{{ name_suffix }}
     build:
       skip: true  # [win and vc<14]
-      string: openmp_h{{ PKG_HASH }}_{{ build_number }}         # [USE_OPENMP == 1]
-      string: pthreads_h{{ PKG_HASH }}_{{ build_number }}        # [USE_OPENMP == 0]
+      string: openmp_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 1]
+      string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
       track_features:
         - openblas_threading_openmp  # [linux and USE_OPENMP == 1]
     files:
