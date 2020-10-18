@@ -34,8 +34,14 @@ if [[ "${target_platform}" == linux-aarch64 ]]; then
 elif [[ "${target_platform}" == linux-ppc64le ]]; then
   TARGET="POWER8"
   BINARY="64"
-elif [[ "${target_platform}" == *-64 ]]; then
+elif [[ "${target_platform}" == linux-64 ]]; then
   TARGET="PRESCOTT"
+  BINARY="64"
+elif [[ "${target_platform}" == osx-64 ]]; then
+  TARGET="CORE2"
+  BINARY="64"
+elif [[ "${target_platform}" == osx-arm64 ]]; then
+  TARGET="VORTEX"
   BINARY="64"
 fi
 
@@ -44,11 +50,7 @@ if [[ "$CI" == "travis" ]]; then
   QUIET_MAKE=1
 fi
 
-# try this hack for now to see if we can get the build to go
-# needs an if statement to do this only for osx arm64
-export HOSTCC=clang
-# turn this on when the build with apple silicon specific support comes out
-# TARGET=VORTEX
+export HOSTCC=$CC_FOR_BUILD
 
 # Build all CPU targets and allow dynamic configuration
 # Build LAPACK.
