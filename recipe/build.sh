@@ -3,6 +3,8 @@
 # Fix ctest not automatically discovering tests
 LDFLAGS=$(echo "${LDFLAGS}" | sed "s/-Wl,--gc-sections//g")
 
+CFLAGS="${CFLAGS} -g -fno-tree-vectorize -O1"
+
 # See this workaround
 # ( https://github.com/xianyi/OpenBLAS/issues/818#issuecomment-207365134 ).
 CF="${CFLAGS}"
