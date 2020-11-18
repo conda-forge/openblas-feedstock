@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -ex
+
 # Fix ctest not automatically discovering tests
 LDFLAGS=$(echo "${LDFLAGS}" | sed "s/-Wl,--gc-sections//g")
 
@@ -62,3 +64,10 @@ make QUIET_MAKE=${QUIET_MAKE} DYNAMIC_ARCH=1 BINARY=${BINARY} NO_LAPACK=0 CFLAGS
      NO_AFFINITY=1 USE_THREAD=1 NUM_THREADS=128 USE_OPENMP="${USE_OPENMP}" \
      INTERFACE64=${INTERFACE64} SYMBOLSUFFIX=${SYMBOLSUFFIX}
 make install PREFIX="${PREFIX}"
+
+# drop build-prefix rpath
+if [[ "$(uname)" == "Darwin" ]]; then
+  for f in ${PREFIX}/lib/libopenblas*${PKG_VERSION}.dylib; do
+    ${INSTALL_NAME_TOOL} -delete_rpath ${BUILD_PREFIX}/lib ${f}
+  done
+fi
