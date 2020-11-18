@@ -41,185 +41,185 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_64_SYMBOLSUFFIX64_USE_OPENMP0c_compiler_version7fortran_compiler_version7name_suffix-ilp64target_platformlinux-64</td>
+              <td>linux_64_SYMBOLSUFFIX64_USE_OPENMP0c_compiler_version7fortran_compiler_version7name_suffix-ilp64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_64_SYMBOLSUFFIX64_USE_OPENMP0c_compiler_version7fortran_compiler_version7name_suffix-ilp64target_platformlinux-64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_64_SYMBOLSUFFIX64_USE_OPENMP0c_compiler_version7fortran_compiler_version7name_suffix-ilp64" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_SYMBOLSUFFIX64_USE_OPENMP0c_compiler_version9fortran_compiler_version9name_suffix-ilp64target_platformlinux-64</td>
+              <td>linux_64_SYMBOLSUFFIX64_USE_OPENMP0c_compiler_version9fortran_compiler_version9name_suffix-ilp64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_64_SYMBOLSUFFIX64_USE_OPENMP0c_compiler_version9fortran_compiler_version9name_suffix-ilp64target_platformlinux-64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_64_SYMBOLSUFFIX64_USE_OPENMP0c_compiler_version9fortran_compiler_version9name_suffix-ilp64" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_SYMBOLSUFFIX64_USE_OPENMP1c_compiler_version7fortran_compiler_version7name_suffix-ilp64target_platformlinux-64</td>
+              <td>linux_64_SYMBOLSUFFIX64_USE_OPENMP1c_compiler_version7fortran_compiler_version7name_suffix-ilp64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_64_SYMBOLSUFFIX64_USE_OPENMP1c_compiler_version7fortran_compiler_version7name_suffix-ilp64target_platformlinux-64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_64_SYMBOLSUFFIX64_USE_OPENMP1c_compiler_version7fortran_compiler_version7name_suffix-ilp64" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_SYMBOLSUFFIX64_USE_OPENMP1c_compiler_version9fortran_compiler_version9name_suffix-ilp64target_platformlinux-64</td>
+              <td>linux_64_SYMBOLSUFFIX64_USE_OPENMP1c_compiler_version9fortran_compiler_version9name_suffix-ilp64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_64_SYMBOLSUFFIX64_USE_OPENMP1c_compiler_version9fortran_compiler_version9name_suffix-ilp64target_platformlinux-64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_64_SYMBOLSUFFIX64_USE_OPENMP1c_compiler_version9fortran_compiler_version9name_suffix-ilp64" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_SYMBOLSUFFIXUSE_OPENMP0c_compiler_version7fortran_compiler_version7name_suffixtarget_platformlinux-64</td>
+              <td>linux_64_SYMBOLSUFFIXUSE_OPENMP0c_compiler_version7fortran_compiler_version7name_suffix</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_64_SYMBOLSUFFIXUSE_OPENMP0c_compiler_version7fortran_compiler_version7name_suffixtarget_platformlinux-64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_64_SYMBOLSUFFIXUSE_OPENMP0c_compiler_version7fortran_compiler_version7name_suffix" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_SYMBOLSUFFIXUSE_OPENMP0c_compiler_version9fortran_compiler_version9name_suffixtarget_platformlinux-64</td>
+              <td>linux_64_SYMBOLSUFFIXUSE_OPENMP0c_compiler_version9fortran_compiler_version9name_suffix</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_64_SYMBOLSUFFIXUSE_OPENMP0c_compiler_version9fortran_compiler_version9name_suffixtarget_platformlinux-64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_64_SYMBOLSUFFIXUSE_OPENMP0c_compiler_version9fortran_compiler_version9name_suffix" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_SYMBOLSUFFIXUSE_OPENMP1c_compiler_version7fortran_compiler_version7name_suffixtarget_platformlinux-64</td>
+              <td>linux_64_SYMBOLSUFFIXUSE_OPENMP1c_compiler_version7fortran_compiler_version7name_suffix</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_64_SYMBOLSUFFIXUSE_OPENMP1c_compiler_version7fortran_compiler_version7name_suffixtarget_platformlinux-64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_64_SYMBOLSUFFIXUSE_OPENMP1c_compiler_version7fortran_compiler_version7name_suffix" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_SYMBOLSUFFIXUSE_OPENMP1c_compiler_version9fortran_compiler_version9name_suffixtarget_platformlinux-64</td>
+              <td>linux_64_SYMBOLSUFFIXUSE_OPENMP1c_compiler_version9fortran_compiler_version9name_suffix</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_64_SYMBOLSUFFIXUSE_OPENMP1c_compiler_version9fortran_compiler_version9name_suffixtarget_platformlinux-64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_64_SYMBOLSUFFIXUSE_OPENMP1c_compiler_version9fortran_compiler_version9name_suffix" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_USE_OPENMP0c_compiler_version7fortran_compiler_version7target_platformlinux-aarch64</td>
+              <td>linux_aarch64_USE_OPENMP0c_compiler_version7fortran_compiler_version7</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_USE_OPENMP0c_compiler_version7fortran_compiler_version7target_platformlinux-aarch64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_USE_OPENMP0c_compiler_version7fortran_compiler_version7" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_USE_OPENMP0c_compiler_version9fortran_compiler_version9target_platformlinux-aarch64</td>
+              <td>linux_aarch64_USE_OPENMP0c_compiler_version9fortran_compiler_version9</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_USE_OPENMP0c_compiler_version9fortran_compiler_version9target_platformlinux-aarch64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_USE_OPENMP0c_compiler_version9fortran_compiler_version9" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_USE_OPENMP1c_compiler_version7fortran_compiler_version7target_platformlinux-aarch64</td>
+              <td>linux_aarch64_USE_OPENMP1c_compiler_version7fortran_compiler_version7</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_USE_OPENMP1c_compiler_version7fortran_compiler_version7target_platformlinux-aarch64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_USE_OPENMP1c_compiler_version7fortran_compiler_version7" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_USE_OPENMP1c_compiler_version9fortran_compiler_version9target_platformlinux-aarch64</td>
+              <td>linux_aarch64_USE_OPENMP1c_compiler_version9fortran_compiler_version9</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_USE_OPENMP1c_compiler_version9fortran_compiler_version9target_platformlinux-aarch64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_USE_OPENMP1c_compiler_version9fortran_compiler_version9" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP0c_compiler_version8fortran_compiler_version8name_suffix-ilp64target_platformlinux-ppc64le</td>
+              <td>linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP0c_compiler_version8fortran_compiler_version8name_suffix-ilp64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP0c_compiler_version8fortran_compiler_version8name_suffix-ilp64target_platformlinux-ppc64le" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP0c_compiler_version8fortran_compiler_version8name_suffix-ilp64" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP0c_compiler_version9fortran_compiler_version9name_suffix-ilp64target_platformlinux-ppc64le</td>
+              <td>linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP0c_compiler_version9fortran_compiler_version9name_suffix-ilp64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP0c_compiler_version9fortran_compiler_version9name_suffix-ilp64target_platformlinux-ppc64le" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP0c_compiler_version9fortran_compiler_version9name_suffix-ilp64" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP1c_compiler_version8fortran_compiler_version8name_suffix-ilp64target_platformlinux-ppc64le</td>
+              <td>linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP1c_compiler_version8fortran_compiler_version8name_suffix-ilp64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP1c_compiler_version8fortran_compiler_version8name_suffix-ilp64target_platformlinux-ppc64le" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP1c_compiler_version8fortran_compiler_version8name_suffix-ilp64" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP1c_compiler_version9fortran_compiler_version9name_suffix-ilp64target_platformlinux-ppc64le</td>
+              <td>linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP1c_compiler_version9fortran_compiler_version9name_suffix-ilp64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP1c_compiler_version9fortran_compiler_version9name_suffix-ilp64target_platformlinux-ppc64le" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP1c_compiler_version9fortran_compiler_version9name_suffix-ilp64" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP0c_compiler_version8fortran_compiler_version8name_suffixtarget_platformlinux-ppc64le</td>
+              <td>linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP0c_compiler_version8fortran_compiler_version8name_suffix</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP0c_compiler_version8fortran_compiler_version8name_suffixtarget_platformlinux-ppc64le" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP0c_compiler_version8fortran_compiler_version8name_suffix" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP0c_compiler_version9fortran_compiler_version9name_suffixtarget_platformlinux-ppc64le</td>
+              <td>linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP0c_compiler_version9fortran_compiler_version9name_suffix</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP0c_compiler_version9fortran_compiler_version9name_suffixtarget_platformlinux-ppc64le" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP0c_compiler_version9fortran_compiler_version9name_suffix" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP1c_compiler_version8fortran_compiler_version8name_suffixtarget_platformlinux-ppc64le</td>
+              <td>linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP1c_compiler_version8fortran_compiler_version8name_suffix</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP1c_compiler_version8fortran_compiler_version8name_suffixtarget_platformlinux-ppc64le" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP1c_compiler_version8fortran_compiler_version8name_suffix" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP1c_compiler_version9fortran_compiler_version9name_suffixtarget_platformlinux-ppc64le</td>
+              <td>linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP1c_compiler_version9fortran_compiler_version9name_suffix</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP1c_compiler_version9fortran_compiler_version9name_suffixtarget_platformlinux-ppc64le" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP1c_compiler_version9fortran_compiler_version9name_suffix" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_64_SYMBOLSUFFIX64_fortran_compiler_version7name_suffix-ilp64target_platformosx-64</td>
+              <td>osx_64_SYMBOLSUFFIX64_fortran_compiler_version7name_suffix-ilp64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=osx&configuration=osx_64_SYMBOLSUFFIX64_fortran_compiler_version7name_suffix-ilp64target_platformosx-64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=osx&configuration=osx_64_SYMBOLSUFFIX64_fortran_compiler_version7name_suffix-ilp64" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_64_SYMBOLSUFFIX64_fortran_compiler_version9name_suffix-ilp64target_platformosx-64</td>
+              <td>osx_64_SYMBOLSUFFIX64_fortran_compiler_version9name_suffix-ilp64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=osx&configuration=osx_64_SYMBOLSUFFIX64_fortran_compiler_version9name_suffix-ilp64target_platformosx-64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=osx&configuration=osx_64_SYMBOLSUFFIX64_fortran_compiler_version9name_suffix-ilp64" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_64_SYMBOLSUFFIXfortran_compiler_version7name_suffixtarget_platformosx-64</td>
+              <td>osx_64_SYMBOLSUFFIXfortran_compiler_version7name_suffix</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=osx&configuration=osx_64_SYMBOLSUFFIXfortran_compiler_version7name_suffixtarget_platformosx-64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=osx&configuration=osx_64_SYMBOLSUFFIXfortran_compiler_version7name_suffix" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_64_SYMBOLSUFFIXfortran_compiler_version9name_suffixtarget_platformosx-64</td>
+              <td>osx_64_SYMBOLSUFFIXfortran_compiler_version9name_suffix</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=osx&configuration=osx_64_SYMBOLSUFFIXfortran_compiler_version9name_suffixtarget_platformosx-64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=osx&configuration=osx_64_SYMBOLSUFFIXfortran_compiler_version9name_suffix" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_arm64_target_platformosx-arm64</td>
+              <td>osx_arm64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=osx&configuration=osx_arm64_target_platformosx-arm64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=osx&configuration=osx_arm64_" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>win_64_target_platformwin-64</td>
+              <td>win_64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=win&configuration=win_64_target_platformwin-64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=master&jobName=win&configuration=win_64_" alt="variant">
                 </a>
               </td>
             </tr>

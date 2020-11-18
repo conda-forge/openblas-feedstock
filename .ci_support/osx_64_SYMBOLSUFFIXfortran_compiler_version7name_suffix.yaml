@@ -1,15 +1,15 @@
 INTERFACE64:
-- '1'
+- '0'
 MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
 SYMBOLSUFFIX:
-- '64_'
+- ''
 USE_OPENMP:
 - '1'
 c_compiler:
 - clang
 c_compiler_version:
-- '10'
+- '11'
 channel_sources:
 - conda-forge,defaults
 channel_targets:
@@ -17,11 +17,11 @@ channel_targets:
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
-- '9'
+- '7'
 macos_machine:
 - x86_64-apple-darwin13.4.0
 name_suffix:
-- -ilp64
+- ''
 perl:
 - 5.26.2
 pin_run_as_build:

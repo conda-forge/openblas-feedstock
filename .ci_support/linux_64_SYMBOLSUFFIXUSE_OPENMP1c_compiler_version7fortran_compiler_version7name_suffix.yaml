@@ -3,7 +3,7 @@ INTERFACE64:
 SYMBOLSUFFIX:
 - ''
 USE_OPENMP:
-- '0'
+- '1'
 c_compiler:
 - gcc
 c_compiler_version:
@@ -15,7 +15,7 @@ channel_sources:
 channel_targets:
 - conda-forge main
 docker_image:
-- condaforge/linux-anvil-comp7
+- quay.io/condaforge/linux-anvil-comp7
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
