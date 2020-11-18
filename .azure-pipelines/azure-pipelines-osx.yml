@@ -8,12 +8,6 @@ jobs:
     vmImage: macOS-10.15
   strategy:
     matrix:
-      osx_64_SYMBOLSUFFIX64_fortran_compiler_version7name_suffix-ilp64:
-        CONFIG: osx_64_SYMBOLSUFFIX64_fortran_compiler_version7name_suffix-ilp64
-        UPLOAD_PACKAGES: 'True'
-      osx_64_SYMBOLSUFFIX64_fortran_compiler_version9name_suffix-ilp64:
-        CONFIG: osx_64_SYMBOLSUFFIX64_fortran_compiler_version9name_suffix-ilp64
-        UPLOAD_PACKAGES: 'True'
       osx_64_SYMBOLSUFFIXfortran_compiler_version7name_suffix:
         CONFIG: osx_64_SYMBOLSUFFIXfortran_compiler_version7name_suffix
         UPLOAD_PACKAGES: 'True'
