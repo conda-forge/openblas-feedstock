@@ -8,20 +8,14 @@ jobs:
     vmImage: macOS-10.15
   strategy:
     matrix:
-      osx_64_SYMBOLSUFFIX64_fortran_compiler_version7name_suffix-ilp64target_platformosx-64:
-        CONFIG: osx_64_SYMBOLSUFFIX64_fortran_compiler_version7name_suffix-ilp64target_platformosx-64
+      osx_64_SYMBOLSUFFIX64_name_suffix-ilp64:
+        CONFIG: osx_64_SYMBOLSUFFIX64_name_suffix-ilp64
         UPLOAD_PACKAGES: 'True'
-      osx_64_SYMBOLSUFFIX64_fortran_compiler_version9name_suffix-ilp64target_platformosx-64:
-        CONFIG: osx_64_SYMBOLSUFFIX64_fortran_compiler_version9name_suffix-ilp64target_platformosx-64
+      osx_64_SYMBOLSUFFIXname_suffix:
+        CONFIG: osx_64_SYMBOLSUFFIXname_suffix
         UPLOAD_PACKAGES: 'True'
-      osx_64_SYMBOLSUFFIXfortran_compiler_version7name_suffixtarget_platformosx-64:
-        CONFIG: osx_64_SYMBOLSUFFIXfortran_compiler_version7name_suffixtarget_platformosx-64
-        UPLOAD_PACKAGES: 'True'
-      osx_64_SYMBOLSUFFIXfortran_compiler_version9name_suffixtarget_platformosx-64:
-        CONFIG: osx_64_SYMBOLSUFFIXfortran_compiler_version9name_suffixtarget_platformosx-64
-        UPLOAD_PACKAGES: 'True'
-      osx_arm64_target_platformosx-arm64:
-        CONFIG: osx_arm64_target_platformosx-arm64
+      osx_arm64_:
+        CONFIG: osx_arm64_
         UPLOAD_PACKAGES: 'True'
   timeoutInMinutes: 360
 
