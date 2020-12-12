@@ -7,35 +7,19 @@ language: generic
 
 matrix:
   include:
-    - env: CONFIG=linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP0c_compiler_version8fortran_compiler_version8name_suffix-ilp64target_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
+    - env: CONFIG=linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64 UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=quay.io/condaforge/linux-anvil-ppc64le
       os: linux
       arch: ppc64le
 
-    - env: CONFIG=linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP0c_compiler_version9fortran_compiler_version9name_suffix-ilp64target_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
+    - env: CONFIG=linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64 UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=quay.io/condaforge/linux-anvil-ppc64le
       os: linux
       arch: ppc64le
 
-    - env: CONFIG=linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP1c_compiler_version8fortran_compiler_version8name_suffix-ilp64target_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
+    - env: CONFIG=linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP0name_suffix UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=quay.io/condaforge/linux-anvil-ppc64le
       os: linux
       arch: ppc64le
 
-    - env: CONFIG=linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP1c_compiler_version9fortran_compiler_version9name_suffix-ilp64target_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
-      os: linux
-      arch: ppc64le
-
-    - env: CONFIG=linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP0c_compiler_version8fortran_compiler_version8name_suffixtarget_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
-      os: linux
-      arch: ppc64le
-
-    - env: CONFIG=linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP0c_compiler_version9fortran_compiler_version9name_suffixtarget_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
-      os: linux
-      arch: ppc64le
-
-    - env: CONFIG=linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP1c_compiler_version8fortran_compiler_version8name_suffixtarget_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
-      os: linux
-      arch: ppc64le
-
-    - env: CONFIG=linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP1c_compiler_version9fortran_compiler_version9name_suffixtarget_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
+    - env: CONFIG=linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP1name_suffix UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=quay.io/condaforge/linux-anvil-ppc64le
       os: linux
       arch: ppc64le
 
