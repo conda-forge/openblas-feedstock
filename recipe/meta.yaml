@@ -29,8 +29,6 @@ requirements:
     - make  # [not win]
     - cmake  # [win]
     - ninja  # [win]
-    - curl  # [win]
-    - jom  # [win]
     - objconv  # [osx]
     - llvm-openmp  # [USE_OPENMP == 1]
     # Following is needed because the Fortran compiler add an rpath to the BUILD_PREFIX
