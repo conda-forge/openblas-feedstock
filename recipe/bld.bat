@@ -14,7 +14,7 @@ cmake -G "Ninja"                            ^
     %SRC_DIR%
 
 if defined USE_OPENMP (
-  cmake -DUSE_OPENMP %SRC_DIR%
+  cmake -DUSE_OPENMP=ON %SRC_DIR%
 )
 
 cmake --build . --target install
