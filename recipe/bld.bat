@@ -11,12 +11,9 @@ cmake -G "Ninja"                            ^
     -DNOFORTRAN=0                           ^
     -DNUM_THREADS=128                       ^
     -DBUILD_SHARED_LIBS=on                  ^
+    -DUSE_OPENMP=%USE_OPENMP%               ^
     %SRC_DIR%
-
-if defined USE_OPENMP (
-  cmake -DUSE_OPENMP=ON %SRC_DIR%
-)
 
 cmake --build . --target install
 
-utest\openblas_utest.exe
+ctest -j2
