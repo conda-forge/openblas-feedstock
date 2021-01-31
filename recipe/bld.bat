@@ -13,6 +13,10 @@ cmake -G "Ninja"                            ^
     -DBUILD_SHARED_LIBS=on                  ^
     %SRC_DIR%
 
+if defined USE_OPENMP (
+  cmake -DUSE_OPENMP %SRC_DIR%
+)
+
 cmake --build . --target install
 
 utest\openblas_utest.exe
