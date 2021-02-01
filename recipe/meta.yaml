@@ -10,6 +10,7 @@ source:
   sha256: 79197543b17cc314b7e43f7a33148c308b0807cd6381ee77f77e15acf3e6459e
   patches:
     - patches/0001-Fix-gfortran-detection-for-ctng-based-cross-compiler.patch  # [c_compiler == 'gcc']
+    - patches/system-cmake.patch                                               # [c_compiler != 'gcc']
     {% if version == "0.3.11" %}
     - patches/gh2913.diff
     - patches/gh2915.diff
