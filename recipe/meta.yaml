@@ -8,12 +8,6 @@ package:
 source:
   url: https://github.com/xianyi/OpenBLAS/archive/v{{ version }}.tar.gz
   sha256: d381935d26f9cae8e4bbd7d7f278435adf8e3a90920edf284bb9ad789ee9ad60
-  patches:
-    - patches/0001-Fix-gfortran-detection-for-ctng-based-cross-compiler.patch  # [c_compiler == 'gcc']
-    {% if version == "0.3.11" %}
-    - patches/gh2913.diff
-    - patches/gh2915.diff
-    {% endif %}
 
 build:
   number: {{ build_number }}
