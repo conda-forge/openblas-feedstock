@@ -1,0 +1,34 @@
+From cc21e5a2816484c3da4e8771517b494e8ccd0205 Mon Sep 17 00:00:00 2001
+From: Martin Kroeker <martin@ruby.chemie.uni-freiburg.de>
+Date: Thu, 18 Mar 2021 07:50:19 +0100
+Subject: [PATCH] Include just the definition of BLASLONG rather than all of
+ common.h
+
+---
+ getarch_2nd.c | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+diff --git a/getarch_2nd.c b/getarch_2nd.c
+index 53ecccf3..dd1f8308 100644
+--- a/getarch_2nd.c
++++ b/getarch_2nd.c
+@@ -4,7 +4,15 @@
+ #else
+ #include "config_kernel.h"
+ #endif
+-#include "common.h"
++#if (defined(__WIN32__) || defined(__WIN64__) || defined(__CYGWIN32__) || defined(__CYGWIN64__) || defined(_WIN32) || defined(_WIN64)) && defined(__64BIT__)
++typedef long long BLASLONG;
++typedef unsigned long long BLASULONG;
++#else
++typedef long BLASLONG;
++typedef unsigned long BLASULONG;
++#endif
++
++#include "param.h"
+ 
+ int main(int argc, char **argv) {
+ 
+-- 
+2.29.2.windows.3
+
