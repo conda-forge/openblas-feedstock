@@ -27,6 +27,7 @@ export FFLAGS="${FFLAGS} -frecursive"
 [[ -d "${PREFIX}"/include ]] || mkdir "${PREFIX}"/include
 [[ -d "${PREFIX}"/lib ]] || mkdir "${PREFIX}"/lib
 
+DEBUG="0"
 # Set CPU Target
 if [[ "${target_platform}" == linux-aarch64 ]]; then
   TARGET="ARMV8"
@@ -40,6 +41,7 @@ elif [[ "${target_platform}" == linux-64 ]]; then
 elif [[ "${target_platform}" == osx-64 ]]; then
   TARGET="CORE2"
   BINARY="64"
+  DEBUG="1"
 elif [[ "${target_platform}" == osx-arm64 ]]; then
   TARGET="VORTEX"
   BINARY="64"
@@ -60,5 +62,5 @@ export HOSTCC=$CC_FOR_BUILD
 make QUIET_MAKE=${QUIET_MAKE} DYNAMIC_ARCH=1 BINARY=${BINARY} NO_LAPACK=0 CFLAGS="${CF}" \
      HOST=${HOST} TARGET=${TARGET} CROSS_SUFFIX="${HOST}-" \
      NO_AFFINITY=1 USE_THREAD=1 NUM_THREADS=128 USE_OPENMP="${USE_OPENMP}" \
-     INTERFACE64=${INTERFACE64} SYMBOLSUFFIX=${SYMBOLSUFFIX}
+     INTERFACE64=${INTERFACE64} SYMBOLSUFFIX=${SYMBOLSUFFIX} DEBUG=${DEBUG}
 make install PREFIX="${PREFIX}"
