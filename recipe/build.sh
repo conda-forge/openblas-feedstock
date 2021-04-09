@@ -22,9 +22,7 @@ if [[ "$USE_OPENMP" == "1" ]]; then
     sed -i.bak 's/test_potrs.o/test_potrs.o test_fork.o/g' utest/Makefile
 fi
 
-if [ ! -z "$FFLAGS" ]; then
-    export FFLAGS="${FFLAGS/-fopenmp/ }";
-fi
+export FFLAGS="${FFLAGS//-fopenmp/}"
 export FFLAGS="${FFLAGS} -frecursive"
 
 # Because -Wno-missing-include-dirs does not work with gfortran:
