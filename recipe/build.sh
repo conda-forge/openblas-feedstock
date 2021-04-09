@@ -2,6 +2,7 @@
 
 export CFLAGS="${DEBUG_CFLAGS//-Wall -Wextra/}"
 export FFLAGS="${DEBUG_FFLAGS//-Wall -Wextra/}"
+export FFLAGS="${FFLAGS//-fimplicit-none/}"
 
 # Fix ctest not automatically discovering tests
 LDFLAGS=$(echo "${LDFLAGS}" | sed "s/-Wl,--gc-sections//g")
