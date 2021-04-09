@@ -1,5 +1,8 @@
 #!/bin/bash
 
+export CFLAGS="$DEBUG_CFLAGS"
+export FFLAGS="$DEBUG_FFLAGS"
+
 # Fix ctest not automatically discovering tests
 LDFLAGS=$(echo "${LDFLAGS}" | sed "s/-Wl,--gc-sections//g")
 
