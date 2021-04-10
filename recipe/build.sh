@@ -45,6 +45,7 @@ elif [[ "${target_platform}" == osx-64 ]]; then
   TARGET="CORE2"
   BINARY="64"
   DEBUG=1
+  export OPENBLAS_CORETYPE=SANDYBRIDGE
 elif [[ "${target_platform}" == osx-arm64 ]]; then
   TARGET="VORTEX"
   BINARY="64"
