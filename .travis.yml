@@ -10,18 +10,22 @@ matrix:
     - env: CONFIG=linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64 UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=quay.io/condaforge/linux-anvil-ppc64le
       os: linux
       arch: ppc64le
+      dist: focal
 
     - env: CONFIG=linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64 UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=quay.io/condaforge/linux-anvil-ppc64le
       os: linux
       arch: ppc64le
+      dist: focal
 
     - env: CONFIG=linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP0name_suffix UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=quay.io/condaforge/linux-anvil-ppc64le
       os: linux
       arch: ppc64le
+      dist: focal
 
     - env: CONFIG=linux_ppc64le_SYMBOLSUFFIXUSE_OPENMP1name_suffix UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=quay.io/condaforge/linux-anvil-ppc64le
       os: linux
       arch: ppc64le
+      dist: focal
 
 script:
   - export CI=travis
