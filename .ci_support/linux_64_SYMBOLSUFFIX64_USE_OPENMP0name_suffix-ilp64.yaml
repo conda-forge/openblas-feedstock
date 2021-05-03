@@ -35,3 +35,5 @@ zip_keys:
   - INTERFACE64
 - - c_compiler_version
   - fortran_compiler_version
+- - cdt_name
+  - docker_image
