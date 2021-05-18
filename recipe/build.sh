@@ -33,12 +33,15 @@ if [[ "${target_platform}" == linux-aarch64 ]]; then
   BINARY="64"
 elif [[ "${target_platform}" == linux-ppc64le ]]; then
   TARGET="POWER8"
+  BUILD_BFLOAT16=1
   BINARY="64"
 elif [[ "${target_platform}" == linux-64 ]]; then
   TARGET="PRESCOTT"
+  BUILD_BFLOAT16=1
   BINARY="64"
 elif [[ "${target_platform}" == osx-64 ]]; then
   TARGET="CORE2"
+  BUILD_BFLOAT16=1
   BINARY="64"
 elif [[ "${target_platform}" == osx-arm64 ]]; then
   TARGET="VORTEX"
