@@ -49,6 +49,12 @@ outputs:
       run_constrained:
         - {{ pin_subpackage("openblas" ~ name_suffix, max_pin="x.x.x") }}
     files:
+      # Include files like
+      #   - libopenblasp-r0.3.5.so
+      #   - libopenblas_vortexp-r0.3.5.so
+      #   - libopenblas.so.0
+      # Avoid files
+      #   - libopenblas.so
       - lib/libopenblas{{ SYMBOLSUFFIX }}*p*{{ SHLIB_EXT }}   # [not win]
       - lib/libopenblas{{ SYMBOLSUFFIX }}.so.*               # [linux]
       - lib/libopenblas{{ SYMBOLSUFFIX }}.*.dylib            # [osx]
