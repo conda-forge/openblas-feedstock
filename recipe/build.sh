@@ -31,21 +31,26 @@ export FFLAGS="${FFLAGS} -frecursive"
 if [[ "${target_platform}" == linux-aarch64 ]]; then
   TARGET="ARMV8"
   BINARY="64"
+  DYNAMIC_ARCH=1
 elif [[ "${target_platform}" == linux-ppc64le ]]; then
   TARGET="POWER8"
   BUILD_BFLOAT16=1
   BINARY="64"
+  DYNAMIC_ARCH=1
 elif [[ "${target_platform}" == linux-64 ]]; then
   TARGET="PRESCOTT"
   BUILD_BFLOAT16=1
   BINARY="64"
+  DYNAMIC_ARCH=1
 elif [[ "${target_platform}" == osx-64 ]]; then
   TARGET="CORE2"
   BUILD_BFLOAT16=1
   BINARY="64"
+  DYNAMIC_ARCH=1
 elif [[ "${target_platform}" == osx-arm64 ]]; then
   TARGET="VORTEX"
   BINARY="64"
+  DYNAMIC_ARCH=0
 fi
 
 QUIET_MAKE=0
@@ -60,8 +65,12 @@ export HOSTCC=$CC_FOR_BUILD
 # Enable threading. This can be controlled to a certain number by
 # setting OPENBLAS_NUM_THREADS before loading the library.
 # Tests are run as part of build
-make QUIET_MAKE=${QUIET_MAKE} DYNAMIC_ARCH=1 BINARY=${BINARY} NO_LAPACK=0 CFLAGS="${CF}" \
+make QUIET_MAKE=${QUIET_MAKE} DYNAMIC_ARCH=${DYNAMIC_ARCH} BINARY=${BINARY} NO_LAPACK=0 CFLAGS="${CF}" \
      HOST=${HOST} TARGET=${TARGET} CROSS_SUFFIX="${HOST}-" \
      NO_AFFINITY=1 USE_THREAD=1 NUM_THREADS=128 USE_OPENMP="${USE_OPENMP}" \
      INTERFACE64=${INTERFACE64} SYMBOLSUFFIX=${SYMBOLSUFFIX}
 make install PREFIX="${PREFIX}"
+
+if [[ "${target_platform}" == osx-arm64 ]]; then
+  ln -sf $PREFIX/lib/libopenblas_vortexp-r${PKG_VERSION}.dylib $PREFIX/lib/libopenblasp-r${PKG_VERSION}.dylib
+fi
