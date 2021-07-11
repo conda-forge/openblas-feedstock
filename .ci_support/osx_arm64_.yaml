@@ -23,7 +23,7 @@ macos_machine:
 name_suffix:
 - ''
 perl:
-- 5.26.2
+- 5.32.0
 pin_run_as_build:
   perl:
     max_pin: x.x.x
