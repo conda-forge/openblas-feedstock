@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Fix ctest not automatically discovering tests
 LDFLAGS=$(echo "${LDFLAGS}" | sed "s/-Wl,--gc-sections//g")
