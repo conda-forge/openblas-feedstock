@@ -1,5 +1,5 @@
 {% set version = "0.3.17" %}
-{% set build_number = 0 %}
+{% set build_number = 1 %}
 
 package:
   name: openblas
@@ -53,7 +53,7 @@ outputs:
       #   - libopenblasp-r0.3.5.so
       #   - libopenblas_vortexp-r0.3.5.so
       #   - libopenblas.so.0
-      #   - libopenblasw64_.so
+      #   - libopenblas64_.so
       - lib/libopenblas{{ SYMBOLSUFFIX }}*p*{{ SHLIB_EXT }}   # [not win]
       - lib/libopenblas{{ SYMBOLSUFFIX }}.so                 # [linux]
       - lib/libopenblas{{ SYMBOLSUFFIX }}.so.*               # [linux]
