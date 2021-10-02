@@ -7,7 +7,7 @@ Package license: BSD-3-Clause
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/openblas-feedstock/blob/master/LICENSE.txt)
 
-Summary: An optimized BLAS library based on GotoBLAS2 1.13 BSD version
+Summary: An optimized BLAS library (ILP64 interface) based on GotoBLAS2 1.13 BSD version
 
 Current build status
 ====================
