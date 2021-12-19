@@ -11,19 +11,27 @@ jobs:
       linux_64_SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64:
         CONFIG: linux_64_SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_64_SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64:
         CONFIG: linux_64_SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_64_SYMBOLSUFFIXUSE_OPENMP0name_suffix:
         CONFIG: linux_64_SYMBOLSUFFIXUSE_OPENMP0name_suffix
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_64_SYMBOLSUFFIXUSE_OPENMP1name_suffix:
         CONFIG: linux_64_SYMBOLSUFFIXUSE_OPENMP1name_suffix
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_aarch64_USE_OPENMP0:
+        CONFIG: linux_aarch64_USE_OPENMP0
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64
+      linux_aarch64_USE_OPENMP1:
+        CONFIG: linux_aarch64_USE_OPENMP1
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64
   timeoutInMinutes: 360
 
   steps:
@@ -44,6 +52,11 @@ jobs:
         export CI=azure
         export GIT_BRANCH=$BUILD_SOURCEBRANCHNAME
         export FEEDSTOCK_NAME=$(basename ${BUILD_REPOSITORY_NAME})
+        if [[ "${BUILD_REASON:-}" == "PullRequest" ]]; then
+          export IS_PR_BUILD="True"
+        else
+          export IS_PR_BUILD="False"
+        fi
         .scripts/run_docker_build.sh
     displayName: Run docker build
     env:
