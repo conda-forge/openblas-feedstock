@@ -7,20 +7,13 @@ Package license: BSD-3-Clause
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/openblas-feedstock/blob/master/LICENSE.txt)
 
-Summary: An optimized BLAS library (ILP64 interface) based on GotoBLAS2 1.13 BSD version
+Summary: An optimized BLAS library based on GotoBLAS2 1.13 BSD version
 
 Current build status
 ====================
 
 
-<table><tr>
-    <td>Travis</td>
-    <td>
-      <a href="https://travis-ci.com/conda-forge/openblas-feedstock">
-        <img alt="macOS" src="https://img.shields.io/travis/com/conda-forge/openblas-feedstock/master.svg?label=macOS">
-      </a>
-    </td>
-  </tr>
+<table>
     
   <tr>
     <td>Azure</td>
@@ -145,9 +138,7 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libopenblas-green.svg)](https://anaconda.org/conda-forge/libopenblas) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libopenblas.svg)](https://anaconda.org/conda-forge/libopenblas) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libopenblas.svg)](https://anaconda.org/conda-forge/libopenblas) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libopenblas.svg)](https://anaconda.org/conda-forge/libopenblas) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-libopenblas--ilp64-green.svg)](https://anaconda.org/conda-forge/libopenblas-ilp64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libopenblas-ilp64.svg)](https://anaconda.org/conda-forge/libopenblas-ilp64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libopenblas-ilp64.svg)](https://anaconda.org/conda-forge/libopenblas-ilp64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libopenblas-ilp64.svg)](https://anaconda.org/conda-forge/libopenblas-ilp64) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-openblas-green.svg)](https://anaconda.org/conda-forge/openblas) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/openblas.svg)](https://anaconda.org/conda-forge/openblas) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/openblas.svg)](https://anaconda.org/conda-forge/openblas) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/openblas.svg)](https://anaconda.org/conda-forge/openblas) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-openblas--ilp64-green.svg)](https://anaconda.org/conda-forge/openblas-ilp64) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/openblas-ilp64.svg)](https://anaconda.org/conda-forge/openblas-ilp64) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/openblas-ilp64.svg)](https://anaconda.org/conda-forge/openblas-ilp64) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/openblas-ilp64.svg)](https://anaconda.org/conda-forge/openblas-ilp64) |
 
 Installing openblas
 ===================
@@ -159,10 +150,10 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `libopenblas, libopenblas-ilp64, openblas, openblas-ilp64` can be installed with:
+Once the `conda-forge` channel has been enabled, `libopenblas, openblas` can be installed with:
 
 ```
-conda install libopenblas libopenblas-ilp64 openblas openblas-ilp64
+conda install libopenblas openblas
 ```
 
 It is possible to list all of the versions of `libopenblas` available on your platform with:
