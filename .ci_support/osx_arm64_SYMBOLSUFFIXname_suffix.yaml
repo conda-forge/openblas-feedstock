@@ -1,33 +1,36 @@
 INTERFACE64:
 - '0'
+MACOSX_DEPLOYMENT_TARGET:
+- '11.0'
 SYMBOLSUFFIX:
 - ''
 USE_OPENMP:
-- '0'
+- '1'
 c_compiler:
-- vs2017
+- clang
+c_compiler_version:
+- '11'
 channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
-curl:
-- '7'
 fortran_compiler:
-- flang
+- gfortran
 fortran_compiler_version:
-- '5'
+- '11'
+llvm_openmp:
+- '11'
+macos_machine:
+- arm64-apple-darwin20.0.0
 name_suffix:
 - ''
 perl:
 - 5.32.1
-pin_run_as_build:
-  curl:
-    max_pin: x
 target_platform:
-- win-64
-vc:
-- '14'
+- osx-arm64
 zip_keys:
 - - SYMBOLSUFFIX
   - name_suffix
   - INTERFACE64
+- - c_compiler_version
+  - fortran_compiler_version

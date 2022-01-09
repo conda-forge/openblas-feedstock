@@ -14,8 +14,11 @@ jobs:
       osx_64_SYMBOLSUFFIXname_suffix:
         CONFIG: osx_64_SYMBOLSUFFIXname_suffix
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_:
-        CONFIG: osx_arm64_
+      osx_arm64_SYMBOLSUFFIX64_name_suffix-ilp64:
+        CONFIG: osx_arm64_SYMBOLSUFFIX64_name_suffix-ilp64
+        UPLOAD_PACKAGES: 'True'
+      osx_arm64_SYMBOLSUFFIXname_suffix:
+        CONFIG: osx_arm64_SYMBOLSUFFIXname_suffix
         UPLOAD_PACKAGES: 'True'
   timeoutInMinutes: 360
 
@@ -26,6 +29,11 @@ jobs:
       export OSX_FORCE_SDK_DOWNLOAD="1"
       export GIT_BRANCH=$BUILD_SOURCEBRANCHNAME
       export FEEDSTOCK_NAME=$(basename ${BUILD_REPOSITORY_NAME})
+      if [[ "${BUILD_REASON:-}" == "PullRequest" ]]; then
+        export IS_PR_BUILD="True"
+      else
+        export IS_PR_BUILD="False"
+      fi
       ./.scripts/run_osx_build.sh
     displayName: Run OSX build
     env:
