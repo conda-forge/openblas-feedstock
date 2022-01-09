@@ -1,14 +1,14 @@
 SYMBOLSUFFIX:
   - ""
-  - "64_"     # [not (win or aarch64 or arm64)]
+  - "64_"     # [not win]
 
 name_suffix:
   - ""
-  - "-ilp64"  # [not (win or aarch64 or arm64)]
+  - "-ilp64"  # [not win]
 
 INTERFACE64:
   - 0
-  - 1         # [not (win or aarch64 or arm64)]
+  - 1         # [not win]
 
 USE_OPENMP:
   - "0"    # [win or linux]
