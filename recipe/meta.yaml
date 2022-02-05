@@ -12,6 +12,8 @@ source:
 build:
   number: {{ build_number }}
   skip: true  # [win and vc<14]
+  # debug: skip emulated builds (~4h for PPC...)
+  skip: true  # [build_platform != target_platform]
   string: openmp_h{{ PKG_HASH }}_{{ build_number }}    # [USE_OPENMP == 1]
   string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
 
