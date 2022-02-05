@@ -24,6 +24,7 @@ requirements:
     - cmake        # [win]
     - curl         # [win]
     - jom          # [win]
+    - libxml2      # [win]
     - objconv      # [osx]
     - llvm-openmp  # [(osx or linux) and USE_OPENMP == 1]
     # Following is needed because the Fortran compiler add an rpath to the BUILD_PREFIX
