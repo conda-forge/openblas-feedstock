@@ -10,6 +10,9 @@ INTERFACE64:
   - 0
   - 1         # [not (win or aarch64 or arm64)]
 
+fortran_compiler_version:      # [win]
+  - 11                         # [win]
+
 USE_OPENMP:
   - "0"    # [win or linux]
   - "1"    # [osx or linux]
