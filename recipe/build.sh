@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Fix ctest not automatically discovering tests
 LDFLAGS=$(echo "${LDFLAGS}" | sed "s/-Wl,--gc-sections//g")
@@ -69,6 +70,13 @@ make QUIET_MAKE=${QUIET_MAKE} DYNAMIC_ARCH=${DYNAMIC_ARCH} BINARY=${BINARY} NO_L
      HOST=${HOST} TARGET=${TARGET} CROSS_SUFFIX="${HOST}-" \
      NO_AFFINITY=1 USE_THREAD=1 NUM_THREADS=128 USE_OPENMP="${USE_OPENMP}" \
      INTERFACE64=${INTERFACE64} SYMBOLSUFFIX=${SYMBOLSUFFIX}
+# lapack tests need to be run separately; cannot run tests for cross-compilation
+if [[ "${target_platform}" != osx-arm64 ]]; then
+    make QUIET_MAKE=${QUIET_MAKE} DYNAMIC_ARCH=${DYNAMIC_ARCH} BINARY=${BINARY} NO_LAPACK=0 CFLAGS="${CF}" \
+         HOST=${HOST} TARGET=${TARGET} CROSS_SUFFIX="${HOST}-" \
+         NO_AFFINITY=1 USE_THREAD=1 NUM_THREADS=128 USE_OPENMP="${USE_OPENMP}" \
+         INTERFACE64=${INTERFACE64} SYMBOLSUFFIX=${SYMBOLSUFFIX} lapack-test
+fi
 make install PREFIX="${PREFIX}"
 
 if [[ "${target_platform}" == osx-arm64 ]]; then

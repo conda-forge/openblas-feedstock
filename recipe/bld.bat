@@ -11,8 +11,15 @@ cmake -G "NMake Makefiles JOM"              ^
     -DNOFORTRAN=0                           ^
     -DNUM_THREADS=128                       ^
     -DBUILD_SHARED_LIBS=on                  ^
+    -DBUILD_TESTING=on                      ^
     %SRC_DIR%
+if %ERRORLEVEL% neq 0 exit 1
 
 jom install -j%CPU_COUNT%
+if %ERRORLEVEL% neq 0 exit 1
 
 utest\openblas_utest.exe
+if %ERRORLEVEL% neq 0 exit 1
+
+ctest --output-on-failure
+if %ERRORLEVEL% neq 0 exit 1
