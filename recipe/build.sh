@@ -13,9 +13,12 @@ if [[ "$PKG_VERSION" == "0.3.11" ]]; then
     sed -i.bak 's/$(BUILD_COMPLEX16)> $(@F)/$(BUILD_COMPLEX16) > $(@F)/g' exports/Makefile
 fi
 
+NUM_PARALLEL=1
 if [[ "$USE_OPENMP" == "1" ]]; then
     # Run the the fork test
     sed -i.bak 's/test_potrs.o/test_potrs.o test_fork.o/g' utest/Makefile
+    # Allow multiple OpenBLAS OpenMP calls to run in parallel
+    NUM_PARALLEL=32
 fi
 
 if [ ! -z "$FFLAGS" ]; then
@@ -67,7 +70,7 @@ export HOSTCC=$CC_FOR_BUILD
 # Tests are run as part of build
 make QUIET_MAKE=${QUIET_MAKE} DYNAMIC_ARCH=${DYNAMIC_ARCH} BINARY=${BINARY} NO_LAPACK=0 CFLAGS="${CF}" \
      HOST=${HOST} TARGET=${TARGET} CROSS_SUFFIX="${HOST}-" \
-     NO_AFFINITY=1 USE_THREAD=1 NUM_THREADS=128 USE_OPENMP="${USE_OPENMP}" \
+     NO_AFFINITY=1 USE_THREAD=1 NUM_THREADS=128 USE_OPENMP="${USE_OPENMP}" NUM_PARALLEL="${NUM_PARALLEL}" \
      INTERFACE64=${INTERFACE64} SYMBOLSUFFIX=${SYMBOLSUFFIX}
 make install PREFIX="${PREFIX}"
 
