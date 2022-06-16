@@ -14,8 +14,11 @@ jobs:
       osx_64_SYMBOLSUFFIXname_suffix:
         CONFIG: osx_64_SYMBOLSUFFIXname_suffix
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_:
-        CONFIG: osx_arm64_
+      osx_arm64_SYMBOLSUFFIX64_name_suffix-ilp64:
+        CONFIG: osx_arm64_SYMBOLSUFFIX64_name_suffix-ilp64
+        UPLOAD_PACKAGES: 'True'
+      osx_arm64_SYMBOLSUFFIXname_suffix:
+        CONFIG: osx_arm64_SYMBOLSUFFIXname_suffix
         UPLOAD_PACKAGES: 'True'
   timeoutInMinutes: 360
 
