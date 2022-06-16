@@ -72,5 +72,5 @@ make QUIET_MAKE=${QUIET_MAKE} DYNAMIC_ARCH=${DYNAMIC_ARCH} BINARY=${BINARY} NO_L
 make install PREFIX="${PREFIX}"
 
 if [[ "${target_platform}" == osx-arm64 ]]; then
-  ln -sf $PREFIX/lib/libopenblas_vortexp-r${PKG_VERSION}.dylib $PREFIX/lib/libopenblasp-r${PKG_VERSION}.dylib
+  ln -sf $PREFIX/lib/libopenblas64__vortexp-r${PKG_VERSION}.dylib $PREFIX/lib/libopenblasp64_-r${PKG_VERSION}.dylib
 fi
