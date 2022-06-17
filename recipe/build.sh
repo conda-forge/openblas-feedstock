@@ -48,7 +48,7 @@ elif [[ "${target_platform}" == osx-64 ]]; then
   BINARY="64"
   DYNAMIC_ARCH=1
 elif [[ "${target_platform}" == osx-arm64 ]]; then
-  TARGET="VORTEX"
+  TARGET="ARMV8"
   BINARY="64"
   DYNAMIC_ARCH=0
 fi
