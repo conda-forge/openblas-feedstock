@@ -9,7 +9,7 @@ source:
   url: https://github.com/xianyi/OpenBLAS/archive/v{{ version }}.tar.gz
   sha256: 8495c9affc536253648e942908e88e097f2ec7753ede55aca52e5dead3029e3c
   patches:
-    - 0003-Fix-calculations-on-M1.patch  # https://github.com/xianyi/OpenBLAS/pull/3675
+    - patches/0003-Fix-calculations-on-M1.patch  # https://github.com/xianyi/OpenBLAS/pull/3675
 
 build:
   number: {{ build_number }}
