@@ -1,5 +1,5 @@
-{% set version = "0.3.20" %}
-{% set build_number = 1 %}
+{% set version = "0.3.21" %}
+{% set build_number = 0 %}
 
 package:
   name: openblas
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/xianyi/OpenBLAS/archive/v{{ version }}.tar.gz
-  sha256: 8495c9affc536253648e942908e88e097f2ec7753ede55aca52e5dead3029e3c
+  sha256: f36ba3d7a60e7c8bcc54cd9aaa9b1223dd42eaf02c811791c37e8ca707c241ca
   patches:
     - patches/0003-Fix-calculations-on-M1.patch  # https://github.com/xianyi/OpenBLAS/pull/3675
 
