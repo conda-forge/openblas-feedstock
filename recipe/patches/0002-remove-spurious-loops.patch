@@ -1,0 +1,32 @@
+From 92a06a5eac2bebbc6070c763d2f968d40c8eed13 Mon Sep 17 00:00:00 2001
+From: Martin Kroeker <martin@ruby.chemie.uni-freiburg.de>
+Date: Mon, 8 Aug 2022 17:09:45 +0200
+Subject: [PATCH 2/3] remove spurious loops
+
+---
+ test/compare_sgemm_sbgemm.c | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/test/compare_sgemm_sbgemm.c b/test/compare_sgemm_sbgemm.c
+index d4b59145..276fecae 100644
+--- a/test/compare_sgemm_sbgemm.c
++++ b/test/compare_sgemm_sbgemm.c
+@@ -112,7 +112,6 @@ main (int argc, char *argv[])
+ 	      &m, BB, &k, &beta, CC, &m);
+       for (i = 0; i < n; i++)
+ 	for (j = 0; j < m; j++)
+-	  for (l = 0; l < k; l++)
+ 	    if (fabs (CC[i * m + j] - C[i * m + j]) > 1.0)
+ 	      ret++;
+       if (transA == 'N' && transB == 'N')
+@@ -126,7 +125,6 @@ main (int argc, char *argv[])
+ 		}
+ 	  for (i = 0; i < n; i++)
+ 	    for (j = 0; j < m; j++)
+-	      for (l = 0; l < k; l++)
+ 		if (CC[i * m + j] != DD[i * m + j])
+ 		  ret++;
+ 	}
+-- 
+2.37.0.windows.1
+
