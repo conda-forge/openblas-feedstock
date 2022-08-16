@@ -48,7 +48,7 @@ elif [[ "${target_platform}" == osx-64 ]]; then
   BINARY="64"
   DYNAMIC_ARCH=1
 elif [[ "${target_platform}" == osx-arm64 ]]; then
-  TARGET="VORTEX"
+  TARGET="ARMV8"
   BINARY="64"
   DYNAMIC_ARCH=0
 fi
@@ -72,5 +72,12 @@ make QUIET_MAKE=${QUIET_MAKE} DYNAMIC_ARCH=${DYNAMIC_ARCH} BINARY=${BINARY} NO_L
 make install PREFIX="${PREFIX}"
 
 if [[ "${target_platform}" == osx-arm64 ]]; then
-  ln -sf $PREFIX/lib/libopenblas_vortexp-r${PKG_VERSION}.dylib $PREFIX/lib/libopenblasp-r${PKG_VERSION}.dylib
+  ls -alh $PREFIX/lib/libopenblas*
+  # Make sure the concrete library is libopenblas.0.dylib and there's a link for
+  # libopenblas_vortexp-r${PKG_VERSION}.dylib for backwards compatibility
+  rm $PREFIX/lib/libopenblas.0.dylib
+  mv $PREFIX/lib/libopenblas_armv8p-r${PKG_VERSION}.dylib $PREFIX/lib/libopenblas.0.dylib
+  ln -sf $PREFIX/lib/libopenblas.0.dylib $PREFIX/lib/libopenblasp-r${PKG_VERSION}.dylib
+  ln -sf $PREFIX/lib/libopenblas.0.dylib $PREFIX/lib/libopenblas_vortexp-r${PKG_VERSION}.dylib
+  ln -sf $PREFIX/lib/libopenblas.0.dylib $PREFIX/lib/libopenblas_armv8p-r${PKG_VERSION}.dylib
 fi
