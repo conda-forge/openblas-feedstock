@@ -76,9 +76,9 @@ if [[ "${target_platform}" == osx-arm64 ]]; then
   ls -alh $PREFIX/lib/libopenblas*
   # Make sure the concrete library is libopenblas.0.dylib and there's a link for
   # libopenblas_vortexp-r${PKG_VERSION}.dylib for backwards compatibility
-  rm $PREFIX/lib/libopenblas.0.dylib
-  mv $PREFIX/lib/libopenblas_${TARGET_LOWER}p-r${PKG_VERSION}.dylib $PREFIX/lib/libopenblas.0.dylib
-  ln -sf $PREFIX/lib/libopenblas.0.dylib $PREFIX/lib/libopenblasp-r${PKG_VERSION}.dylib
-  ln -sf $PREFIX/lib/libopenblas.0.dylib $PREFIX/lib/libopenblas_vortexp-r${PKG_VERSION}.dylib
-  ln -sf $PREFIX/lib/libopenblas.0.dylib $PREFIX/lib/libopenblas_armv8p-r${PKG_VERSION}.dylib
+  rm $PREFIX/lib/libopenblas${SYMBOLSUFFIX}.0.dylib
+  mv $PREFIX/lib/libopenblas${SYMBOLSUFFIX}_${TARGET_LOWER}p-r${PKG_VERSION}.dylib $PREFIX/lib/libopenblas${SYMBOLSUFFIX}.0.dylib
+  ln -sf $PREFIX/lib/libopenblas${SYMBOLSUFFIX}.0.dylib $PREFIX/lib/libopenblas${SYMBOLSUFFIX}p-r${PKG_VERSION}.dylib
+  ln -sf $PREFIX/lib/libopenblas${SYMBOLSUFFIX}.0.dylib $PREFIX/lib/libopenblas${SYMBOLSUFFIX}_vortexp-r${PKG_VERSION}.dylib
+  ln -sf $PREFIX/lib/libopenblas${SYMBOLSUFFIX}.0.dylib $PREFIX/lib/libopenblas${SYMBOLSUFFIX}_armv8p-r${PKG_VERSION}.dylib
 fi
