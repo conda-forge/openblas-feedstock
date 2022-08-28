@@ -5,7 +5,7 @@ SYMBOLSUFFIX:
 USE_OPENMP:
 - '0'
 c_compiler:
-- vs2017
+- vs2019
 channel_sources:
 - conda-forge
 channel_targets:
