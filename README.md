@@ -7,7 +7,7 @@ Package license: BSD-3-Clause
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/openblas-feedstock/blob/main/LICENSE.txt)
 
-Summary: An optimized BLAS library (ILP64 interface) based on GotoBLAS2 1.13 BSD version
+Summary: An optimized BLAS library based on GotoBLAS2 1.13 BSD version
 
 Current build status
 ====================
@@ -118,10 +118,17 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>osx_arm64</td>
+              <td>osx_arm64_SYMBOLSUFFIX64_name_suffix-ilp64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=main&jobName=osx&configuration=osx_arm64_" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=main&jobName=osx&configuration=osx_arm64_SYMBOLSUFFIX64_name_suffix-ilp64" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_arm64_SYMBOLSUFFIXname_suffix</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=main&jobName=osx&configuration=osx_arm64_SYMBOLSUFFIXname_suffix" alt="variant">
                 </a>
               </td>
             </tr><tr>
