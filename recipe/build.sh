@@ -60,6 +60,11 @@ fi
 
 export HOSTCC=$CC_FOR_BUILD
 
+OBJCONV=""
+if [[ "${target_platform}" == "osx-arm64" && "${build_platform}" != "osx-arm64" ]]; then
+  OBJCONV="OBJCONV=objconv"
+fi
+
 # Build all CPU targets and allow dynamic configuration
 # Build LAPACK.
 # Enable threading. This can be controlled to a certain number by
@@ -68,7 +73,7 @@ export HOSTCC=$CC_FOR_BUILD
 make QUIET_MAKE=${QUIET_MAKE} DYNAMIC_ARCH=${DYNAMIC_ARCH} BINARY=${BINARY} NO_LAPACK=0 CFLAGS="${CF}" \
      HOST=${HOST} TARGET=${TARGET} CROSS_SUFFIX="${HOST}-" \
      NO_AFFINITY=1 USE_THREAD=1 NUM_THREADS=128 USE_OPENMP="${USE_OPENMP}" \
-     INTERFACE64=${INTERFACE64} SYMBOLSUFFIX=${SYMBOLSUFFIX}
+     INTERFACE64=${INTERFACE64} SYMBOLSUFFIX=${SYMBOLSUFFIX} ${OBJCONV}
 make install PREFIX="${PREFIX}"
 
 if [[ "${target_platform}" == osx-arm64 ]]; then
@@ -76,9 +81,9 @@ if [[ "${target_platform}" == osx-arm64 ]]; then
   ls -alh $PREFIX/lib/libopenblas*
   # Make sure the concrete library is libopenblas.0.dylib and there's a link for
   # libopenblas_vortexp-r${PKG_VERSION}.dylib for backwards compatibility
-  rm $PREFIX/lib/libopenblas.0.dylib
-  mv $PREFIX/lib/libopenblas_${TARGET_LOWER}p-r${PKG_VERSION}.dylib $PREFIX/lib/libopenblas.0.dylib
-  ln -sf $PREFIX/lib/libopenblas.0.dylib $PREFIX/lib/libopenblasp-r${PKG_VERSION}.dylib
-  ln -sf $PREFIX/lib/libopenblas.0.dylib $PREFIX/lib/libopenblas_vortexp-r${PKG_VERSION}.dylib
-  ln -sf $PREFIX/lib/libopenblas.0.dylib $PREFIX/lib/libopenblas_armv8p-r${PKG_VERSION}.dylib
+  rm $PREFIX/lib/libopenblas${SYMBOLSUFFIX}.0.dylib
+  mv $PREFIX/lib/libopenblas${SYMBOLSUFFIX}_${TARGET_LOWER}p-r${PKG_VERSION}.dylib $PREFIX/lib/libopenblas${SYMBOLSUFFIX}.0.dylib
+  ln -sf $PREFIX/lib/libopenblas${SYMBOLSUFFIX}.0.dylib $PREFIX/lib/libopenblas${SYMBOLSUFFIX}p-r${PKG_VERSION}.dylib
+  ln -sf $PREFIX/lib/libopenblas${SYMBOLSUFFIX}.0.dylib $PREFIX/lib/libopenblas${SYMBOLSUFFIX}_vortexp-r${PKG_VERSION}.dylib
+  ln -sf $PREFIX/lib/libopenblas${SYMBOLSUFFIX}.0.dylib $PREFIX/lib/libopenblas${SYMBOLSUFFIX}_armv8p-r${PKG_VERSION}.dylib
 fi
