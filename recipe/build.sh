@@ -65,10 +65,16 @@ export HOSTCC=$CC_FOR_BUILD
 # Enable threading. This can be controlled to a certain number by
 # setting OPENBLAS_NUM_THREADS before loading the library.
 # Tests are run as part of build
+OBJCONV=""
+
+if [[ "${target_platform}" == osx-arm64 ]]; then
+  OBJCONV=objconv
+fi
+
 make QUIET_MAKE=${QUIET_MAKE} DYNAMIC_ARCH=${DYNAMIC_ARCH} BINARY=${BINARY} NO_LAPACK=0 CFLAGS="${CF}" \
      HOST=${HOST} TARGET=${TARGET} CROSS_SUFFIX="${HOST}-" \
      NO_AFFINITY=1 USE_THREAD=1 NUM_THREADS=128 USE_OPENMP="${USE_OPENMP}" \
-     INTERFACE64=${INTERFACE64} SYMBOLSUFFIX=${SYMBOLSUFFIX} OBJCONV=objconv
+     INTERFACE64=${INTERFACE64} SYMBOLSUFFIX=${SYMBOLSUFFIX} OBJCONV=${OBJCONV}
 make install PREFIX="${PREFIX}"
 
 if [[ "${target_platform}" == osx-arm64 ]]; then
