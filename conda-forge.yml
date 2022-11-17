@@ -7,3 +7,5 @@ github:
   tooling_branch_name: main
 azure:
   store_build_artifacts: true
+conda_build:
+  pkg_format: '2'
