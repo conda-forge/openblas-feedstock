@@ -1,5 +1,5 @@
-{% set version = "0.3.21" %}
-{% set build_number = 3 %}
+{% set version = "0.3.22" %}
+{% set build_number = 0 %}
 
 package:
   name: openblas
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/xianyi/OpenBLAS/archive/v{{ version }}.tar.gz
-  sha256: f36ba3d7a60e7c8bcc54cd9aaa9b1223dd42eaf02c811791c37e8ca707c241ca
+  sha256: 7fa9685926ba4f27cfe513adbf9af64d6b6b63f9dcabb37baefad6a65ff347a7
   patches:
     # backport xianyi/OpenBLAS#3718 to fix tests on PPC + INTERFACE64 (2 commits)
     - patches/0001-Use-blasint-for-INTERFACE64-compatibility.patch
