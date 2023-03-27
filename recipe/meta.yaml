@@ -8,12 +8,6 @@ package:
 source:
   url: https://github.com/xianyi/OpenBLAS/archive/v{{ version }}.tar.gz
   sha256: 5d9491d07168a5d00116cdc068a40022c3455bf9293c7cb86a65b1054d7e5114
-  patches:
-    # backport xianyi/OpenBLAS#3718 to fix tests on PPC + INTERFACE64 (2 commits)
-    - patches/0001-Use-blasint-for-INTERFACE64-compatibility.patch
-    - patches/0002-remove-spurious-loops.patch
-    # backport xianyi/OpenBLAS#3721 to fix linkage errors on OSX
-    - patches/0003-Fix-building-tests-when-NOFORTRAN-is-not-given-at-al.patch
 
 build:
   number: {{ build_number }}
