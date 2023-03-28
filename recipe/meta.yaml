@@ -97,6 +97,7 @@ about:
     - lapack-netlib/LICENSE
   summary: An optimized BLAS library based on GotoBLAS2 1.13 BSD version                    # [SYMBOLSUFFIX != "64_"]
   summary: An optimized BLAS library (ILP64 interface) based on GotoBLAS2 1.13 BSD version  # [SYMBOLSUFFIX == "64_"]
+  dev_url: https://github.com/xianyi/openblas
 
 extra:
   recipe-maintainers:
