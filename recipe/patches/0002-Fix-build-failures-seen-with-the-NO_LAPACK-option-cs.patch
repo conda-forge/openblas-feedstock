@@ -1,7 +1,7 @@
 From 5f961c243d4697c424b4e8fd4bf9dd12f64137bb Mon Sep 17 00:00:00 2001
 From: Martin Kroeker <martin@ruby.chemie.uni-freiburg.de>
 Date: Tue, 28 Mar 2023 16:33:09 +0200
-Subject: [PATCH 2/2] Fix build failures seen with the NO_LAPACK option -
+Subject: [PATCH 2/4] Fix build failures seen with the NO_LAPACK option -
  cspr/csymv/csyr belong on the LAPACK list
 
 ---

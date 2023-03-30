@@ -1,0 +1,25 @@
+From 69f214edc4a9ea4d1c402021e59559be00ede1b7 Mon Sep 17 00:00:00 2001
+From: Martin Kroeker <martin@ruby.chemie.uni-freiburg.de>
+Date: Wed, 29 Mar 2023 09:44:33 +0200
+Subject: [PATCH 3/4] fix conditional
+
+---
+ lapack/getf2/zgetf2_k.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lapack/getf2/zgetf2_k.c b/lapack/getf2/zgetf2_k.c
+index f3412f52..dbc78abc 100644
+--- a/lapack/getf2/zgetf2_k.c
++++ b/lapack/getf2/zgetf2_k.c
+@@ -107,7 +107,7 @@ blasint CNAME(blas_arg_t *args, BLASLONG *range_m, BLASLONG *range_n, FLOAT *sa,
+       temp2 = *(b + jp * 2 + 1);
+ 
+   //    if ((temp1 != ZERO) || (temp2 != ZERO)) {
+-	if ((fabs(temp1) >= DBL_MIN) && (fabs(temp2) >= DBL_MIN)) {
++	if ((fabs(temp1) >= DBL_MIN) || (fabs(temp2) >= DBL_MIN)) {
+ 		
+ 	if (jp != j) {
+ 	  SWAP_K(j + 1, 0, 0, ZERO, ZERO, a + j * 2, lda,
+-- 
+2.38.1.windows.1
+

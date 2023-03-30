@@ -1,0 +1,110 @@
+From 4f44a06b91c1f0ac2e2942f92e2898db364619cd Mon Sep 17 00:00:00 2001
+From: Martin Kroeker <martin@ruby.chemie.uni-freiburg.de>
+Date: Wed, 29 Mar 2023 22:14:21 +0200
+Subject: [PATCH 4/4] Split test condition in LU computation - non-denormal for
+ computation, exact zero for reporting singularity
+
+---
+ lapack/getf2/getf2_k.c  | 23 ++++++++++++--------
+ lapack/getf2/zgetf2_k.c | 48 ++++++++++++++++++++++-------------------
+ 2 files changed, 40 insertions(+), 31 deletions(-)
+
+diff --git a/lapack/getf2/getf2_k.c b/lapack/getf2/getf2_k.c
+index d29ed588..80c66dd7 100644
+--- a/lapack/getf2/getf2_k.c
++++ b/lapack/getf2/getf2_k.c
+@@ -100,16 +100,21 @@ blasint CNAME(blas_arg_t *args, BLASLONG *range_m, BLASLONG *range_n, FLOAT *sa,
+       jp--;
+       temp1 = *(b + jp);
+ 
+-      //if (temp1 != ZERO) {
++      if (temp1 != ZERO) {
++#if defined(DOUBLE)
+ 	if (fabs(temp1) >= DBL_MIN ) {
+-	temp1 = dp1 / temp1;
+-
+-	if (jp != j) {
+-	  SWAP_K(j + 1, 0, 0, ZERO, a + j, lda, a + jp, lda, NULL, 0);
+-	}
+-	if (j + 1 < m) {
+-	  SCAL_K(m - j - 1, 0, 0, temp1, b + j + 1, 1, NULL, 0, NULL, 0);
+-	}
++#else
++	if (fabs(temp1) >= FLT_MIN ) {
++#endif
++  	  temp1 = dp1 / temp1;
++
++	  if (jp != j) {
++	    SWAP_K(j + 1, 0, 0, ZERO, a + j, lda, a + jp, lda, NULL, 0);
++	  }
++	  if (j + 1 < m) {
++	    SCAL_K(m - j - 1, 0, 0, temp1, b + j + 1, 1, NULL, 0, NULL, 0);
++	  }
++        }
+       } else {
+ 	if (!info) info = j + 1;
+       }
+diff --git a/lapack/getf2/zgetf2_k.c b/lapack/getf2/zgetf2_k.c
+index dbc78abc..e3d53c96 100644
+--- a/lapack/getf2/zgetf2_k.c
++++ b/lapack/getf2/zgetf2_k.c
+@@ -106,30 +106,34 @@ blasint CNAME(blas_arg_t *args, BLASLONG *range_m, BLASLONG *range_n, FLOAT *sa,
+       temp1 = *(b + jp * 2 + 0);
+       temp2 = *(b + jp * 2 + 1);
+ 
+-  //    if ((temp1 != ZERO) || (temp2 != ZERO)) {
++      if ((temp1 != ZERO) || (temp2 != ZERO)) {
++#if defined(DOUBLE)
+ 	if ((fabs(temp1) >= DBL_MIN) || (fabs(temp2) >= DBL_MIN)) {
+-		
+-	if (jp != j) {
+-	  SWAP_K(j + 1, 0, 0, ZERO, ZERO, a + j * 2, lda,
++#else
++	if ((fabs(temp1) >= FLT_MIN) || (fabs(temp2) >= FLT_MIN)) {
++#endif		
++	  if (jp != j) {
++	    SWAP_K(j + 1, 0, 0, ZERO, ZERO, a + j * 2, lda,
+ 		 a + jp * 2, lda, NULL, 0);
+-	}
+-
+-	if (fabs(temp1) >= fabs(temp2)){
+-	  ratio = temp2 / temp1;
+-	  den = dp1 /(temp1 * ( 1 + ratio * ratio));
+-	  temp3 =  den;
+-	  temp4 = -ratio * den;
+-	} else {
+-	  ratio = temp1 / temp2;
+-	  den = dp1 /(temp2 * ( 1 + ratio * ratio));
+-	  temp3 =  ratio * den;
+-	  temp4 = -den;
+-	}
+-
+-	if (j + 1 < m) {
+-	  SCAL_K(m - j - 1, 0, 0, temp3, temp4,
+-		 b + (j + 1) * 2, 1, NULL, 0, NULL, 0);
+-	}
++	  }
++
++	  if (fabs(temp1) >= fabs(temp2)){
++	    ratio = temp2 / temp1;
++	    den = dp1 /(temp1 * ( 1 + ratio * ratio));
++	    temp3 =  den;
++	    temp4 = -ratio * den;
++	  } else {
++	    ratio = temp1 / temp2;
++	    den = dp1 /(temp2 * ( 1 + ratio * ratio));
++	    temp3 =  ratio * den;
++	    temp4 = -den;
++	  }
++
++	  if (j + 1 < m) {
++	    SCAL_K(m - j - 1, 0, 0, temp3, temp4,
++	  	 b + (j + 1) * 2, 1, NULL, 0, NULL, 0);
++	  }
++        }
+       } else {
+ 	if (!info) info = j + 1;
+       }
+-- 
+2.38.1.windows.1
+

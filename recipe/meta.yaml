@@ -9,9 +9,11 @@ source:
   url: https://github.com/xianyi/OpenBLAS/archive/v{{ version }}.tar.gz
   sha256: 7fa9685926ba4f27cfe513adbf9af64d6b6b63f9dcabb37baefad6a65ff347a7
   patches:
-    # build fixes backported from xianyi/OpenBLAS#3972 & xianyi/OpenBLAS#3975
+    # build fixes backported from xianyi/OpenBLAS#3972 & #3975 & #3978 & #3980
     - patches/0001-remove-unqualified-ifdef-s-for-NO_LAPACK-E.patch
     - patches/0002-Fix-build-failures-seen-with-the-NO_LAPACK-option-cs.patch
+    - patches/0003-fix-conditional.patch
+    - patches/0004-Split-test-condition-in-LU-computation-non-denormal-.patch
 
 build:
   number: {{ build_number }}
