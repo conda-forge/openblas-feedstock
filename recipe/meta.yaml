@@ -1,5 +1,5 @@
-{% set version = "0.3.21" %}
-{% set build_number = 3 %}
+{% set version = "0.3.23" %}
+{% set build_number = 0 %}
 
 package:
   name: openblas
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/xianyi/OpenBLAS/archive/v{{ version }}.tar.gz
-  sha256: f36ba3d7a60e7c8bcc54cd9aaa9b1223dd42eaf02c811791c37e8ca707c241ca
+  sha256: 5d9491d07168a5d00116cdc068a40022c3455bf9293c7cb86a65b1054d7e5114
   patches:
     # backport xianyi/OpenBLAS#3718 to fix tests on PPC + INTERFACE64 (2 commits)
     - patches/0001-Use-blasint-for-INTERFACE64-compatibility.patch
@@ -17,7 +17,7 @@ source:
 
 build:
   number: {{ build_number }}
-  string: openmp_h{{ PKG_HASH }}_{{ build_number }}    # [USE_OPENMP == 1]
+  string: openmp_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 1]
   string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
 
 requirements:
@@ -39,7 +39,7 @@ requirements:
 outputs:
   - name: libopenblas{{ name_suffix }}
     build:
-      string: openmp_h{{ PKG_HASH }}_{{ build_number }}    # [USE_OPENMP == 1]
+      string: openmp_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 1]
       string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
       track_features:
         - openblas_threading_openmp                        # [linux and USE_OPENMP == 1]
@@ -72,7 +72,7 @@ outputs:
 
   - name: openblas{{ name_suffix }}
     build:
-      string: openmp_h{{ PKG_HASH }}_{{ build_number }}    # [USE_OPENMP == 1]
+      string: openmp_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 1]
       string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
       track_features:
         - openblas_threading_openmp                        # [linux and USE_OPENMP == 1]
@@ -101,7 +101,7 @@ about:
   license_file:
     - LICENSE
     - lapack-netlib/LICENSE
-  summary: An optimized BLAS library based on GotoBLAS2 1.13 BSD version                    # [SYMBOLSUFFIX != "64_"]
+  summary: An optimized BLAS library based on GotoBLAS2 1.13 BSD version  # [SYMBOLSUFFIX != "64_"]
   summary: An optimized BLAS library (ILP64 interface) based on GotoBLAS2 1.13 BSD version  # [SYMBOLSUFFIX == "64_"]
 
 extra:
