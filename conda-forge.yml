@@ -9,3 +9,4 @@ azure:
   store_build_artifacts: true
 conda_build:
   pkg_format: '2'
+idle_timeout_minutes: 30
