@@ -11,6 +11,8 @@ Home: http://www.openblas.net/
 Package license: BSD-3-Clause
 
 Summary: An optimized BLAS library based on GotoBLAS2 1.13 BSD version
+
+Development: https://github.com/xianyi/openblas
 About libopenblas-ilp64
 -----------------------
 
@@ -19,6 +21,8 @@ Home: http://www.openblas.net/
 Package license: BSD-3-Clause
 
 Summary: An optimized BLAS library (ILP64 interface) based on GotoBLAS2 1.13 BSD version
+
+Development: https://github.com/xianyi/openblas
 About openblas-ilp64
 --------------------
 
@@ -27,6 +31,8 @@ Home: http://www.openblas.net/
 Package license: BSD-3-Clause
 
 Summary: An optimized BLAS library (ILP64 interface) based on GotoBLAS2 1.13 BSD version
+
+Development: https://github.com/xianyi/openblas
 
 Current build status
 ====================
