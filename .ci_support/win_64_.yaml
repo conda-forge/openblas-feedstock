@@ -20,9 +20,6 @@ name_suffix:
 - ''
 perl:
 - 5.32.1
-pin_run_as_build:
-  curl:
-    max_pin: x
 target_platform:
 - win-64
 zip_keys:

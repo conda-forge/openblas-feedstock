@@ -7,7 +7,7 @@ USE_OPENMP:
 c_compiler:
 - gcc
 c_compiler_version:
-- '10'
+- '11'
 cdt_name:
 - cos7
 channel_sources:
@@ -15,11 +15,11 @@ channel_sources:
 channel_targets:
 - conda-forge main
 docker_image:
-- quay.io/condaforge/linux-anvil-ppc64le
+- quay.io/condaforge/linux-anvil-cos7-x86_64
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
-- '10'
+- '11'
 name_suffix:
 - -ilp64
 perl:

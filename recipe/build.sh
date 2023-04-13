@@ -8,11 +8,6 @@ LDFLAGS=$(echo "${LDFLAGS}" | sed "s/-Wl,--gc-sections//g")
 CF="${CFLAGS}"
 unset CFLAGS
 
-if [[ "$PKG_VERSION" == "0.3.11" ]]; then
-    # see https://github.com/xianyi/OpenBLAS/pull/2909
-    sed -i.bak 's/$(BUILD_COMPLEX16)> $(@F)/$(BUILD_COMPLEX16) > $(@F)/g' exports/Makefile
-fi
-
 if [[ "$USE_OPENMP" == "1" ]]; then
     # Run the the fork test
     sed -i.bak 's/test_potrs.o/test_potrs.o test_fork.o/g' utest/Makefile
@@ -65,6 +60,13 @@ if [[ "${target_platform}" == "osx-arm64" && "${build_platform}" != "osx-arm64" 
   OBJCONV="OBJCONV=objconv"
 fi
 
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}" != "" ]]; then
+  # We set CROSS=0 for builds with an emulator in order to run tests
+  CROSS=0
+else
+  CROSS=1
+fi
+
 # Build all CPU targets and allow dynamic configuration
 # Build LAPACK.
 # Enable threading. This can be controlled to a certain number by
@@ -73,8 +75,12 @@ fi
 make QUIET_MAKE=${QUIET_MAKE} DYNAMIC_ARCH=${DYNAMIC_ARCH} BINARY=${BINARY} NO_LAPACK=0 CFLAGS="${CF}" \
      HOST=${HOST} TARGET=${TARGET} CROSS_SUFFIX="${HOST}-" \
      NO_AFFINITY=1 USE_THREAD=1 NUM_THREADS=128 USE_OPENMP="${USE_OPENMP}" \
-     INTERFACE64=${INTERFACE64} SYMBOLSUFFIX=${SYMBOLSUFFIX} ${OBJCONV}
-make install PREFIX="${PREFIX}"
+     INTERFACE64=${INTERFACE64} SYMBOLSUFFIX=${SYMBOLSUFFIX} ${OBJCONV} CROSS=${CROSS}
+make install PREFIX="${PREFIX}" \
+     QUIET_MAKE=${QUIET_MAKE} DYNAMIC_ARCH=${DYNAMIC_ARCH} BINARY=${BINARY} NO_LAPACK=0 CFLAGS="${CF}" \
+     HOST=${HOST} TARGET=${TARGET} CROSS_SUFFIX="${HOST}-" \
+     NO_AFFINITY=1 USE_THREAD=1 NUM_THREADS=128 USE_OPENMP="${USE_OPENMP}" \
+     INTERFACE64=${INTERFACE64} SYMBOLSUFFIX=${SYMBOLSUFFIX} ${OBJCONV} CROSS=${CROSS}
 
 if [[ "${target_platform}" == osx-arm64 ]]; then
   TARGET_LOWER=$(echo "$TARGET" | tr '[:upper:]' '[:lower:]')
