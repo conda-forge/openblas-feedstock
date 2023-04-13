@@ -58,6 +58,8 @@ outputs:
       - lib/libopenblas{{ SYMBOLSUFFIX }}.*.dylib            # [osx]
       - Library/bin/openblas{{ SYMBOLSUFFIX }}.dll           # [win]
     test:
+      requires:
+        - python *
       commands:
         - test -f ${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}p-r{{ version }}{{ SHLIB_EXT }}                                    # [not win]
         - nm -g ${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}p-r{{ version }}{{ SHLIB_EXT }} | grep dsecnd                        # [osx and build_platform=="osx-64"]
