@@ -1,0 +1,15 @@
+r_version:
+  - 3.6
+cran_mirror:
+  - https://cran.r-project.org
+cross_compiler_target_platform:
+  - win-64                     # [win]
+target_platform:
+  - win-64                     # [win]
+m2w64_c_compiler:              # [win]
+  - m2w64-toolchain            # [win]
+m2w64_cxx_compiler:            # [win]
+  - m2w64-toolchain            # [win]
+CONDA_BUILD_SYSROOT:
+  - /opt/MacOSX10.10.sdk        # [osx and x86_64]
+  - /Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk  # [osx and arm64]
