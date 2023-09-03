@@ -1,4 +1,4 @@
-{% set version = "0.3.23" %}
+{% set version = "0.3.24" %}
 {% set build_number = 0 %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/xianyi/OpenBLAS/archive/v{{ version }}.tar.gz
-  sha256: 5d9491d07168a5d00116cdc068a40022c3455bf9293c7cb86a65b1054d7e5114
+  sha256: ceadc5065da97bd92404cac7254da66cc6eb192679cf1002098688978d4d5132
 
 build:
   number: {{ build_number }}
