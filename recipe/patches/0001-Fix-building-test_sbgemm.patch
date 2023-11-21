@@ -1,0 +1,30 @@
+From ce420fe5ec8e65d9655618572ca82962d3e792eb Mon Sep 17 00:00:00 2001
+From: Isuru Fernando <isuruf@gmail.com>
+Date: Sun, 19 Nov 2023 02:57:13 -0600
+Subject: [PATCH] Fix building test_sbgemm
+
+---
+ test/Makefile | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/test/Makefile b/test/Makefile
+index 715842b4d..56acf1c5b 100644
+--- a/test/Makefile
++++ b/test/Makefile
+@@ -260,6 +260,7 @@ endif
+ 
+ 
+ FLDFLAGS = $(FFLAGS:-fPIC=) $(LDFLAGS)
++CLDFLAGS = $(CFLAGS) $(LDFLAGS)
+ 
+ 
+ ifeq ($(USE_OPENMP), 1)
+@@ -331,7 +332,7 @@ endif
+ 
+ ifeq ($(BUILD_BFLOAT16),1)
+ test_sbgemm : compare_sgemm_sbgemm.c ../$(LIBNAME)
+-	$(CC) $(CFLAGS) -o test_sbgemm compare_sgemm_sbgemm.c ../$(LIBNAME) $(EXTRALIB) $(CEXTRALIB)
++	$(CC) $(CLDFLAGS) -o test_sbgemm compare_sgemm_sbgemm.c ../$(LIBNAME) $(EXTRALIB) $(CEXTRALIB)
+ endif
+ 
+ ifeq ($(BUILD_COMPLEX),1)
