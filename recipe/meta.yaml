@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/xianyi/OpenBLAS/archive/v{{ version }}.tar.gz
+  url: https://github.com/OpenMathLib/OpenBLAS/archive/v{{ version }}.tar.gz
   sha256: 4c25cb30c4bb23eddca05d7d0a85997b8db6144f5464ba7f8c09ce91e2f35543
 
 build:
@@ -99,7 +99,7 @@ about:
     - lapack-netlib/LICENSE
   summary: An optimized BLAS library based on GotoBLAS2 1.13 BSD version  # [SYMBOLSUFFIX != "64_"]
   summary: An optimized BLAS library (ILP64 interface) based on GotoBLAS2 1.13 BSD version  # [SYMBOLSUFFIX == "64_"]
-  dev_url: https://github.com/xianyi/openblas
+  dev_url: https://github.com/OpenMathLib/OpenBLAS
 
 extra:
   recipe-maintainers:
