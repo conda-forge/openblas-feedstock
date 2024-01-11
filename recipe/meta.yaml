@@ -1,4 +1,4 @@
-{% set version = "0.3.25" %}
+{% set version = "0.3.26" %}
 {% set build_number = 0 %}
 
 package:
@@ -7,10 +7,7 @@ package:
 
 source:
   url: https://github.com/OpenMathLib/OpenBLAS/archive/v{{ version }}.tar.gz
-  sha256: 4c25cb30c4bb23eddca05d7d0a85997b8db6144f5464ba7f8c09ce91e2f35543
-  patches:
-    # backport OpenMathLib/OpenBLAS#4329; can be dropped for v>0.3.25
-    - patches/0001-Fix-building-test_sbgemm.patch
+  sha256: 4e6e4f5cb14c209262e33e6816d70221a2fe49eb69eaf0a06f065598ac602c68
 
 build:
   number: {{ build_number }}
