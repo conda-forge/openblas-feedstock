@@ -1,5 +1,8 @@
 @echo on
 
+:: flang still uses a temporary name not recognized by CMake
+copy %BUILD_PREFIX%\Library\bin\flang-new.exe %BUILD_PREFIX%\Library\bin\flang.exe
+
 mkdir build
 cd build
 
