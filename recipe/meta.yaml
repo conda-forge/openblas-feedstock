@@ -1,4 +1,4 @@
-{% set version = "0.3.13" %}
+{% set version = "0.3.26" %}
 {% set build_number = 1 %}
 
 package:
@@ -6,19 +6,13 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/xianyi/OpenBLAS/archive/v{{ version }}.tar.gz
-  sha256: 79197543b17cc314b7e43f7a33148c308b0807cd6381ee77f77e15acf3e6459e
+  url: https://github.com/OpenMathLib/OpenBLAS/archive/v{{ version }}.tar.gz
+  sha256: 4e6e4f5cb14c209262e33e6816d70221a2fe49eb69eaf0a06f065598ac602c68
   patches:
-    - patches/0001-Fix-gfortran-detection-for-ctng-based-cross-compiler.patch  # [c_compiler == 'gcc']
     - patches/system-cmake.patch
-    {% if version == "0.3.11" %}
-    - patches/gh2913.diff
-    - patches/gh2915.diff
-    {% endif %}
 
 build:
   number: {{ build_number }}
-  skip: true  # [win and vc<14]
   string: openmp_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 1]
   string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
 
@@ -27,11 +21,11 @@ requirements:
     - {{ compiler("c") }}
     - {{ compiler("fortran") }}
     - perl
-    - make  # [not win]
-    - cmake  # [win]
-    - ninja  # [win]
-    - objconv  # [osx]
-    - llvm-openmp  # [USE_OPENMP == 1]
+    - make                    # [not win]
+    - cmake                   # [win]
+    - ninja                   # [win]
+    - objconv                 # [osx]
+    - llvm-openmp             # [USE_OPENMP == 1]
     # Following is needed because the Fortran compiler add an rpath to the BUILD_PREFIX
     - _openmp_mutex * *_llvm  # [linux and USE_OPENMP == 1]
   host:
@@ -40,57 +34,63 @@ requirements:
 outputs:
   - name: libopenblas{{ name_suffix }}
     build:
-      skip: true  # [win and vc<14]
       string: openmp_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 1]
       string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
       track_features:
         # weigh down openmp (except on osx, where it is the only option)
-        - openblas_threading_openmp  # [(not osx) and USE_OPENMP == 1]
+        - openblas_threading_openmp     # [(not osx) and USE_OPENMP == 1]
       run_exports:
         - {{ pin_subpackage("libopenblas" ~ name_suffix) }}
     requirements:
       build:
         - {{ compiler("c") }}
         - {{ compiler("fortran") }}
-        - llvm-openmp  # [(osx or linux) and USE_OPENMP == 1]
+        - llvm-openmp                                      # [(osx or linux) and USE_OPENMP == 1]
       run_constrained:
         - {{ pin_subpackage("openblas" ~ name_suffix, max_pin="x.x.x") }}
     files:
-      - lib/libopenblas{{ SYMBOLSUFFIX }}p*{{ SHLIB_EXT }}   # [not win]
+      # Include files like
+      #   - libopenblasp-r0.3.5.so
+      #   - libopenblas_vortexp-r0.3.5.so
+      #   - libopenblas.so.0
+      # Avoid files
+      #   - libopenblas.so
+      - lib/libopenblas{{ SYMBOLSUFFIX }}*p*{{ SHLIB_EXT }}  # [not win]
       - lib/libopenblas{{ SYMBOLSUFFIX }}.so.*               # [linux]
       - lib/libopenblas{{ SYMBOLSUFFIX }}.*.dylib            # [osx]
       - Library/bin/openblas{{ SYMBOLSUFFIX }}.dll           # [win]
     test:
+      requires:
+        - python *
       commands:
-        - test -f ${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}p-r{{ version }}{{ SHLIB_EXT }}  # [not win]
-        - nm -g ${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}p-r{{ version }}{{ SHLIB_EXT }} | grep dsecnd  # [osx and build_platform=="osx-64"]
+        - test -f ${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}p-r{{ version }}{{ SHLIB_EXT }}                                    # [not win]
+        - nm -g ${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}p-r{{ version }}{{ SHLIB_EXT }} | grep dsecnd                        # [osx and build_platform=="osx-64"]
         - python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}p-r{{ version }}{{ SHLIB_EXT }}']"  # [not win]
-        - if not exist %PREFIX%\\Library\\bin\\openblas{{ SYMBOLSUFFIX }}.dll exit 1  # [win]
+        - if not exist %PREFIX%\\Library\\bin\\openblas{{ SYMBOLSUFFIX }}.dll exit 1                                            # [win]
 
   - name: openblas{{ name_suffix }}
     build:
-      skip: true  # [win and vc<14]
       string: openmp_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 1]
       string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
       track_features:
-        - openblas_threading_openmp  # [linux and USE_OPENMP == 1]
+        - openblas_threading_openmp                        # [linux and USE_OPENMP == 1]
     files:
-      - include/*.h  # [not win]
-      - lib/libopenblas{{ SYMBOLSUFFIX }}*.a  # [not win]
+      - include/*.h                                       # [not win]
+      - lib/libopenblas{{ SYMBOLSUFFIX }}*.a              # [not win]
       - lib/libopenblas{{ SYMBOLSUFFIX }}{{ SHLIB_EXT }}  # [not win]
-      - lib/pkgconfig/openblas.pc  # [not win]
-      - lib/cmake/openblas/*  # [not win]
-      - Library/include/openblas  # [win]
-      - Library/lib/openblas{{ SYMBOLSUFFIX }}.lib  # [win]
-      - Library/lib/pkgconfig/openblas.pc  # [win]
-      - Library/share/cmake/OpenBLAS  # [win]
+      - lib/pkgconfig/openblas.pc                         # [not win]
+      - lib/cmake/openblas/*                              # [not win]
+      - Library/include/openblas                          # [win]
+      - Library/lib/openblas{{ SYMBOLSUFFIX }}.lib        # [win]
+      - Library/lib/pkgconfig/openblas.pc                 # [win]
+      - Library/share/cmake/OpenBLAS                      # [win]
     requirements:
       run:
         - {{ pin_subpackage("libopenblas" ~ name_suffix, exact=True) }}
     test:
       commands:
-        - test -f ${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}.a  # [not win]
-        - test -f ${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}{{ SHLIB_EXT }}  # [not win]
+        - test -f ${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}.a                       # [not win]
+        - test -f ${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}{{ SHLIB_EXT }}          # [not win]
         - if not exist %PREFIX%\\Library\\lib\\openblas{{ SYMBOLSUFFIX }}.lib exit 1  # [win]
 
 about:
@@ -101,6 +101,7 @@ about:
     - lapack-netlib/LICENSE
   summary: An optimized BLAS library based on GotoBLAS2 1.13 BSD version  # [SYMBOLSUFFIX != "64_"]
   summary: An optimized BLAS library (ILP64 interface) based on GotoBLAS2 1.13 BSD version  # [SYMBOLSUFFIX == "64_"]
+  dev_url: https://github.com/OpenMathLib/OpenBLAS
 
 extra:
   recipe-maintainers:
