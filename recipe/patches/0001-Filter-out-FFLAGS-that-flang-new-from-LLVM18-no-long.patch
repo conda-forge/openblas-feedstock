@@ -1,0 +1,78 @@
+From 780a166f9fc31284d976f81bcabdcd7ee2d50158 Mon Sep 17 00:00:00 2001
+From: Martin Kroeker <martin@ruby.chemie.uni-freiburg.de>
+Date: Fri, 22 Mar 2024 17:02:39 +0100
+Subject: [PATCH] Filter out FFLAGS that flang-new from LLVM18 no longer
+ supports (#4569)
+
+* Filter out FFLAGS that flang-new from LLVM18 no longer supports
+---
+ Makefile.system    | 4 ++++
+ cmake/fc.cmake     | 6 +++++-
+ cmake/system.cmake | 8 +++++++-
+ 3 files changed, 16 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile.system b/Makefile.system
+index e602eaf05..22d949301 100644
+--- a/Makefile.system
++++ b/Makefile.system
+@@ -1652,6 +1652,10 @@ ifeq ($(F_COMPILER),CRAY)
+ LAPACK_FFLAGS := $(filter-out -msse3 -mssse3 -msse4.1 -mavx -mavx2 -mskylake-avx512 ,$(FFLAGS))
+ override FFLAGS := $(filter-out -msse3 -mssse3 -msse4.1 -mavx -mavx2 -mskylake-avx512 ,$(FFLAGS))
+ endif
++ifeq ($(F_COMPILER),FLANGNEW)
++LAPACK_FFLAGS := $(filter-out -m32 -m64 -msse3 -mssse3 -msse4.1 -mavx -mavx2 -mskylake-avx512 ,$(FFLAGS))
++override FFLAGS := $(filter-out -m32 -m64 -msse3 -mssse3 -msse4.1 -mavx -mavx2 -mskylake-avx512 ,$(FFLAGS))
++endif
+ 
+ LAPACK_CFLAGS = $(CFLAGS)
+ LAPACK_CFLAGS += -DHAVE_LAPACK_CONFIG_H
+diff --git a/cmake/fc.cmake b/cmake/fc.cmake
+index 5c30be843..3e2242d5f 100644
+--- a/cmake/fc.cmake
++++ b/cmake/fc.cmake
+@@ -85,7 +85,9 @@ if (${F_COMPILER} STREQUAL "GFORTRAN" OR ${F_COMPILER} STREQUAL "F95" OR CMAKE_F
+     endif ()
+   else ()
+     if (BINARY64)
++      if (NOT CMAKE_Fortran_COMPILER_ID MATCHES "LLVMFlang.*")
+       set(FCOMMON_OPT "${FCOMMON_OPT} -m64")
++      endif ()
+       if (INTERFACE64)
+         if (CMAKE_Fortran_COMPILER_ID STREQUAL "Intel")
+           if (WIN32)
+@@ -98,7 +100,9 @@ if (${F_COMPILER} STREQUAL "GFORTRAN" OR ${F_COMPILER} STREQUAL "F95" OR CMAKE_F
+         endif ()
+       endif ()
+     else ()
+-      set(FCOMMON_OPT "${FCOMMON_OPT} -m32")
++        if (NOT CMAKE_Fortran_COMPILER_ID MATCHES "LLVMFlang.*")
++           set(FCOMMON_OPT "${FCOMMON_OPT} -m32")
++	endif ()
+     endif ()
+   endif ()
+ 
+diff --git a/cmake/system.cmake b/cmake/system.cmake
+index bc87f7b44..5004444e4 100644
+--- a/cmake/system.cmake
++++ b/cmake/system.cmake
+@@ -615,13 +615,19 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+   endforeach ()
+ endif ()
+ 
+-if ("${F_COMPILER}" STREQUAL "NAG" OR "${F_COMPILER}" STREQUAL "CRAY")
++if (CMAKE_Fortran_COMPILER)
++if (${F_COMPILER} STREQUAL "NAG" OR ${F_COMPILER} STREQUAL "CRAY" OR CMAKE_Fortran_COMPILER_ID MATCHES "LLVMFlang.*")
+   set(FILTER_FLAGS "-msse3;-mssse3;-msse4.1;-mavx;-mavx2,-mskylake-avx512")
++  if (CMAKE_Fortran_COMPILER_ID MATCHES "LLVMFlang.*")
++message(STATUS "removing fortran flags")
++    set(FILTER_FLAGS "${FILTER_FLAGS};-m32;-m64")
++  endif ()
+   foreach (FILTER_FLAG ${FILTER_FLAGS})
+     string(REPLACE ${FILTER_FLAG} "" LAPACK_FFLAGS ${LAPACK_FFLAGS})
+     string(REPLACE ${FILTER_FLAG} "" LAPACK_FPFLAGS ${LAPACK_FPFLAGS})
+   endforeach ()
+ endif ()
++endif ()
+ 
+ if ("${F_COMPILER}" STREQUAL "GFORTRAN")
+   # lapack-netlib is rife with uninitialized warnings -hpa
