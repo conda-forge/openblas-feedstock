@@ -1,3 +1,5 @@
+@echo on
+
 mkdir build
 cd build
 
@@ -13,7 +15,10 @@ cmake -G "Ninja"                            ^
     -DBUILD_SHARED_LIBS=on                  ^
     -DUSE_OPENMP=%USE_OPENMP%               ^
     %SRC_DIR%
+if %ERRORLEVEL% neq 0 exit 1
 
 cmake --build . --target install
+if %ERRORLEVEL% neq 0 exit 1
 
 ctest -j2
+if %ERRORLEVEL% neq 0 exit 1
