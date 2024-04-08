@@ -8,9 +8,6 @@ package:
 source:
   url: https://github.com/OpenMathLib/OpenBLAS/archive/v{{ version }}.tar.gz
   sha256: aa2d68b1564fe2b13bc292672608e9cdeeeb6dc34995512e65c3b10f4599e897
-  patches:
-    # backport https://github.com/OpenMathLib/OpenBLAS/pull/4569 for flang 18 support
-    - patches/0001-Filter-out-FFLAGS-that-flang-new-from-LLVM18-no-long.patch
 
 build:
   number: {{ build_number }}
