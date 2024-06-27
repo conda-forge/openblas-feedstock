@@ -19,6 +19,7 @@ build:
 requirements:
   build:
     - {{ compiler("c") }}
+    - {{ stdlib("c") }}
     - {{ compiler("fortran") }}
     - perl
     - make                    # [not win]
@@ -44,6 +45,7 @@ outputs:
     requirements:
       build:
         - {{ compiler("c") }}
+        - {{ stdlib("c") }}
         - {{ compiler("fortran") }}
         - llvm-openmp                                      # [(osx or linux) and USE_OPENMP == 1]
       run_constrained:
