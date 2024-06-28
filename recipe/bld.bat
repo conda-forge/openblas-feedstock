@@ -19,5 +19,8 @@ if %ERRORLEVEL% neq 0 exit 1
 cmake --build . --target install
 if %ERRORLEVEL% neq 0 exit 1
 
+ctest -j2
+if %ERRORLEVEL% neq 0 exit 1
+
 utest\openblas_utest.exe
 if %ERRORLEVEL% neq 0 exit 1
