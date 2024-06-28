@@ -1,7 +1,9 @@
+@echo on
+
 mkdir build
 cd build
 
-cmake -G "NMake Makefiles JOM"              ^
+cmake -G "Ninja"                            ^
     -DCMAKE_C_COMPILER=clang-cl             ^
     -DCMAKE_Fortran_COMPILER=flang          ^
     -DCMAKE_BUILD_TYPE=Release              ^
@@ -12,7 +14,13 @@ cmake -G "NMake Makefiles JOM"              ^
     -DNUM_THREADS=128                       ^
     -DBUILD_SHARED_LIBS=on                  ^
     %SRC_DIR%
+if %ERRORLEVEL% neq 0 exit 1
 
-jom install -j%CPU_COUNT%
+cmake --build . --target install
+if %ERRORLEVEL% neq 0 exit 1
+
+ctest -j2
+if %ERRORLEVEL% neq 0 exit 1
 
 utest\openblas_utest.exe
+if %ERRORLEVEL% neq 0 exit 1
