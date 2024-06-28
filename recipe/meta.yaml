@@ -1,5 +1,5 @@
 {% set version = "0.3.27" %}
-{% set build_number = 0 %}
+{% set build_number = 1 %}
 
 package:
   name: openblas
@@ -16,6 +16,7 @@ build:
 
 requirements:
   build:
+    - {{ stdlib("c") }}
     - {{ compiler("c") }}
     - {{ compiler("fortran") }}
     - perl
@@ -40,6 +41,7 @@ outputs:
         - {{ pin_subpackage("libopenblas" ~ name_suffix) }}
     requirements:
       build:
+        - {{ stdlib("c") }}
         - {{ compiler("c") }}
         - {{ compiler("fortran") }}
         - llvm-openmp                                      # [(osx or linux) and USE_OPENMP == 1]
