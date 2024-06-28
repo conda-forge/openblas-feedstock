@@ -4,8 +4,6 @@ provider: {linux_aarch64: default, linux_ppc64le: default}
 github:
   branch_name: main
   tooling_branch_name: main
-azure:
-  store_build_artifacts: true
 conda_build:
   pkg_format: '2'
 idle_timeout_minutes: 30
