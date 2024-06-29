@@ -14,6 +14,7 @@ if "%USE_OPENMP%"=="1" (
     set "CMAKE_EXTRA=-DOpenMP_Fortran_FLAGS=-fopenmp -DOpenMP_Fortran_LIB_NAMES=libomp -DOpenMP_libomp_LIBRARY=-llibomp"
     REM same thing with "_C" instead of "_Fortran"
     set "CMAKE_EXTRA=!CMAKE_EXTRA! -DOpenMP_C_FLAGS=-fopenmp -DOpenMP_C_LIB_NAMES=libomp"
+    set "FFLAGS=%FFLAGS% -I%LIBRARY_INC%"
 ) else (
     set "CFLAGS=%CFLAGS% -w"
     set "FFLAGS=%FFLAGS% -w"
