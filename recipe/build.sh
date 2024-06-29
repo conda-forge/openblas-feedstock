@@ -1,4 +1,8 @@
 #!/bin/bash
+set -ex
+
+# show CPU arch to detect slow CI agents early (rather than wait for 6h timeout)
+python -c "import numpy; numpy.show_config()"
 
 # Fix ctest not automatically discovering tests
 LDFLAGS=$(echo "${LDFLAGS}" | sed "s/-Wl,--gc-sections//g")
