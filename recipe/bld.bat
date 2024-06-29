@@ -15,10 +15,9 @@ if "%USE_OPENMP%"=="1" (
     REM same thing with "_C" instead of "_Fortran"
     set "CMAKE_EXTRA=!CMAKE_EXTRA! -DOpenMP_C_FLAGS=-fopenmp -DOpenMP_C_LIB_NAMES=libomp"
     set "FFLAGS=%FFLAGS% -I%LIBRARY_INC%"
-) else (
-    set "CFLAGS=%CFLAGS% -w"
-    set "FFLAGS=%FFLAGS% -w"
 )
+
+set "CFLAGS=%CFLAGS% -w"
 
 cmake -G "Ninja"                            ^
     -DCMAKE_C_COMPILER=clang-cl             ^
