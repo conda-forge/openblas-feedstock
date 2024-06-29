@@ -29,6 +29,8 @@ requirements:
     - llvm-openmp             # [USE_OPENMP == 1]
     # Following is needed because the Fortran compiler add an rpath to the BUILD_PREFIX
     - _openmp_mutex * *_llvm  # [linux and USE_OPENMP == 1]
+    # for showing CPU info of CI agent
+    - numpy *
   host:
   run:
 
