@@ -6,6 +6,9 @@ copy %BUILD_PREFIX%\Library\bin\flang-new.exe %BUILD_PREFIX%\Library\bin\flang.e
 mkdir build
 cd build
 
+:: millions of lines of warnings with clang-19
+set "CFLAGS=%CFLAGS% -w"
+
 cmake -G "Ninja"                            ^
     -DCMAKE_C_COMPILER=clang-cl             ^
     -DCMAKE_Fortran_COMPILER=flang          ^
