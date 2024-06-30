@@ -1,22 +1,32 @@
-From 1a648a75dec6fa762b116c733fe45d592775bb73 Mon Sep 17 00:00:00 2001
+From ac5319d74193af62681126f40085acb16bc3b32f Mon Sep 17 00:00:00 2001
 From: "H. Vetinari" <h.vetinari@gmx.com>
 Date: Mon, 1 Jul 2024 09:05:00 +1100
 Subject: [PATCH] explicitly link to OpenMP
 
 ---
- CMakeLists.txt | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ CMakeLists.txt | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 096ca88b3..da4f34521 100644
+index 096ca88b3..664f131f1 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -256,6 +256,16 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "AIX|Android|Linux|FreeBSD|OpenBSD|NetBSD|Drago
+@@ -178,6 +178,10 @@ if(MSVC)
+   set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${PROJECT_BINARY_DIR}/lib/Release)
+ endif ()
+ 
++if (USE_OPENMP)
++  find_package(OpenMP REQUIRED)
++endif ()
++
+ # get obj vars into format that add_library likes: $<TARGET_OBJS:objlib> (see http://www.cmake.org/cmake/help/v3.0/command/add_library.html)
+ set(TARGET_OBJS "")
+ foreach (SUBDIR ${SUBDIRS})
+@@ -256,6 +260,15 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "AIX|Android|Linux|FreeBSD|OpenBSD|NetBSD|Drago
    endif()
  endif()
  
 +if (USE_OPENMP)
-+  find_package(OpenMP REQUIRED)
 +  if(BUILD_STATIC_LIBS)
 +    target_link_libraries(${OpenBLAS_LIBNAME}_static OpenMP::OpenMP_C)
 +  endif()
