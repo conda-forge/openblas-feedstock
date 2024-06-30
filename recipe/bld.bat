@@ -10,15 +10,8 @@ copy %BUILD_PREFIX%\Library\bin\flang-new.exe %BUILD_PREFIX%\Library\bin\flang.e
 mkdir build
 cd build
 
-if "%USE_OPENMP%"=="1" (
-    set "CMAKE_EXTRA=-DOpenMP_Fortran_FLAGS=-fopenmp -DOpenMP_Fortran_LIB_NAMES=libomp -DOpenMP_libomp_LIBRARY=-llibomp"
-    REM same thing with "_C" instead of "_Fortran"
-    set "CMAKE_EXTRA=!CMAKE_EXTRA! -DOpenMP_C_FLAGS=-fopenmp -DOpenMP_C_LIB_NAMES=libomp"
-    set "FFLAGS=%FFLAGS% -I%LIBRARY_INC%"
-)
-
+:: millions of lines of warnings with clang-19
 set "CFLAGS=%CFLAGS% -w"
-set "LDFLAGS=%LDFLAGS% -libpath:%LIBRARY_LIB%"
 
 cmake -G "Ninja"                            ^
     -DCMAKE_C_COMPILER=clang-cl             ^

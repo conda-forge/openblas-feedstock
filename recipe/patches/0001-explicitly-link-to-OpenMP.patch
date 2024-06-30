@@ -1,0 +1,30 @@
+From 1a648a75dec6fa762b116c733fe45d592775bb73 Mon Sep 17 00:00:00 2001
+From: "H. Vetinari" <h.vetinari@gmx.com>
+Date: Mon, 1 Jul 2024 09:05:00 +1100
+Subject: [PATCH] explicitly link to OpenMP
+
+---
+ CMakeLists.txt | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 096ca88b3..da4f34521 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -256,6 +256,16 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "AIX|Android|Linux|FreeBSD|OpenBSD|NetBSD|Drago
+   endif()
+ endif()
+ 
++if (USE_OPENMP)
++  find_package(OpenMP REQUIRED)
++  if(BUILD_STATIC_LIBS)
++    target_link_libraries(${OpenBLAS_LIBNAME}_static OpenMP::OpenMP_C)
++  endif()
++  if(BUILD_SHARED_LIBS)
++    target_link_libraries(${OpenBLAS_LIBNAME}_shared OpenMP::OpenMP_C)
++  endif()
++endif()
++
+ # Seems that this hack doesn't required since macOS 11 Big Sur
+ if (APPLE AND BUILD_SHARED_LIBS AND CMAKE_HOST_SYSTEM_VERSION VERSION_LESS 20)
+   set (CMAKE_C_USE_RESPONSE_FILE_FOR_OBJECTS 1)

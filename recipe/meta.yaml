@@ -8,6 +8,8 @@ package:
 source:
   url: https://github.com/OpenMathLib/OpenBLAS/archive/v{{ version }}.tar.gz
   sha256: aa2d68b1564fe2b13bc292672608e9cdeeeb6dc34995512e65c3b10f4599e897
+  patches:
+    - patches/0001-explicitly-link-to-OpenMP.patch
 
 build:
   number: {{ build_number }}
