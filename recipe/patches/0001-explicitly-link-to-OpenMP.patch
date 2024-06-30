@@ -1,4 +1,4 @@
-From ac5319d74193af62681126f40085acb16bc3b32f Mon Sep 17 00:00:00 2001
+From beed6e5fc1f57d6ed07dd07a1044dd505982ba22 Mon Sep 17 00:00:00 2001
 From: "H. Vetinari" <h.vetinari@gmx.com>
 Date: Mon, 1 Jul 2024 09:05:00 +1100
 Subject: [PATCH] explicitly link to OpenMP
@@ -8,20 +8,20 @@ Subject: [PATCH] explicitly link to OpenMP
  1 file changed, 13 insertions(+)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 096ca88b3..664f131f1 100644
+index 096ca88b3..7d0530edd 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -178,6 +178,10 @@ if(MSVC)
-   set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${PROJECT_BINARY_DIR}/lib/Release)
- endif ()
+@@ -100,6 +100,10 @@ endif()
+ 
+ message(WARNING "CMake support is experimental. It does not yet support all build options and may not produce the same Makefiles that OpenBLAS ships with.")
  
 +if (USE_OPENMP)
 +  find_package(OpenMP REQUIRED)
 +endif ()
 +
- # get obj vars into format that add_library likes: $<TARGET_OBJS:objlib> (see http://www.cmake.org/cmake/help/v3.0/command/add_library.html)
- set(TARGET_OBJS "")
- foreach (SUBDIR ${SUBDIRS})
+ include("${PROJECT_SOURCE_DIR}/cmake/utils.cmake")
+ include("${PROJECT_SOURCE_DIR}/cmake/system.cmake")
+ 
 @@ -256,6 +260,15 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "AIX|Android|Linux|FreeBSD|OpenBSD|NetBSD|Drago
    endif()
  endif()
