@@ -10,6 +10,11 @@ copy %BUILD_PREFIX%\Library\bin\flang-new.exe %BUILD_PREFIX%\Library\bin\flang.e
 mkdir build
 cd build
 
+if "%USE_OPENMP%"=="1" (
+    REM not picked up by `find_package(OpenMP)` for some reason
+    set "CMAKE_EXTRA=-DOpenMP_Fortran_FLAGS=-fopenmp -DOpenMP_Fortran_LIB_NAMES=libomp -DOpenMP_libomp_LIBRARY=-llibomp"
+)
+
 :: millions of lines of warnings with clang-19
 set "CFLAGS=%CFLAGS% -w"
 
