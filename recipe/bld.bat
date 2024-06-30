@@ -18,7 +18,7 @@ if "%USE_OPENMP%"=="1" (
 )
 
 set "CFLAGS=%CFLAGS% -w"
-set "LDFLAGS=%LDFLAGS% -L%LIBRARY_LIB%"
+set "LDFLAGS=%LDFLAGS% -libpath:%LIBRARY_LIB%"
 
 cmake -G "Ninja"                            ^
     -DCMAKE_C_COMPILER=clang-cl             ^
