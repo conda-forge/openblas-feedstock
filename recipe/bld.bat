@@ -1,4 +1,5 @@
 @echo on
+SetLocal EnableDelayedExpansion
 
 :: show CPU arch to detect slow CI agents early (rather than wait for 6h timeout)
 python -c "import numpy; numpy.show_config()"
@@ -8,6 +9,14 @@ copy %BUILD_PREFIX%\Library\bin\flang-new.exe %BUILD_PREFIX%\Library\bin\flang.e
 
 mkdir build
 cd build
+
+if "%USE_OPENMP%"=="1" (
+    REM https://discourse.cmake.org/t/how-to-find-openmp-with-clang-on-macos/8860
+    set "CMAKE_EXTRA=-DOpenMP_ROOT=%LIBRARY_LIB%"
+    REM not picked up by `find_package(OpenMP)` for some reason
+    set "CMAKE_EXTRA=-DOpenMP_Fortran_FLAGS=-fopenmp -DOpenMP_Fortran_LIB_NAMES=libomp"
+    set "FFLAGS=%FFLAGS% -I%LIBRARY_INC%"
+)
 
 :: millions of lines of warnings with clang-19
 set "CFLAGS=%CFLAGS% -w"
@@ -23,6 +32,7 @@ cmake -G "Ninja"                            ^
     -DNUM_THREADS=128                       ^
     -DBUILD_SHARED_LIBS=on                  ^
     -DUSE_OPENMP=%USE_OPENMP%               ^
+    !CMAKE_EXTRA!                           ^
     %SRC_DIR%
 if %ERRORLEVEL% neq 0 exit 1
 
