@@ -9,13 +9,13 @@ c_compiler:
 c_stdlib:
 - vs
 channel_sources:
-- conda-forge
+- conda-forge/label/llvm_dev,conda-forge
 channel_targets:
 - conda-forge main
 fortran_compiler:
 - flang
 fortran_compiler_version:
-- '18'
+- '19'
 name_suffix:
 - ''
 perl:
