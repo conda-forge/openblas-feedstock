@@ -180,14 +180,14 @@ Current release info
 Installing openblas
 ===================
 
-Installing `openblas` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `openblas` from the `conda-forge/label/openblas_dev` channel can be achieved by adding `conda-forge/label/openblas_dev` to your channels with:
 
 ```
-conda config --add channels conda-forge
+conda config --add channels conda-forge/label/openblas_dev
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `libopenblas, libopenblas-ilp64, openblas, openblas-ilp64` can be installed with `conda`:
+Once the `conda-forge/label/openblas_dev` channel has been enabled, `libopenblas, libopenblas-ilp64, openblas, openblas-ilp64` can be installed with `conda`:
 
 ```
 conda install libopenblas libopenblas-ilp64 openblas openblas-ilp64
@@ -202,26 +202,26 @@ mamba install libopenblas libopenblas-ilp64 openblas openblas-ilp64
 It is possible to list all of the versions of `libopenblas` available on your platform with `conda`:
 
 ```
-conda search libopenblas --channel conda-forge
+conda search libopenblas --channel conda-forge/label/openblas_dev
 ```
 
 or with `mamba`:
 
 ```
-mamba search libopenblas --channel conda-forge
+mamba search libopenblas --channel conda-forge/label/openblas_dev
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search libopenblas --channel conda-forge
+mamba repoquery search libopenblas --channel conda-forge/label/openblas_dev
 
 # List packages depending on `libopenblas`:
-mamba repoquery whoneeds libopenblas --channel conda-forge
+mamba repoquery whoneeds libopenblas --channel conda-forge/label/openblas_dev
 
 # List dependencies of `libopenblas`:
-mamba repoquery depends libopenblas --channel conda-forge
+mamba repoquery depends libopenblas --channel conda-forge/label/openblas_dev
 ```
 
 

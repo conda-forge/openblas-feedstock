@@ -19,7 +19,7 @@ c_stdlib_version:
 channel_sources:
 - conda-forge
 channel_targets:
-- conda-forge main
+- conda-forge openblas_dev
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
