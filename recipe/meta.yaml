@@ -1,5 +1,5 @@
 {% set version = "0.3.27" %}
-{% set build_number = 1 %}
+{% set build_number = 2 %}
 
 package:
   name: openblas
@@ -8,6 +8,10 @@ package:
 source:
   url: https://github.com/OpenMathLib/OpenBLAS/archive/v{{ version }}.tar.gz
   sha256: aa2d68b1564fe2b13bc292672608e9cdeeeb6dc34995512e65c3b10f4599e897
+  patches:
+    # exploratory patch for #160 by re-applying an old patch, see
+    # https://github.com/OpenMathLib/OpenBLAS/commit/66904f814853d1d34aed020eebbd826e8466f029
+    - patches/0001-Ensure-that-a-premature-call-will-not-overwrite-unre.patch
 
 build:
   number: {{ build_number }}
