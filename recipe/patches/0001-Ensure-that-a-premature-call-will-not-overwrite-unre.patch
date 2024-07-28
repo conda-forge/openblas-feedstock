@@ -1,0 +1,23 @@
+From 051e36282bc3ea376aaae0d2ed640c7131d1cbc3 Mon Sep 17 00:00:00 2001
+From: Martin Kroeker <martin@ruby.chemie.uni-freiburg.de>
+Date: Wed, 19 Jul 2023 22:14:34 +0200
+Subject: [PATCH] Ensure that a premature call will not overwrite unrelated
+ memory
+
+---
+ driver/others/blas_server_win32.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/driver/others/blas_server_win32.c b/driver/others/blas_server_win32.c
+index 788a23b0b..233d1604e 100644
+--- a/driver/others/blas_server_win32.c
++++ b/driver/others/blas_server_win32.c
+@@ -554,7 +554,7 @@ void goto_set_num_threads(int num_threads)
+ 		
+ 		SetEvent(kickoff_event);
+ 
+-		for (i = num_threads - 1; i < blas_num_threads - 1; i++) {
++		for (i = (blas_num_threads > 0) ? blas_num_threads - 1 : 0; i < blas_num_threads - 1; i++) {
+ 			//MT_TRACE("set_num_threads: waiting on thread [%d] to quit.\n", i);
+ 
+ 			WaitForSingleObject(blas_threads[i], INFINITE);
