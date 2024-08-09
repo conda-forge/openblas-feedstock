@@ -1,5 +1,5 @@
-{% set version = "0.3.27" %}
-{% set build_number = 1 %}
+{% set version = "0.3.28" %}
+{% set build_number = 0 %}
 
 package:
   name: openblas
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/OpenMathLib/OpenBLAS/archive/v{{ version }}.tar.gz
-  sha256: aa2d68b1564fe2b13bc292672608e9cdeeeb6dc34995512e65c3b10f4599e897
+  sha256: f1003466ad074e9b0c8d421a204121100b0751c96fc6fcf3d1456bd12f8a00a1
 
 build:
   number: {{ build_number }}
