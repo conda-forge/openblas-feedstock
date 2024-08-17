@@ -15,7 +15,6 @@ if "%USE_OPENMP%"=="1" (
     set "CMAKE_EXTRA=-DOpenMP_ROOT=%LIBRARY_LIB%"
     REM not picked up by `find_package(OpenMP)` for some reason
     set "CMAKE_EXTRA=-DOpenMP_Fortran_FLAGS=-fopenmp -DOpenMP_Fortran_LIB_NAMES=libomp"
-    set "FFLAGS=%FFLAGS% -I%LIBRARY_INC%"
 )
 
 :: millions of lines of warnings with clang-19
