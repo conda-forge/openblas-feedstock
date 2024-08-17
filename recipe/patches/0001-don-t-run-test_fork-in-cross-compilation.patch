@@ -1,0 +1,23 @@
+From 04ffe3be0b4e7ed5483ae20dc0eec2cfa7e98703 Mon Sep 17 00:00:00 2001
+From: "H. Vetinari" <h.vetinari@gmx.com>
+Date: Sat, 17 Aug 2024 22:36:42 +1100
+Subject: [PATCH] don't run test_fork in cross-compilation
+
+---
+ utest/Makefile | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/utest/Makefile b/utest/Makefile
+index b82937093..bcb9572ee 100644
+--- a/utest/Makefile
++++ b/utest/Makefile
+@@ -44,9 +44,6 @@ endif
+ #this does not work with OpenMP nor with native Windows or Android threads
+ # FIXME TBD if this works on OSX, SunOS, POWER and zarch
+ ifeq ($(OSNAME), $(filter $(OSNAME),Linux CYGWIN_NT))
+-ifneq ($(USE_OPENMP), 1)
+-OBJS += test_fork.o
+-endif
+ OBJS += test_post_fork.o
+ endif
+ 
