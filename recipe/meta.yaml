@@ -53,7 +53,7 @@ outputs:
         - {{ stdlib("c") }}
         - {{ compiler("c") }}
         - {{ compiler("fortran") }}
-        - llvm-openmp                                      # [(osx or linux) and USE_OPENMP == 1]
+        - llvm-openmp                   # [USE_OPENMP == 1]
       run_constrained:
         - {{ pin_subpackage("openblas" ~ name_suffix, max_pin="x.x.x") }}
     files:
@@ -81,7 +81,7 @@ outputs:
       string: openmp_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 1]
       string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
       track_features:
-        - openblas_threading_openmp                        # [linux and USE_OPENMP == 1]
+        - openblas_threading_openmp     # [(not osx) and USE_OPENMP == 1]
     files:
       - include/*.h                                       # [not win]
       - lib/libopenblas{{ SYMBOLSUFFIX }}*.a              # [not win]
