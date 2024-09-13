@@ -78,6 +78,8 @@ outputs:
     build:
       string: openmp_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 1]
       string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
+      run_exports:
+        - {{ pin_subpackage("libopenblas" ~ name_suffix) }}
     files:
       - include/*.h                                       # [not win]
       - lib/libopenblas{{ SYMBOLSUFFIX }}*.a              # [not win]
