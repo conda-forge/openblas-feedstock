@@ -1,5 +1,5 @@
 {% set version = "0.3.28" %}
-{% set build_number = 0 %}
+{% set build_number = 1 %}
 
 package:
   name: openblas
@@ -38,8 +38,6 @@ outputs:
     build:
       string: openmp_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 1]
       string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
-      track_features:
-        - openblas_threading_openmp                        # [linux and USE_OPENMP == 1]
       run_exports:
         - {{ pin_subpackage("libopenblas" ~ name_suffix) }}
     requirements:
@@ -74,8 +72,6 @@ outputs:
     build:
       string: openmp_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 1]
       string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
-      track_features:
-        - openblas_threading_openmp                        # [linux and USE_OPENMP == 1]
     files:
       - include/*.h                                       # [not win]
       - lib/libopenblas{{ SYMBOLSUFFIX }}*.a              # [not win]
