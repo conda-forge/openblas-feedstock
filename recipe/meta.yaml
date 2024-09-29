@@ -1,5 +1,5 @@
 {% set version = "0.3.28" %}
-{% set build_number = 0 %}
+{% set build_number = 1 %}
 
 package:
   name: openblas
@@ -13,12 +13,16 @@ source:
     - patches/0001-don-t-run-test_fork-in-cross-compilation.patch  # [build_platform != target_platform]
 
 build:
-  number: {{ build_number }}
+  number: {{ build_number }}          # [not (unix and x86_64)]
+  number: {{ build_number + 100 }}    # [unix and x86_64 and microarch_level == 1]
+  number: {{ build_number + 300 }}    # [unix and x86_64 and microarch_level == 3]
+  number: {{ build_number + 400 }}    # [unix and x86_64 and microarch_level == 4]
   string: openmp_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 1]
   string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
 
 requirements:
   build:
+    - x86_64-microarch-level {{ microarch_level }}  # [unix and x86_64]
     - {{ stdlib("c") }}
     - {{ compiler("c") }}
     - {{ compiler("fortran") }}
