@@ -8,11 +8,23 @@ jobs:
     vmImage: macOS-12
   strategy:
     matrix:
-      osx_64_SYMBOLSUFFIX64_name_suffix-ilp64:
-        CONFIG: osx_64_SYMBOLSUFFIX64_name_suffix-ilp64
+      osx_64_SYMBOLSUFFIX64_microarch_level1name_suffix-ilp64:
+        CONFIG: osx_64_SYMBOLSUFFIX64_microarch_level1name_suffix-ilp64
         UPLOAD_PACKAGES: 'True'
-      osx_64_SYMBOLSUFFIXname_suffix:
-        CONFIG: osx_64_SYMBOLSUFFIXname_suffix
+      osx_64_SYMBOLSUFFIX64_microarch_level3name_suffix-ilp64:
+        CONFIG: osx_64_SYMBOLSUFFIX64_microarch_level3name_suffix-ilp64
+        UPLOAD_PACKAGES: 'True'
+      osx_64_SYMBOLSUFFIX64_microarch_level4name_suffix-ilp64:
+        CONFIG: osx_64_SYMBOLSUFFIX64_microarch_level4name_suffix-ilp64
+        UPLOAD_PACKAGES: 'True'
+      osx_64_SYMBOLSUFFIXmicroarch_level1name_suffix:
+        CONFIG: osx_64_SYMBOLSUFFIXmicroarch_level1name_suffix
+        UPLOAD_PACKAGES: 'True'
+      osx_64_SYMBOLSUFFIXmicroarch_level3name_suffix:
+        CONFIG: osx_64_SYMBOLSUFFIXmicroarch_level3name_suffix
+        UPLOAD_PACKAGES: 'True'
+      osx_64_SYMBOLSUFFIXmicroarch_level4name_suffix:
+        CONFIG: osx_64_SYMBOLSUFFIXmicroarch_level4name_suffix
         UPLOAD_PACKAGES: 'True'
       osx_arm64_SYMBOLSUFFIX64_name_suffix-ilp64:
         CONFIG: osx_arm64_SYMBOLSUFFIX64_name_suffix-ilp64
