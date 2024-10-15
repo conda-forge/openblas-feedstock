@@ -2,7 +2,7 @@
 {% set build_number = 0 %}
 
 package:
-  name: openblas
+  name: openblas-split
   version: {{ version }}
 
 source:
@@ -117,3 +117,4 @@ extra:
     - jakirkham
     - isuruf
     - h-vetinari
+  feedstock-name: openblas
