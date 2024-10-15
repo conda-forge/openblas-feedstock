@@ -17,8 +17,6 @@ build:
   number: {{ build_number }}
   string: openmp_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 1]
   string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
-  # debug: only win
-  skip: true  # [not win]
 
 requirements:
   build:

@@ -6,9 +6,6 @@ fortran_compiler_version:   # [linux or win]
   - 14                      # [linux]
   - 19                      # [win]
 
-channel_sources:                            # [win]
-  - conda-forge/label/llvm_rc,conda-forge   # [win]
-
 SYMBOLSUFFIX:
   - ""
   - "64_"     # [not (win or aarch64)]
