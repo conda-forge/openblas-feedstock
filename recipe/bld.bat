@@ -1,9 +1,6 @@
 @echo on
 SetLocal EnableDelayedExpansion
 
-:: show CPU arch to detect slow CI agents early (rather than wait for 6h timeout)
-python -c "import numpy; numpy.show_config()"
-
 :: flang still uses a temporary name not recognized by CMake
 copy %BUILD_PREFIX%\Library\bin\flang-new.exe %BUILD_PREFIX%\Library\bin\flang.exe
 
