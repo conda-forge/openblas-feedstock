@@ -2,7 +2,7 @@
 {% set build_number = 0 %}
 
 package:
-  name: openblas
+  name: openblas-split
   version: {{ version }}
 
 source:
@@ -11,6 +11,7 @@ source:
   patches:
     # don't run test_fork in emulation, it has a tendency to hang indefinitely
     - patches/0001-don-t-run-test_fork-in-cross-compilation.patch  # [build_platform != target_platform]
+    - patches/0002-explicitly-link-to-OpenMP.patch
 
 build:
   number: {{ build_number }}
@@ -27,10 +28,11 @@ requirements:
     - cmake                   # [win]
     - ninja                   # [win]
     - objconv                 # [osx]
-    - llvm-openmp             # [(osx or linux) and USE_OPENMP == 1]
+    - llvm-openmp             # [USE_OPENMP == 1]
     # Following is needed because the Fortran compiler add an rpath to the BUILD_PREFIX
     - _openmp_mutex * *_llvm  # [linux and USE_OPENMP == 1]
   host:
+    - llvm-openmp-fortran     # [win and USE_OPENMP == 1]
   run:
 
 outputs:
@@ -39,7 +41,8 @@ outputs:
       string: openmp_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 1]
       string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
       track_features:
-        - openblas_threading_openmp                        # [linux and USE_OPENMP == 1]
+        # weigh down openmp (except on osx, where it is the only option)
+        - openblas_threading_openmp     # [(not osx) and USE_OPENMP == 1]
       run_exports:
         - {{ pin_subpackage("libopenblas" ~ name_suffix) }}
     requirements:
@@ -47,7 +50,7 @@ outputs:
         - {{ stdlib("c") }}
         - {{ compiler("c") }}
         - {{ compiler("fortran") }}
-        - llvm-openmp                                      # [(osx or linux) and USE_OPENMP == 1]
+        - llvm-openmp                   # [USE_OPENMP == 1]
       run_constrained:
         - {{ pin_subpackage("openblas" ~ name_suffix, max_pin="x.x.x") }}
     files:
@@ -75,7 +78,7 @@ outputs:
       string: openmp_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 1]
       string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
       track_features:
-        - openblas_threading_openmp                        # [linux and USE_OPENMP == 1]
+        - openblas_threading_openmp     # [(not osx) and USE_OPENMP == 1]
     files:
       - include/*.h                                       # [not win]
       - lib/libopenblas{{ SYMBOLSUFFIX }}*.a              # [not win]
@@ -112,3 +115,4 @@ extra:
     - jakirkham
     - isuruf
     - h-vetinari
+  feedstock-name: openblas
