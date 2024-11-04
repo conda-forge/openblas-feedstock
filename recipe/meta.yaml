@@ -14,6 +14,7 @@ source:
   patches:
     # don't run test_fork in emulation, it has a tendency to hang indefinitely
     - patches/0001-don-t-run-test_fork-in-cross-compilation.patch  # [build_platform != target_platform]
+    # backport https://github.com/OpenMathLib/OpenBLAS/pull/4961
     - patches/0002-explicitly-link-to-OpenMP.patch
 
 build:
