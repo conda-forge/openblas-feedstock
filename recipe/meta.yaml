@@ -1,6 +1,9 @@
 {% set version = "0.3.28" %}
 {% set build_number = 1 %}
 
+# ensure INTERFACE64 variable gets detected by conda-build
+# [INTERFACE64 == "foobar"]
+
 package:
   name: openblas-split
   version: {{ version }}
