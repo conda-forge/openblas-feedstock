@@ -1,6 +1,6 @@
 __migrator:
   kind: version
-  migration_number: 1
+  migration_number: 2
   build_number: 1
   commit_message: Rebuild for flang 19
   platform_allowlist:
