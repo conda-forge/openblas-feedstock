@@ -9,7 +9,8 @@ github:
   branch_name: main
   tooling_branch_name: main
 idle_timeout_minutes: 30
-provider:
-  linux_aarch64: default
-  linux_ppc64le: default
+remote_ci_setup:
+  - conda-forge-ci-setup=4
+  # https://github.com/conda/conda-build/issues/5613
+  - conda-build <24.11
 test: native_and_emulated
