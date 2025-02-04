@@ -24,6 +24,7 @@ cmake -G "Ninja"                            ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
     -DDYNAMIC_ARCH=ON                       ^
     -DBUILD_WITHOUT_LAPACK=no               ^
+    -DNO_AVX512=1                           ^
     -DNOFORTRAN=0                           ^
     -DNUM_THREADS=128                       ^
     -DBUILD_SHARED_LIBS=on                  ^
