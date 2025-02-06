@@ -64,7 +64,7 @@ fi
 if [[ "${CROSSCOMPILING_EMULATOR}" != "" ]]; then
   # We'd like to set CROSS=0 for builds with an emulator in order to run tests,
   # but as of 0.3.29 aarch64/ppc64 run into spurious emulation errors
-  CROSS=0
+  CROSS=1
 elif [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" ]]; then
   CROSS=0
 else
