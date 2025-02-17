@@ -1,7 +1,7 @@
-From 04ffe3be0b4e7ed5483ae20dc0eec2cfa7e98703 Mon Sep 17 00:00:00 2001
+From ae78348d36ebd393d6fceb005f34125d8ea79769 Mon Sep 17 00:00:00 2001
 From: "H. Vetinari" <h.vetinari@gmx.com>
 Date: Sat, 17 Aug 2024 22:36:42 +1100
-Subject: [PATCH 1/2] don't run test_fork in cross-compilation
+Subject: [PATCH] don't run test_fork in cross-compilation
 
 ---
  utest/Makefile | 3 ---

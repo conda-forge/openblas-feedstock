@@ -6,8 +6,9 @@ source .scripts/logging_utils.sh
 
 set -xe
 
-MINIFORGE_HOME=${MINIFORGE_HOME:-${HOME}/miniforge3}
-MINIFORGE_HOME=${MINIFORGE_HOME%/} # remove trailing slash
+MINIFORGE_HOME="${MINIFORGE_HOME:-${HOME}/miniforge3}"
+MINIFORGE_HOME="${MINIFORGE_HOME%/}" # remove trailing slash
+export CONDA_BLD_PATH="${CONDA_BLD_PATH:-${MINIFORGE_HOME}/conda-bld}"
 
 ( startgroup "Provisioning base env with micromamba" ) 2> /dev/null
 MICROMAMBA_VERSION="1.5.10-0"
@@ -25,7 +26,7 @@ chmod +x "${micromamba_exe}"
 echo "Creating environment"
 "${micromamba_exe}" create --yes --root-prefix "${MAMBA_ROOT_PREFIX}" --prefix "${MINIFORGE_HOME}" \
   --channel conda-forge \
-  pip python=3.12 conda-build conda-forge-ci-setup=4 "conda-build>=24.1"
+  pip python=3.12 conda-build conda-forge-ci-setup=4 "conda-build <24.11"
 echo "Moving pkgs cache from ${MAMBA_ROOT_PREFIX} to ${MINIFORGE_HOME}"
 mv "${MAMBA_ROOT_PREFIX}/pkgs" "${MINIFORGE_HOME}"
 echo "Cleaning up micromamba"
@@ -33,7 +34,7 @@ rm -rf "${MAMBA_ROOT_PREFIX}" "${micromamba_exe}" || true
 ( endgroup "Provisioning base env with micromamba" ) 2> /dev/null
 
 ( startgroup "Configuring conda" ) 2> /dev/null
-
+echo "Activating environment"
 source "${MINIFORGE_HOME}/etc/profile.d/conda.sh"
 conda activate base
 export CONDA_SOLVER="libmamba"

@@ -18,6 +18,8 @@ fortran_compiler_version:
 - '19'
 name_suffix:
 - ''
+openblas:
+- 0.3.*
 perl:
 - 5.32.1
 target_platform:
