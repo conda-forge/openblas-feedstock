@@ -26,7 +26,7 @@ build:
 
 outputs:
   - package:
-      name: ${{ "libopenblas" ~ name_suffix }} }}
+      name: libopenblas${{ name_suffix }}
     build:
       files:
         # Include files like
@@ -69,7 +69,8 @@ outputs:
         - if: win and USE_OPENMP == 1
           then: llvm-openmp-fortran
       run_exports:
-        - ${{ pin_subpackage("libopenblas" ~ name_suffix) }}
+        - ${{ pin_compatible("libopenblas" ~ name_suffix) }}
+        # - ${{ pin_subpackage("libopenblas" ~ name_suffix) }}
       # run_constraints:
       #   - ${{ pin_subpackage("openblas" ~ name_suffix, upper_bound="x.x.x") }}
     tests:
