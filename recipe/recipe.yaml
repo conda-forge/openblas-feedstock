@@ -26,7 +26,7 @@ build:
 
 outputs:
   - package:
-      name: libopenblas${{ name_suffix }}
+      name: ${{ "libopenblas" ~ name_suffix }} }}
     build:
       files:
         # Include files like
