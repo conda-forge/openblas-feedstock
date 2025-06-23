@@ -14,3 +14,6 @@ remote_ci_setup:
   # https://github.com/conda/conda-build/issues/5613
   - conda-build <24.11
 test: native_and_emulated
+conda_install_tool: pixi
+conda_build_tool: rattler-build
+
