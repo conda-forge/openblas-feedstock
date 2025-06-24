@@ -11,29 +11,29 @@ Home: http://www.openblas.net/
 
 Package license: BSD-3-Clause
 
-Summary: An optimized BLAS library based on GotoBLAS2 1.13 BSD version
+Summary: An optimized BLAS library (ILP64 interface) based on GotoBLAS2 1.13 BSD version
 
 Development: https://github.com/OpenMathLib/OpenBLAS
 
-About libopenblas-ilp64
------------------------
+About libopenblas
+-----------------
 
 Home: http://www.openblas.net/
 
 Package license: BSD-3-Clause
 
-Summary: An optimized BLAS library (ILP64 interface) based on GotoBLAS2 1.13 BSD version
+Summary: An optimized BLAS librarybased on GotoBLAS2 1.13 BSD version
 
 Development: https://github.com/OpenMathLib/OpenBLAS
 
-About openblas-ilp64
---------------------
+About openblas
+--------------
 
 Home: http://www.openblas.net/
 
 Package license: BSD-3-Clause
 
-Summary: An optimized BLAS library (ILP64 interface) based on GotoBLAS2 1.13 BSD version
+Summary: An optimized BLAS librarybased on GotoBLAS2 1.13 BSD version
 
 Development: https://github.com/OpenMathLib/OpenBLAS
 
@@ -55,31 +55,17 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP0name_suffix</td>
+              <td>linux_64_SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP0name_suffix" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP1name_suffix</td>
+              <td>linux_64_SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP1name_suffix" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -97,59 +83,31 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_INTERFACE640SYMBOLSUFFIXUSE_OPENMP0name_suffix</td>
+              <td>linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_INTERFACE640SYMBOLSUFFIXUSE_OPENMP0name_suffix" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_INTERFACE640SYMBOLSUFFIXUSE_OPENMP1name_suffix</td>
+              <td>linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_INTERFACE640SYMBOLSUFFIXUSE_OPENMP1name_suffix" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64</td>
+              <td>osx_64_SYMBOLSUFFIX64_name_suffix-ilp64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_SYMBOLSUFFIX64_name_suffix-ilp64" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64</td>
+              <td>osx_arm64_SYMBOLSUFFIX64_name_suffix-ilp64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_64_INTERFACE640SYMBOLSUFFIXname_suffix</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_INTERFACE640SYMBOLSUFFIXname_suffix" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_64_INTERFACE641SYMBOLSUFFIX64_name_suffix-ilp64</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_INTERFACE641SYMBOLSUFFIX64_name_suffix-ilp64" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_arm64_INTERFACE640SYMBOLSUFFIXname_suffix</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_INTERFACE640SYMBOLSUFFIXname_suffix" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_arm64_INTERFACE641SYMBOLSUFFIX64_name_suffix-ilp64</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_INTERFACE641SYMBOLSUFFIX64_name_suffix-ilp64" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_SYMBOLSUFFIX64_name_suffix-ilp64" alt="variant">
                 </a>
               </td>
             </tr><tr>

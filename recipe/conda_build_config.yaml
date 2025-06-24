@@ -1,27 +1,26 @@
 # gcc 12 cannot handle `-mtune=native` on aarch,
 # gcc 13 causes test failures on ppc
-c_compiler_version:         # [linux]
-  - 14                      # [linux]
-fortran_compiler_version:   # [linux]
-  - 14                      # [linux]
+c_compiler_version: # [linux]
+  - 14 # [linux]
+fortran_compiler_version: # [linux]
+  - 14 # [linux]
 
 SYMBOLSUFFIX:
   - ""
-  - "64_"     # [not (win or aarch64)]
+  - "64_" # [not (win or aarch64)]
 
 name_suffix:
   - ""
-  - "-ilp64"  # [not (win or aarch64)]
+  - "-ilp64" # [not (win or aarch64)]
 
 INTERFACE64:
   - 0
-  - 1         # [not (win or aarch64)]
+  - 1 # [not (win or aarch64)]
 
 USE_OPENMP:
-  - "0"    # [not osx]
+  - "0" # [not osx]
   - "1"
-
-zip_keys:
-  - - SYMBOLSUFFIX
-    - name_suffix
-    - INTERFACE64
+# zip_keys:
+#   - - SYMBOLSUFFIX
+#     - name_suffix
+#     - INTERFACE64
