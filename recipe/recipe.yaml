@@ -7,7 +7,7 @@ context:
   version: 0.3.30
   build_number: 0
   string_prefix: ${{ "openmp" if OPENMP == 1 else "pthreads" }}
-  ILP64_string: ${{ "" if SYMBOLSUFFIX != "64_" else " (ILP64 interface) " }}
+  # ILP64_string: ${{ "" if SYMBOLSUFFIX != "64_" else " (ILP64 interface) " }}
 
 recipe:
   name: openblas-split
@@ -26,7 +26,8 @@ build:
 
 outputs:
   - package:
-      name: libopenblas${{ name_suffix }}
+      # name: libopenblas${{ name_suffix }}
+      name: libopenblas
     build:
       files:
         # Include files like
@@ -36,13 +37,17 @@ outputs:
         # Avoid files
         #   - libopenblas.so
         - if: not win
-          then: lib/libopenblas${{ SYMBOLSUFFIX }}*p*${{ SHLIB_EXT }}
+          # then: lib/libopenblas${{ SYMBOLSUFFIX }}*p*${{ SHLIB_EXT }}
+          then: lib/libopenblas*p*${{ SHLIB_EXT }}
         - if: linux
-          then: lib/libopenblas${{ SYMBOLSUFFIX }}.so.*
+          # then: lib/libopenblas${{ SYMBOLSUFFIX }}.so.*
+          then: lib/libopenblas.so.*
         - if: osx
-          then: lib/libopenblas${{ SYMBOLSUFFIX }}.*.dylib
+          # then: lib/libopenblas${{ SYMBOLSUFFIX }}.*.dylib
+          then: lib/libopenblas.*.dylib
         - if: win
-          then: Library/bin/openblas${{ SYMBOLSUFFIX }}.dll
+          # then: Library/bin/openblas${{ SYMBOLSUFFIX }}.dll
+          then: Library/bin/openblas.dll
       string: ${{ string_prefix }}_h${{ PKG_HASH }}_${{ build_number }}
       variant:
         down_prioritize_variant: ${{ 1 if (not osx) and USE_OPENMP == 1 else 0 }}
@@ -69,8 +74,8 @@ outputs:
         - if: win and USE_OPENMP == 1
           then: llvm-openmp-fortran
       run_exports:
-        - ${{ pin_compatible("libopenblas" ~ name_suffix) }}
         # - ${{ pin_subpackage("libopenblas" ~ name_suffix) }}
+        - ${{ pin_subpackage("libopenblas") }}
       # run_constraints:
       #   - ${{ pin_subpackage("openblas" ~ name_suffix, upper_bound="x.x.x") }}
     tests:
@@ -79,13 +84,17 @@ outputs:
             - python *
         script:
           - if: not win
-            then: test -f ${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${{ SHLIB_EXT }}
+            # then: test -f ${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${{ SHLIB_EXT }}
+            then: test -f ${PREFIX}/lib/libopenblasp-r${{ version }}${{ SHLIB_EXT }}
           - if: 'osx and build_platform=="osx-64"'
-            then: nm -g ${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${{ SHLIB_EXT }} | grep dsecnd
-          # - if: not win
-          #   then: python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${{ SHLIB_EXT }}']"
+            # then: nm -g ${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${{ SHLIB_EXT }} | grep dsecnd
+            then: nm -g ${PREFIX}/lib/libopenblasp-r${{ version }}${{ SHLIB_EXT }} | grep dsecnd
+          - if: not win
+            # then: python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${{ SHLIB_EXT }}']"
+            then: python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblasp-r${{ version }}${{ SHLIB_EXT }}']"
           - if: win
-            then: if not exist %PREFIX%\\Library\\bin\\openblas${{ SYMBOLSUFFIX }}.dll exit 1
+            # then: if not exist %PREFIX%\\Library\\bin\\openblas${{ SYMBOLSUFFIX }}.dll exit 1
+            then: if not exist %PREFIX%\\Library\\bin\\openblas.dll exit 1
   - package:
       name: openblas${{ name_suffix }}
     build:
@@ -93,9 +102,11 @@ outputs:
         - if: not win
           then: include/*.h
         - if: not win
-          then: lib/libopenblas${{ SYMBOLSUFFIX }}*.a
+          # then: lib/libopenblas${{ SYMBOLSUFFIX }}*.a
+          then: lib/libopenblas*.a
         - if: not win
-          then: lib/libopenblas${{ SYMBOLSUFFIX }}${{ SHLIB_EXT }}
+          # then: lib/libopenblas${{ SYMBOLSUFFIX }}${{ SHLIB_EXT }}
+          then: lib/libopenblas${{ SHLIB_EXT }}
         - if: not win
           then: lib/pkgconfig/openblas.pc
         - if: not win
@@ -103,7 +114,8 @@ outputs:
         - if: win
           then: Library/include/openblas
         - if: win
-          then: Library/lib/openblas${{ SYMBOLSUFFIX }}.lib
+          # then: Library/lib/openblas${{ SYMBOLSUFFIX }}.lib
+          then: Library/lib/openblas.lib
         - if: win
           then: Library/lib/pkgconfig/openblas.pc
         - if: win
@@ -134,16 +146,20 @@ outputs:
         - if: win and USE_OPENMP == 1
           then: llvm-openmp-fortran
       run:
-        - ${{ pin_subpackage("libopenblas" ~ name_suffix, exact=True) }}
+        # - ${{ pin_subpackage("libopenblas" ~ name_suffix, exact=True) }}
+        - ${{ pin_subpackage("libopenblas", exact=True) }}
 
     tests:
       - script:
           - if: not win
-            then: test -f ${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}.a
+            # then: test -f ${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}.a
+            then: test -f ${PREFIX}/lib/libopenblas.a
           - if: not win
-            then: test -f ${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}${{ SHLIB_EXT }}
+            # then: test -f ${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}${{ SHLIB_EXT }}
+            then: test -f ${PREFIX}/lib/libopenblas${{ SHLIB_EXT }}
           - if: win
-            then: if not exist %PREFIX%\\Library\\lib\\openblas${{ SYMBOLSUFFIX }}.lib exit 1
+            # then: if not exist %PREFIX%\\Library\\lib\\openblas${{ SYMBOLSUFFIX }}.lib exit 1
+            then: if not exist %PREFIX%\\Library\\lib\\openblas.lib exit 1
 
 about:
   license: BSD-3-Clause
