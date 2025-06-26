@@ -1,0 +1,31 @@
+zip_keys:
+  - [SYMBOLSUFFIX, name_suffix, INTERFACE64]
+
+# gcc 12 cannot handle `-mtune=native` on aarch,
+# gcc 13 causes test failures on ppc
+c_compiler_version:
+  - if: linux
+    then: 14
+fortran_compiler_version:
+  - if: linux
+    then: 14
+
+SYMBOLSUFFIX:
+  - ""
+  - if: not (win or aarch64)
+    then: "64_"
+
+name_suffix:
+  - ""
+  - if: not (win or aarch64)
+    then: "-ilp64"
+
+INTERFACE64:
+  - 0
+  - if: not (win or aarch64)
+    then: 1
+
+USE_OPENMP:
+  - if: not osx
+    then: "0"
+  - "1"
