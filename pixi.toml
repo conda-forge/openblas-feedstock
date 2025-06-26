@@ -37,6 +37,18 @@ description = "Build openblas-feedstock with variant linux_64_SYMBOLSUFFIX64_USE
 [tasks."inspect-linux_64_SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64.yaml"
 description = "List contents of openblas-feedstock packages built for variant linux_64_SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64"
+[tasks."build-linux_64_SYMBOLSUFFIXbUSE_OPENMP0name_suffixa"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_SYMBOLSUFFIXbUSE_OPENMP0name_suffixa.yaml"
+description = "Build openblas-feedstock with variant linux_64_SYMBOLSUFFIXbUSE_OPENMP0name_suffixa directly (without setup scripts)"
+[tasks."inspect-linux_64_SYMBOLSUFFIXbUSE_OPENMP0name_suffixa"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_SYMBOLSUFFIXbUSE_OPENMP0name_suffixa.yaml"
+description = "List contents of openblas-feedstock packages built for variant linux_64_SYMBOLSUFFIXbUSE_OPENMP0name_suffixa"
+[tasks."build-linux_64_SYMBOLSUFFIXbUSE_OPENMP1name_suffixa"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_SYMBOLSUFFIXbUSE_OPENMP1name_suffixa.yaml"
+description = "Build openblas-feedstock with variant linux_64_SYMBOLSUFFIXbUSE_OPENMP1name_suffixa directly (without setup scripts)"
+[tasks."inspect-linux_64_SYMBOLSUFFIXbUSE_OPENMP1name_suffixa"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_SYMBOLSUFFIXbUSE_OPENMP1name_suffixa.yaml"
+description = "List contents of openblas-feedstock packages built for variant linux_64_SYMBOLSUFFIXbUSE_OPENMP1name_suffixa"
 [tasks."build-linux_aarch64_USE_OPENMP0"]
 cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_USE_OPENMP0.yaml"
 description = "Build openblas-feedstock with variant linux_aarch64_USE_OPENMP0 directly (without setup scripts)"
@@ -61,18 +73,42 @@ description = "Build openblas-feedstock with variant linux_ppc64le_SYMBOLSUFFIX6
 [tasks."inspect-linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64.yaml"
 description = "List contents of openblas-feedstock packages built for variant linux_ppc64le_SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64"
+[tasks."build-linux_ppc64le_SYMBOLSUFFIXbUSE_OPENMP0name_suffixa"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_ppc64le_SYMBOLSUFFIXbUSE_OPENMP0name_suffixa.yaml"
+description = "Build openblas-feedstock with variant linux_ppc64le_SYMBOLSUFFIXbUSE_OPENMP0name_suffixa directly (without setup scripts)"
+[tasks."inspect-linux_ppc64le_SYMBOLSUFFIXbUSE_OPENMP0name_suffixa"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_ppc64le_SYMBOLSUFFIXbUSE_OPENMP0name_suffixa.yaml"
+description = "List contents of openblas-feedstock packages built for variant linux_ppc64le_SYMBOLSUFFIXbUSE_OPENMP0name_suffixa"
+[tasks."build-linux_ppc64le_SYMBOLSUFFIXbUSE_OPENMP1name_suffixa"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_ppc64le_SYMBOLSUFFIXbUSE_OPENMP1name_suffixa.yaml"
+description = "Build openblas-feedstock with variant linux_ppc64le_SYMBOLSUFFIXbUSE_OPENMP1name_suffixa directly (without setup scripts)"
+[tasks."inspect-linux_ppc64le_SYMBOLSUFFIXbUSE_OPENMP1name_suffixa"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_ppc64le_SYMBOLSUFFIXbUSE_OPENMP1name_suffixa.yaml"
+description = "List contents of openblas-feedstock packages built for variant linux_ppc64le_SYMBOLSUFFIXbUSE_OPENMP1name_suffixa"
 [tasks."build-osx_64_SYMBOLSUFFIX64_name_suffix-ilp64"]
 cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_SYMBOLSUFFIX64_name_suffix-ilp64.yaml"
 description = "Build openblas-feedstock with variant osx_64_SYMBOLSUFFIX64_name_suffix-ilp64 directly (without setup scripts)"
 [tasks."inspect-osx_64_SYMBOLSUFFIX64_name_suffix-ilp64"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_64_SYMBOLSUFFIX64_name_suffix-ilp64.yaml"
 description = "List contents of openblas-feedstock packages built for variant osx_64_SYMBOLSUFFIX64_name_suffix-ilp64"
+[tasks."build-osx_64_SYMBOLSUFFIXbname_suffixa"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_SYMBOLSUFFIXbname_suffixa.yaml"
+description = "Build openblas-feedstock with variant osx_64_SYMBOLSUFFIXbname_suffixa directly (without setup scripts)"
+[tasks."inspect-osx_64_SYMBOLSUFFIXbname_suffixa"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_64_SYMBOLSUFFIXbname_suffixa.yaml"
+description = "List contents of openblas-feedstock packages built for variant osx_64_SYMBOLSUFFIXbname_suffixa"
 [tasks."build-osx_arm64_SYMBOLSUFFIX64_name_suffix-ilp64"]
 cmd = "rattler-build build --recipe recipe -m .ci_support/osx_arm64_SYMBOLSUFFIX64_name_suffix-ilp64.yaml"
 description = "Build openblas-feedstock with variant osx_arm64_SYMBOLSUFFIX64_name_suffix-ilp64 directly (without setup scripts)"
 [tasks."inspect-osx_arm64_SYMBOLSUFFIX64_name_suffix-ilp64"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_arm64_SYMBOLSUFFIX64_name_suffix-ilp64.yaml"
 description = "List contents of openblas-feedstock packages built for variant osx_arm64_SYMBOLSUFFIX64_name_suffix-ilp64"
+[tasks."build-osx_arm64_SYMBOLSUFFIXbname_suffixa"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/osx_arm64_SYMBOLSUFFIXbname_suffixa.yaml"
+description = "Build openblas-feedstock with variant osx_arm64_SYMBOLSUFFIXbname_suffixa directly (without setup scripts)"
+[tasks."inspect-osx_arm64_SYMBOLSUFFIXbname_suffixa"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_arm64_SYMBOLSUFFIXbname_suffixa.yaml"
+description = "List contents of openblas-feedstock packages built for variant osx_arm64_SYMBOLSUFFIXbname_suffixa"
 [tasks."build-win_64_USE_OPENMP0"]
 cmd = "rattler-build build --recipe recipe -m .ci_support/win_64_USE_OPENMP0.yaml"
 description = "Build openblas-feedstock with variant win_64_USE_OPENMP0 directly (without setup scripts)"
