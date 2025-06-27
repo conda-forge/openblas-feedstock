@@ -1,0 +1,16 @@
+USE_OPENMP:
+- '1'
+c_compiler:
+- gcc
+c_compiler_version:
+- '14'
+docker_image:
+- quay.io/condaforge/linux-anvil-comp7
+fortran_compiler:
+- gfortran
+fortran_compiler_version:
+- '14'
+perl:
+- 5.26.2
+target_platform:
+- linux-ppc64le
