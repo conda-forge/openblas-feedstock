@@ -8,17 +8,17 @@ jobs:
     vmImage: macOS-13
   strategy:
     matrix:
-      osx_64_INTERFACE640SYMBOLSUFFIXname_suffix:
-        CONFIG: osx_64_INTERFACE640SYMBOLSUFFIXname_suffix
+      osx_64_SYMBOLSUFFIX:
+        CONFIG: osx_64_SYMBOLSUFFIX
         UPLOAD_PACKAGES: 'True'
-      osx_64_INTERFACE641SYMBOLSUFFIX64_name_suffix-ilp64:
-        CONFIG: osx_64_INTERFACE641SYMBOLSUFFIX64_name_suffix-ilp64
+      osx_64_SYMBOLSUFFIX64_:
+        CONFIG: osx_64_SYMBOLSUFFIX64_
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_INTERFACE640SYMBOLSUFFIXname_suffix:
-        CONFIG: osx_arm64_INTERFACE640SYMBOLSUFFIXname_suffix
+      osx_arm64_SYMBOLSUFFIX:
+        CONFIG: osx_arm64_SYMBOLSUFFIX
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_INTERFACE641SYMBOLSUFFIX64_name_suffix-ilp64:
-        CONFIG: osx_arm64_INTERFACE641SYMBOLSUFFIX64_name_suffix-ilp64
+      osx_arm64_SYMBOLSUFFIX64_:
+        CONFIG: osx_arm64_SYMBOLSUFFIX64_
         UPLOAD_PACKAGES: 'True'
   timeoutInMinutes: 360
   variables: {}
