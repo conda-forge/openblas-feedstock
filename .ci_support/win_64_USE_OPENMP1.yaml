@@ -1,18 +1,17 @@
+SYMBOLSUFFIX:
+- ''
 USE_OPENMP:
 - '1'
 c_compiler:
-- vs2022
-c_stdlib:
-- vs
-channel_sources:
-- conda-forge
-channel_targets:
-- conda-forge main
+- vs2017
 fortran_compiler:
-- flang
-fortran_compiler_version:
-- '5'
+- gfortran
+name_suffix:
+- ''
 perl:
-- 5.32.1
+- 5.26.2
 target_platform:
 - win-64
+zip_keys:
+- - SYMBOLSUFFIX
+  - name_suffix

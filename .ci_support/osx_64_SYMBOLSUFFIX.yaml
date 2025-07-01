@@ -3,21 +3,15 @@ SYMBOLSUFFIX:
 USE_OPENMP:
 - '1'
 c_compiler:
-- gcc
-c_compiler_version:
-- '14'
-docker_image:
-- quay.io/condaforge/linux-anvil-comp7
+- clang
 fortran_compiler:
 - gfortran
-fortran_compiler_version:
-- '14'
 name_suffix:
 - ''
 perl:
 - 5.26.2
 target_platform:
-- linux-aarch64
+- osx-64
 zip_keys:
 - - SYMBOLSUFFIX
   - name_suffix
