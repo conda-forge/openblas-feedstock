@@ -1,5 +1,5 @@
 {% set version = "0.3.30" %}
-{% set build_number = 1 %}
+{% set build_number = 2 %}
 
 # ensure INTERFACE64 variable gets detected by conda-build
 # [INTERFACE64 == "foobar"]
