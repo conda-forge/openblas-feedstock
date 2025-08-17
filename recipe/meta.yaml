@@ -1,5 +1,5 @@
 {% set version = "0.3.30" %}
-{% set build_number = 1 %}
+{% set build_number = 2 %}
 
 # ensure INTERFACE64 variable gets detected by conda-build
 # [INTERFACE64 == "foobar"]
@@ -14,6 +14,8 @@ source:
   patches:
     # don't run test_fork in emulation, it has a tendency to hang indefinitely
     - patches/0001-don-t-run-test_fork-in-cross-compilation.patch  # [build_platform != target_platform]
+    # backport https://github.com/OpenMathLib/OpenBLAS/pull/5403
+    - patches/trmv.patch
 
 build:
   number: {{ build_number }}

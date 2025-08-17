@@ -1,0 +1,25 @@
+From a9e8fa06bf11f174f339151a08978bcb3d49b59e Mon Sep 17 00:00:00 2001
+From: Martin Kroeker <martin@ruby.chemie.uni-freiburg.de>
+Date: Fri, 25 Jul 2025 15:15:46 +0200
+Subject: [PATCH] Introduce a (crude) threshold to multithreading
+
+---
+ interface/trmv.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/interface/trmv.c b/interface/trmv.c
+index 2e52527a3c..029a83499d 100644
+--- a/interface/trmv.c
++++ b/interface/trmv.c
+@@ -219,7 +219,10 @@ void CNAME(enum CBLAS_ORDER order, enum CBLAS_UPLO Uplo,
+ 
+ #ifdef SMP
+   nthreads = num_cpu_avail(2);
+-
++  
++  if (n < 50 ) nthreads = 1;
++  if (nthreads > 2 && n < 500) nthreads = 2;
++	
+   if (nthreads == 1) {
+ #endif
+ 
