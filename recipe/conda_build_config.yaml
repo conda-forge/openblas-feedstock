@@ -18,7 +18,7 @@ INTERFACE64:
   - 1         # [not (win or aarch64)]
 
 USE_OPENMP:
-  - "0"    # [not osx]
+  - "0"
   - "1"
 
 zip_keys:

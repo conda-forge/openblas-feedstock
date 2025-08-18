@@ -45,8 +45,12 @@ outputs:
       string: openmp_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 1]
       string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
       track_features:
-        # weigh down openmp (except on osx, where it is the only option)
+        # On Windows and Linux, pthreads was the original threading model,
+        # so we use it as a default by weighing down the openmp variant.
         - openblas_threading_openmp     # [(not osx) and USE_OPENMP == 1]
+        # On macOS, OpenMP was the original threading model,
+        # so we use it as a default by weighing down the pthreads variant.
+        - openblas_threading_pthreads   # [osx and USE_OPENMP == 0]
       run_exports:
         - {{ pin_subpackage("libopenblas" ~ name_suffix) }}
     requirements:
@@ -82,7 +86,12 @@ outputs:
       string: openmp_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 1]
       string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
       track_features:
+        # On Windows and Linux, pthreads was the original threading model,
+        # so we use it as a default by weighing down the openmp variant.
         - openblas_threading_openmp     # [(not osx) and USE_OPENMP == 1]
+        # On macOS, OpenMP was the original threading model,
+        # so we use it as a default by weighing down the pthreads variant.
+        - openblas_threading_pthreads   # [osx and USE_OPENMP == 0]
     files:
       - include/*.h                                       # [not win]
       - lib/libopenblas{{ SYMBOLSUFFIX }}*.a              # [not win]
