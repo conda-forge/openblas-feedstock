@@ -24,12 +24,20 @@ jobs:
         CONFIG: linux_64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_aarch64_USE_OPENMP0:
-        CONFIG: linux_aarch64_USE_OPENMP0
+      linux_aarch64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP0name_suffix:
+        CONFIG: linux_aarch64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP0name_suffix
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_aarch64_USE_OPENMP1:
-        CONFIG: linux_aarch64_USE_OPENMP1
+      linux_aarch64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP1name_suffix:
+        CONFIG: linux_aarch64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP1name_suffix
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+      linux_aarch64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64:
+        CONFIG: linux_aarch64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+      linux_aarch64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64:
+        CONFIG: linux_aarch64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
       linux_ppc64le_INTERFACE640SYMBOLSUFFIXUSE_OPENMP0name_suffix:
