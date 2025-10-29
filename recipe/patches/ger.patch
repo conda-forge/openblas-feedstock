@@ -1,0 +1,25 @@
+From 30d11bc92c185d3a91255ea329db9bc2d2ad2174 Mon Sep 17 00:00:00 2001
+From: Martin Kroeker <martin@ruby.chemie.uni-freiburg.de>
+Date: Wed, 30 Jul 2025 08:13:33 -0700
+Subject: [PATCH] Adjust multithreading threshold and add an intermediate step
+
+---
+ interface/ger.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/interface/ger.c b/interface/ger.c
+index af6ae8606a..640b8cb443 100644
+--- a/interface/ger.c
++++ b/interface/ger.c
+@@ -180,8 +180,10 @@ void CNAME(enum CBLAS_ORDER order,
+ 
+ #ifdef SMPTEST
+   // Threshold chosen so that speed-up is > 1 on a Xeon E5-2630
+-  if(1L * m * n > 2048L * GEMM_MULTITHREAD_THRESHOLD)
++  if(1L * m * n > 20480L * GEMM_MULTITHREAD_THRESHOLD)
+     nthreads = num_cpu_avail(2);
++  else if(1L * m * n > 2048L * GEMM_MULTITHREAD_THRESHOLD)
++	  nthreads = MIN(3,num_cpu_avail(2));
+   else
+     nthreads = 1;
+ 
