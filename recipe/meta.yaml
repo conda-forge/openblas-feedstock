@@ -1,5 +1,5 @@
-{% set version = "0.3.30" %}
-{% set build_number = 4 %}
+{% set version = "0.3.31" %}
+{% set build_number = 0 %}
 
 # ensure INTERFACE64 variable gets detected by conda-build
 # [INTERFACE64 == "foobar"]
@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://github.com/OpenMathLib/OpenBLAS/archive/v{{ version }}.tar.gz
-  sha256: 27342cff518646afb4c2b976d809102e368957974c250a25ccc965e53063c95d
+  sha256: 6dd2a63ac9d32643b7cc636eab57bf4e57d0ed1fff926dfbc5d3d97f2d2be3a6
   patches:
     # don't run test_fork in emulation, it has a tendency to hang indefinitely
     - patches/0001-don-t-run-test_fork-in-cross-compilation.patch  # [build_platform != target_platform]
