@@ -1,22 +1,21 @@
-From 8031a4292b3841e71588406e3eca4cb1f4befb09 Mon Sep 17 00:00:00 2001
+From 097746cec823ff4a8fd705373ee1bb1417df4626 Mon Sep 17 00:00:00 2001
 From: "H. Vetinari" <h.vetinari@gmx.com>
 Date: Sat, 17 Aug 2024 22:36:42 +1100
 Subject: [PATCH] don't run test_fork in cross-compilation
 
 ---
- utest/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ utest/Makefile | 1 -
+ 1 file changed, 1 deletion(-)
 
 diff --git a/utest/Makefile b/utest/Makefile
-index e92fb67dc..50b3ce56d 100644
+index c3bf7e706..a21bf864f 100644
 --- a/utest/Makefile
 +++ b/utest/Makefile
-@@ -45,7 +45,7 @@ endif
+@@ -45,7 +45,6 @@ endif
  # FIXME TBD if this works on OSX, SunOS, POWER and zarch
  ifeq ($(OSNAME), $(filter $(OSNAME),Linux CYGWIN_NT))
  ifneq ($(USE_OPENMP), 1)
--OBJS += test_fork.o test_post_fork_async.o
-+OBJS += test_post_fork_async.o
- endif
- OBJS += test_post_fork.o
+-OBJS += test_fork.o
+ ifneq ($(NO_LAPACK), 1)
+ OBJS += test_post_fork_async.o
  endif
