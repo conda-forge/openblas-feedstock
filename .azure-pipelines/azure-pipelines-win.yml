@@ -14,6 +14,12 @@ jobs:
       win_64_USE_OPENMP1:
         CONFIG: win_64_USE_OPENMP1
         UPLOAD_PACKAGES: 'True'
+      win_arm64_USE_OPENMP0:
+        CONFIG: win_arm64_USE_OPENMP0
+        UPLOAD_PACKAGES: 'True'
+      win_arm64_USE_OPENMP1:
+        CONFIG: win_arm64_USE_OPENMP1
+        UPLOAD_PACKAGES: 'True'
   timeoutInMinutes: 360
   variables:
     CONDA_BLD_PATH: D:\\bld\\
