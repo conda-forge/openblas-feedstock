@@ -1,0 +1,28 @@
+INTERFACE64:
+- '0'
+SYMBOLSUFFIX:
+- ''
+USE_OPENMP:
+- '0'
+c_compiler:
+- vs2022
+c_stdlib:
+- vs
+channel_sources:
+- conda-forge
+channel_targets:
+- conda-forge main
+fortran_compiler:
+- gfortran
+name_suffix:
+- ''
+openblas:
+- 0.3.*
+perl:
+- 5.32.1
+target_platform:
+- win-arm64
+zip_keys:
+- - SYMBOLSUFFIX
+  - name_suffix
+  - INTERFACE64
