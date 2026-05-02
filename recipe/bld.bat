@@ -17,7 +17,7 @@ if "%USE_OPENMP%"=="1" (
 :: millions of lines of warnings with clang-19
 set "CFLAGS=%CFLAGS% -w"
 
-cmake -G "Ninja"                            ^
+cmake %CMAKE_ARGS% -G "Ninja"                            ^
     -DCMAKE_C_COMPILER=clang-cl             ^
     -DCMAKE_Fortran_COMPILER=flang          ^
     -DCMAKE_BUILD_TYPE=Release              ^
@@ -36,5 +36,7 @@ if %ERRORLEVEL% neq 0 exit 1
 cmake --build . --target install
 if %ERRORLEVEL% neq 0 exit 1
 
+if not "%CONDA_BUILD_SKIP_TESTS%"=="1" (
 ctest -j2
+)
 if %ERRORLEVEL% neq 0 exit 1
