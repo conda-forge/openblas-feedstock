@@ -28,6 +28,7 @@ outputs:
         - ${{ stdlib("c") }}
         - ${{ compiler("c") }}
         - ${{ compiler("fortran") }}
+        - make
         - if: USE_OPENMP == 1
           then: llvm-openmp
   - package:
