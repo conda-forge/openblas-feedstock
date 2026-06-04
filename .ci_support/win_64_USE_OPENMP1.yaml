@@ -1,3 +1,5 @@
+INTERFACE64:
+- '0'
 SYMBOLSUFFIX:
 - ''
 USE_OPENMP:
@@ -21,3 +23,4 @@ target_platform:
 zip_keys:
 - - SYMBOLSUFFIX
   - name_suffix
+  - INTERFACE64
