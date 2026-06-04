@@ -4,6 +4,7 @@ context:
   version: "0.3.33"
   build_number: 0
   string_prefix: ${{ "openmp_h" if USE_OPENMP == 1 else "pthreads_h" }}
+  shlib_ext: ${{ ".so" if linux else ".dylib" if osx else ".dll" if win else "" }}
 
 recipe:
   name: openblas-split
@@ -54,7 +55,7 @@ outputs:
         #   - libopenblas.so
         - if: not win
           then:
-            - lib/libopenblas${{ SYMBOLSUFFIX }}*p*${SHLIB_EXT}
+            - lib/libopenblas${{ SYMBOLSUFFIX }}*p*${{ shlib_ext }}
         - if: linux
           then:
             - lib/libopenblas${{ SYMBOLSUFFIX }}.so.*
@@ -73,7 +74,7 @@ outputs:
       - package_contents:
           files:
             - if: not win
-              then: lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${SHLIB_EXT}
+              then: lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${{ shlib_ext }}
             - if: win
               then: Library/bin/openblas${{ SYMBOLSUFFIX }}.dll
       - requirements:
@@ -81,9 +82,9 @@ outputs:
             - python *
         script:
           - if: osx and build_platform == "osx-64"
-            then: nm -g ${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${SHLIB_EXT} | grep dsecnd
+            then: nm -g ${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${{ shlib_ext }} | grep dsecnd
           - if: not win
-            then: python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${SHLIB_EXT}']"
+            then: python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${{ shlib_ext }}']"
 
   - package:
       name: openblas${{ name_suffix }}
@@ -105,7 +106,7 @@ outputs:
             - include/*.h
             - lib/libopenblas${{ SYMBOLSUFFIX }}.a
             - lib/libopenblas${{ SYMBOLSUFFIX }}*.a
-            - lib/libopenblas${{ SYMBOLSUFFIX }}${SHLIB_EXT}
+            - lib/libopenblas${{ SYMBOLSUFFIX }}${{ shlib_ext }}
             - lib/pkgconfig/openblas.pc
             - lib/cmake/openblas/*
         - if: win
@@ -123,7 +124,7 @@ outputs:
             - if: not win
               then:
                 - lib/libopenblas${{ SYMBOLSUFFIX }}.a
-                - lib/libopenblas${{ SYMBOLSUFFIX }}${SHLIB_EXT}
+                - lib/libopenblas${{ SYMBOLSUFFIX }}${{ shlib_ext }}
             - if: win
               then:
                 - Library/lib/openblas${{ SYMBOLSUFFIX }}.lib
