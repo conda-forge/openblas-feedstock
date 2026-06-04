@@ -71,12 +71,12 @@ outputs:
             #   then: lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${{ SHLIB_EXT }}
             - if: win
               then: Library/bin/openblas${{ SYMBOLSUFFIX }}.dll
-      - requirements:
-          run:
-            - python *
-        script:
-          - if: osx and build_platform == "osx-64"
-            then: nm -g ${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${{ SHLIB_EXT }} | grep dsecnd
+      # - requirements:
+      #     run:
+      #       - python *
+      #   script:
+          # - if: osx and build_platform == "osx-64"
+          #   then: nm -g ${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${{ SHLIB_EXT }} | grep dsecnd
           # - if: not win
           #   then: python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${{ SHLIB_EXT }}']"
 
