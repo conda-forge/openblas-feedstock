@@ -43,8 +43,8 @@ outputs:
         - if: linux and USE_OPENMP == 1
           then: _openmp_mutex * *_llv
       host:
-        if: win and USE_OPENMP == 1
-        then: llvm-openmp-fortran
+        - if: win and USE_OPENMP == 1
+          then: llvm-openmp-fortran
     build:
       script:
         file: build
