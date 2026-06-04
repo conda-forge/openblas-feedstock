@@ -7,7 +7,7 @@ USE_OPENMP:
 c_compiler:
 - vs2022
 c_stdlib:
-- macosx_deployment_target
+- vs
 channel_sources:
 - conda-forge
 channel_targets:
