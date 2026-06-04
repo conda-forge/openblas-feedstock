@@ -21,9 +21,19 @@ build:
   number: ${{ build_number }}
 
 outputs:
+  - staging:
+      name: openblas-build
+    requirements:
+      build:
+        - ${{ stdlib("c") }}
+        - ${{ compiler("c") }}
+        - ${{ compiler("fortran") }}
+        - if: USE_OPENMP == 1
+          then: llvm-openmp
   - package:
       name: libopenblas${{ name_suffix }}
       version: ${{ version }}
+    inherit: openblas-build
     build:
       string: ${{ string_prefix }}_h${{ hash }}_${{ build_number }}
       variant:
@@ -34,7 +44,7 @@ outputs:
         # On macOS, OpenMP was the original threading model,
         # so we use it as a default by weighing down the pthreads variant.
         down_prioritize_variant: ${{ 1 if (not osx and USE_OPENMP == 1) or (osx and USE_OPENMP == 0) else 0 }}
-      # files:
+      files:
         # Include files like:
         #   - libopenblasp-r0.3.5.so
         #   - libopenblas_vortexp-r0.3.5.so
@@ -44,45 +54,40 @@ outputs:
         # - if: not win
         #   then:
         #     - lib/libopenblas${{ SYMBOLSUFFIX }}*p*${{ SHLIB_EXT }}
-        # - if: linux
-        #   then:
-        #     - lib/libopenblas${{ SYMBOLSUFFIX }}.so.*
-        # - if: osx
-        #   then:
-        #     - lib/libopenblas${{ SYMBOLSUFFIX }}.*.dylib
-        # - if: win
-        #   then:
-        #     - Library/bin/openblas${{ SYMBOLSUFFIX }}.dll
+        - if: linux
+          then:
+            - lib/libopenblas${{ SYMBOLSUFFIX }}.so.*
+        - if: osx
+          then:
+            - lib/libopenblas${{ SYMBOLSUFFIX }}.*.dylib
+        - if: win
+          then:
+            - Library/bin/openblas${{ SYMBOLSUFFIX }}.dll
     requirements:
-      build:
-        - ${{ stdlib("c") }}
-        - ${{ compiler("c") }}
-        - ${{ compiler("fortran") }}
-        - if: USE_OPENMP == 1
-          then: llvm-openmp
       run_exports:
         - ${{ pin_subpackage("libopenblas" ~ name_suffix) }}
       # run_constraints:
         # - ${{ pin_subpackage("openblas" ~ name_suffix, upper_bound="x.x.x") }}
-    # tests:
-    #   - package_contents:
-    #       files:
+    tests:
+      - package_contents:
+          files:
             # - if: not win
             #   then: lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${{ SHLIB_EXT }}
-            # - if: win
-            #   then: Library/bin/openblas${{ SYMBOLSUFFIX }}.dll
+            - if: win
+              then: Library/bin/openblas${{ SYMBOLSUFFIX }}.dll
       # - requirements:
       #     run:
       #       - python *
       #   script:
-          # - if: osx and build_platform == "osx-64"
-          #   then: nm -g ${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${{ SHLIB_EXT }} | grep dsecnd
-          # - if: not win
-          #   then: python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${{ SHLIB_EXT }}']"
+      #     - if: osx and build_platform == "osx-64"
+      #       then: nm -g ${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${{ SHLIB_EXT }} | grep dsecnd
+      #     - if: not win
+      #       then: python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${{ SHLIB_EXT }}']"
 
   - package:
       name: openblas${{ name_suffix }}
       version: ${{ version }}
+    inherit: openblas-build
     build:
       string: ${{ string_prefix }}_h${{ hash }}_${{ build_number }}
       variant:
@@ -93,30 +98,30 @@ outputs:
         # On macOS, OpenMP was the original threading model,
         # so we use it as a default by weighing down the pthreads variant.
         down_prioritize_variant: ${{ 1 if (not osx and USE_OPENMP == 1) or (osx and USE_OPENMP == 0) else 0 }}
-      # files:
-      #   - if: not win
-      #     then:
-      #       - include/*.h
-      #       - lib/libopenblas${{ SYMBOLSUFFIX }}*.a
-      #       # - lib/libopenblas${{ SYMBOLSUFFIX }}${{ SHLIB_EXT }}
-      #       - lib/pkgconfig/openblas.pc
-      #       - lib/cmake/openblas/*
-      #   - if: win
-      #     then:
-      #       - Library/include/openblas
-      #       - Library/lib/openblas${{ SYMBOLSUFFIX }}.lib
-      #       - Library/lib/pkgconfig/openblas.pc
-      #       - Library/share/cmake/OpenBLAS
+      files:
+        - if: not win
+          then:
+            - include/*.h
+            - lib/libopenblas${{ SYMBOLSUFFIX }}*.a
+            # - lib/libopenblas${{ SYMBOLSUFFIX }}${{ SHLIB_EXT }}
+            - lib/pkgconfig/openblas.pc
+            - lib/cmake/openblas/*
+        - if: win
+          then:
+            - Library/include/openblas
+            - Library/lib/openblas${{ SYMBOLSUFFIX }}.lib
+            - Library/lib/pkgconfig/openblas.pc
+            - Library/share/cmake/OpenBLAS
     requirements:
       run:
         - ${{ pin_subpackage("libopenblas" ~ name_suffix, exact=True) }}
     tests:
       - package_contents:
           files:
-            # - if: not win
-            #   then:
-            #     - lib/libopenblas${{ SYMBOLSUFFIX }}.a
-               #  - lib/libopenblas${{ SYMBOLSUFFIX }}${{ SHLIB_EXT }}
+            - if: not win
+              then:
+                - lib/libopenblas${{ SYMBOLSUFFIX }}.a
+                # - lib/libopenblas${{ SYMBOLSUFFIX }}${{ SHLIB_EXT }}
             - if: win
               then:
                 - Library/lib/openblas${{ SYMBOLSUFFIX }}.lib

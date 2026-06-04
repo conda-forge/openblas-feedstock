@@ -25,3 +25,6 @@ zip_keys:
   - - SYMBOLSUFFIX
     - name_suffix
     - INTERFACE64
+
+c_stdlib:
+   - macosx_deployment_target
