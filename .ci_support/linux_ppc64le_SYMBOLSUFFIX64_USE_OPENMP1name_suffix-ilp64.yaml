@@ -1,7 +1,5 @@
-INTERFACE64:
-- '0'
 SYMBOLSUFFIX:
-- ''
+- '64_'
 USE_OPENMP:
 - '1'
 c_compiler:
@@ -23,16 +21,11 @@ fortran_compiler:
 fortran_compiler_version:
 - '14'
 name_suffix:
-- ''
-openblas:
-- 0.3.*
-perl:
-- 5.32.1
+- -ilp64
 target_platform:
-- linux-aarch64
+- linux-ppc64le
 zip_keys:
 - - SYMBOLSUFFIX
   - name_suffix
-  - INTERFACE64
 - - c_compiler_version
   - fortran_compiler_version

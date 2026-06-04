@@ -8,52 +8,70 @@ jobs:
     vmImage: $(VMIMAGE)
   strategy:
     matrix:
-      osx_64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP0name_suffix:
-        CONFIG: osx_64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP0name_suffix
+      osx_64_SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64:
+        CONFIG: osx_64_SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
         store_build_artifacts: false
-      osx_64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP1name_suffix:
-        CONFIG: osx_64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP1name_suffix
+        tools_install_dir: ~/miniforge3
+      osx_64_SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64:
+        CONFIG: osx_64_SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
         store_build_artifacts: false
-      osx_64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64:
-        CONFIG: osx_64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64
+        tools_install_dir: ~/miniforge3
+      osx_64_SYMBOLSUFFIXUSE_OPENMP0name_suffix:
+        CONFIG: osx_64_SYMBOLSUFFIXUSE_OPENMP0name_suffix
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
         store_build_artifacts: false
-      osx_64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64:
-        CONFIG: osx_64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64
+        tools_install_dir: ~/miniforge3
+      osx_64_SYMBOLSUFFIXUSE_OPENMP1name_suffix:
+        CONFIG: osx_64_SYMBOLSUFFIXUSE_OPENMP1name_suffix
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
         store_build_artifacts: false
-      osx_arm64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP0name_suffix:
-        CONFIG: osx_arm64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP0name_suffix
+        tools_install_dir: ~/miniforge3
+      osx_arm64_SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64:
+        CONFIG: osx_arm64_SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
         store_build_artifacts: false
-      osx_arm64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP1name_suffix:
-        CONFIG: osx_arm64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP1name_suffix
+        tools_install_dir: ~/miniforge3
+      osx_arm64_SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64:
+        CONFIG: osx_arm64_SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
         store_build_artifacts: false
-      osx_arm64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64:
-        CONFIG: osx_arm64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64
+        tools_install_dir: ~/miniforge3
+      osx_arm64_SYMBOLSUFFIXUSE_OPENMP0name_suffix:
+        CONFIG: osx_arm64_SYMBOLSUFFIXUSE_OPENMP0name_suffix
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
         store_build_artifacts: false
-      osx_arm64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64:
-        CONFIG: osx_arm64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64
+        tools_install_dir: ~/miniforge3
+      osx_arm64_SYMBOLSUFFIXUSE_OPENMP1name_suffix:
+        CONFIG: osx_arm64_SYMBOLSUFFIXUSE_OPENMP1name_suffix
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
         store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
   timeoutInMinutes: 360
   variables: {}
 
   steps:
   # TODO: Fast finish on azure pipelines?
   - script: |
+      export MINIFORGE_HOME=$(tools_install_dir)
+      export CONDA_BLD_PATH=$(build_workspace_dir)
       export CI=azure
       export flow_run_id=azure_$(Build.BuildNumber).$(System.JobAttempt)
       export remote_url=$(Build.Repository.Uri)
