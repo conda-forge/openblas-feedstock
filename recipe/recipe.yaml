@@ -1,0 +1,142 @@
+schema_version: 1
+
+context:
+  version: "0.3.33"
+  build_number: 0
+  string_prefix: ${{ "openmp_h" if USE_OPENMP == 1 else "pthreads_h" }}
+
+# keep this if the old recipe relied on INTERFACE64 entering variant/hash detection
+# ensure INTERFACE64 variable gets detected by the build system / variant machinery
+# INTERFACE64
+
+recipe:
+  name: openblas-split
+  version: ${{ version }}
+
+source:
+  url: https://github.com/OpenMathLib/OpenBLAS/archive/v${{ version }}.tar.gz
+  sha256: 6761af1d9f5d353ab4f0b7497be2643313b36c8f31caec0144bfef198e71e6ab
+  patches:
+    # don't run test_fork in emulation, it has a tendency to hang indefinitely
+    - if: build_platform != target_platform
+      then: patches/0001-don-t-run-test_fork-in-cross-compilation.patch
+
+build:
+  number: ${{ build_number }}
+
+outputs:
+  - package:
+      name: libopenblas${{ name_suffix }}
+      version: ${{ version }}
+    build:
+      string: ${{ string_prefix }}_h${{ hash }}_${{ build_number }}
+      variant:
+        # On Windows and Linux, pthreads was the original threading model,
+        # so we use it as a default by weighing down the openmp variant.
+        # On macOS, OpenMP was the original threading model,
+        # so we use it as a default by weighing down the pthreads variant.
+        down_prioritize_variant: ${{ 1 if (not osx and USE_OPENMP == 1) or (osx and USE_OPENMP == 0) else 0 }}
+      files:
+        # Include files like:
+        #   - libopenblasp-r0.3.5.so
+        #   - libopenblas_vortexp-r0.3.5.so
+        #   - libopenblas.so.0
+        # Avoid files:
+        #   - libopenblas.so
+        # - if: not win
+        #   then:
+        #     - lib/libopenblas${{ SYMBOLSUFFIX }}*p*${{ SHLIB_EXT }}
+        - if: linux
+          then:
+            - lib/libopenblas${{ SYMBOLSUFFIX }}.so.*
+        - if: osx
+          then:
+            - lib/libopenblas${{ SYMBOLSUFFIX }}.*.dylib
+        - if: win
+          then:
+            - Library/bin/openblas${{ SYMBOLSUFFIX }}.dll
+    requirements:
+      build:
+        - ${{ stdlib("c") }}
+        - ${{ compiler("c") }}
+        - ${{ compiler("fortran") }}
+        - if: USE_OPENMP == 1
+          then: llvm-openmp
+      run_exports:
+        - ${{ pin_subpackage("libopenblas" ~ name_suffix) }}
+      # run_constraints:
+        # - ${{ pin_subpackage("openblas" ~ name_suffix, upper_bound="x.x.x") }}
+    tests:
+      - package_contents:
+          files:
+            # - if: not win
+            #   then: lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${{ SHLIB_EXT }}
+            - if: win
+              then: Library/bin/openblas${{ SYMBOLSUFFIX }}.dll
+      - requirements:
+          run:
+            - python *
+        script:
+          - if: osx and build_platform == "osx-64"
+            then: nm -g ${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${{ SHLIB_EXT }} | grep dsecnd
+          # - if: not win
+          #   then: python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${{ SHLIB_EXT }}']"
+
+  - package:
+      name: openblas${{ name_suffix }}
+      version: ${{ version }}
+    build:
+      string: ${{ string_prefix }}_h${{ hash }}_${{ build_number }}
+      variant:
+        use_keys: 
+          - SYMBOLSUFFIX
+        # On Windows and Linux, pthreads was the original threading model,
+        # so we use it as a default by weighing down the openmp variant.
+        # On macOS, OpenMP was the original threading model,
+        # so we use it as a default by weighing down the pthreads variant.
+        down_prioritize_variant: ${{ 1 if (not osx and USE_OPENMP == 1) or (osx and USE_OPENMP == 0) else 0 }}
+      files:
+        - if: not win
+          then:
+            - include/*.h
+            - lib/libopenblas${{ SYMBOLSUFFIX }}*.a
+            # - lib/libopenblas${{ SYMBOLSUFFIX }}${{ SHLIB_EXT }}
+            - lib/pkgconfig/openblas.pc
+            - lib/cmake/openblas/*
+        - if: win
+          then:
+            - Library/include/openblas
+            - Library/lib/openblas${{ SYMBOLSUFFIX }}.lib
+            - Library/lib/pkgconfig/openblas.pc
+            - Library/share/cmake/OpenBLAS
+    requirements:
+      run:
+        - ${{ pin_subpackage("libopenblas" ~ name_suffix, exact=True) }}
+    tests:
+      - package_contents:
+          files:
+            # - if: not win
+            #   then:
+            #     - lib/libopenblas${{ SYMBOLSUFFIX }}.a
+               #  - lib/libopenblas${{ SYMBOLSUFFIX }}${{ SHLIB_EXT }}
+            - if: win
+              then:
+                - Library/lib/openblas${{ SYMBOLSUFFIX }}.lib
+
+about:
+  homepage: http://www.openblas.net/
+  license: BSD-3-Clause
+  license_file:
+    - LICENSE
+    - lapack-netlib/LICENSE
+  summary: ${{ "An optimized BLAS library (ILP64 interface) based on GotoBLAS2 1.13 BSD version" if SYMBOLSUFFIX == "64_" else "An optimized BLAS library based on GotoBLAS2 1.13 BSD version" }}
+  repository: https://github.com/OpenMathLib/OpenBLAS
+
+extra:
+  recipe-maintainers:
+    - gillins
+    - groutr
+    - jakirkham
+    - isuruf
+    - h-vetinari
+  feedstock-name: openblas
