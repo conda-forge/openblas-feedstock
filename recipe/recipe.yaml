@@ -5,10 +5,6 @@ context:
   build_number: 0
   string_prefix: ${{ "openmp_h" if USE_OPENMP == 1 else "pthreads_h" }}
 
-# keep this if the old recipe relied on INTERFACE64 entering variant/hash detection
-# ensure INTERFACE64 variable gets detected by the build system / variant machinery
-# INTERFACE64
-
 recipe:
   name: openblas-split
   version: ${{ version }}
@@ -31,6 +27,8 @@ outputs:
     build:
       string: ${{ string_prefix }}_h${{ hash }}_${{ build_number }}
       variant:
+        use_keys:
+          - INTERFACE64
         # On Windows and Linux, pthreads was the original threading model,
         # so we use it as a default by weighing down the openmp variant.
         # On macOS, OpenMP was the original threading model,
@@ -88,8 +86,8 @@ outputs:
     build:
       string: ${{ string_prefix }}_h${{ hash }}_${{ build_number }}
       variant:
-        use_keys: 
-          - SYMBOLSUFFIX
+        use_keys:
+          - INTERFACE64
         # On Windows and Linux, pthreads was the original threading model,
         # so we use it as a default by weighing down the openmp variant.
         # On macOS, OpenMP was the original threading model,
