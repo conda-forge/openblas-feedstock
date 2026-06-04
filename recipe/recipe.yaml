@@ -29,9 +29,22 @@ outputs:
         - ${{ stdlib("c") }}
         - ${{ compiler("c") }}
         - ${{ compiler("fortran") }}
-        - make
+        - perl
+        - if: not win
+          then: make
+        - if: win
+          then:
+            - cmake
+            - ninja
+        - if: osx
+          then: objconv
         - if: USE_OPENMP == 1
           then: llvm-openmp
+        - if: linux and USE_OPENMP == 1
+          then: _openmp_mutex * *_llv
+      host:
+        if: win and USE_OPENMP == 1
+        then: llvm-openmp-fortran
     build:
       script:
         file: build
