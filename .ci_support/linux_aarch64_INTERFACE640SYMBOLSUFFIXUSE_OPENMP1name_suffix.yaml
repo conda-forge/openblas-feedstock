@@ -9,7 +9,7 @@ c_compiler:
 c_compiler_version:
 - '14'
 c_stdlib:
-- sysroot
+- macosx_deployment_target
 c_stdlib_version:
 - '2.17'
 channel_sources:
