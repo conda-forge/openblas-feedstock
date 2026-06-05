@@ -91,8 +91,8 @@ outputs:
     requirements:
       run_exports:
         - ${{ pin_subpackage("libopenblas" ~ name_suffix) }}
-      # run_constraints:
-        # - ${{ pin_subpackage("openblas" ~ name_suffix, upper_bound="x.x.x") }}
+      run_constraints:
+        - ${{ pin_compatible("openblas" ~ name_suffix, upper_bound="x.x.x") }}
     tests:
       - package_contents:
           files:
