@@ -1,18 +1,15 @@
 build_platform:
-  linux_aarch64: linux_64
   linux_ppc64le: linux_64
-  osx_arm64: osx_64
+provider:
+  linux_aarch64: default
+  osx_arm64: default
 conda_build:
   pkg_format: '2'
+conda_build_tool: rattler-build
 conda_forge_output_validation: true
+conda_install_tool: pixi
 github:
   branch_name: main
   tooling_branch_name: main
 idle_timeout_minutes: 30
-remote_ci_setup:
-  - conda-forge-ci-setup=4
-  # https://github.com/conda/conda-build/issues/5613
-  - conda-build <24.11
 test: native_and_emulated
-conda_build_tool: rattler-build
-conda_install_tool: pixi

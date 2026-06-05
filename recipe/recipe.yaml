@@ -3,7 +3,7 @@ schema_version: 1
 context:
   version: "0.3.33"
   build_number: 0
-  string_prefix: ${{ "openmp_h" if USE_OPENMP == 1 else "pthreads_h" }}
+  string_prefix: ${{ "openmp" if USE_OPENMP == 1 else "pthreads" }}
   shlib_ext: ${{ ".so" if linux else ".dylib" if osx else ".dll" if win else "" }}
 
 recipe:
@@ -30,7 +30,7 @@ outputs:
         - ${{ compiler("c") }}
         - ${{ compiler("fortran") }}
         - perl
-        - if: not win
+        - if: unix
           then: make
         - if: win
           then:
@@ -41,16 +41,18 @@ outputs:
         - if: USE_OPENMP == 1
           then: llvm-openmp
         - if: linux and USE_OPENMP == 1
-          then: _openmp_mutex * *_llv
+          then: _openmp_mutex * *_llvm
       host:
         - if: win and USE_OPENMP == 1
           then: llvm-openmp-fortran
     build:
       script:
         file: build
+        # ensure that these variants are available for the build script
         env:
           SYMBOLSUFFIX: ${{ SYMBOLSUFFIX }}
           INTERFACE64: ${{ INTERFACE64 }}
+
   - package:
       name: libopenblas${{ name_suffix }}
       version: ${{ version }}
@@ -59,6 +61,7 @@ outputs:
       string: ${{ string_prefix }}_h${{ hash }}_${{ build_number }}
       variant:
         use_keys:
+          # ensure that `INTERFACE64` is included in the variant
           - INTERFACE64
         # On Windows and Linux, pthreads was the original threading model,
         # so we use it as a default by weighing down the openmp variant.
@@ -72,7 +75,7 @@ outputs:
       #   #   - libopenblas.so.0
       #   # Avoid files:
       #   #   - libopenblas.so
-        - if: not win
+        - if: unix
           then:
             - lib/libopenblas${{ SYMBOLSUFFIX }}*p*${{ shlib_ext }}
         - if: linux
@@ -92,7 +95,7 @@ outputs:
     tests:
       - package_contents:
           files:
-            - if: not win
+            - if: unix
               then: lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${{ shlib_ext }}
             - if: win
               then: Library/bin/openblas${{ SYMBOLSUFFIX }}.dll
@@ -102,7 +105,7 @@ outputs:
         script:
           - if: osx and build_platform == "osx-64"
             then: nm -g ${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${{ shlib_ext }} | grep dsecnd
-          - if: not win
+          - if: unix
             then: python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${{ shlib_ext }}']"
 
   - package:
@@ -112,6 +115,7 @@ outputs:
     build:
       string: ${{ string_prefix }}_h${{ hash }}_${{ build_number }}
       variant:
+        # ensure that `INTERFACE64` is included in the variant
         use_keys:
           - INTERFACE64
         # On Windows and Linux, pthreads was the original threading model,
@@ -120,7 +124,7 @@ outputs:
         # so we use it as a default by weighing down the pthreads variant.
         down_prioritize_variant: ${{ 1 if (not osx and USE_OPENMP == 1) or (osx and USE_OPENMP == 0) else 0 }}
       files:
-        - if: not win
+        - if: unix
           then:
             - include/*.h
             - lib/libopenblas${{ SYMBOLSUFFIX }}.a
@@ -140,7 +144,7 @@ outputs:
     tests:
       - package_contents:
           files:
-            - if: not win
+            - if: unix
               then:
                 - lib/libopenblas${{ SYMBOLSUFFIX }}.a
                 - lib/libopenblas${{ SYMBOLSUFFIX }}${{ shlib_ext }}
