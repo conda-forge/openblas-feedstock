@@ -69,12 +69,12 @@ outputs:
         # so we use it as a default by weighing down the pthreads variant.
         down_prioritize_variant: ${{ 1 if (not osx and USE_OPENMP == 1) or (osx and USE_OPENMP == 0) else 0 }}
       files:
-      #   # Include files like:
-      #   #   - libopenblasp-r0.3.5.so
-      #   #   - libopenblas_vortexp-r0.3.5.so
-      #   #   - libopenblas.so.0
-      #   # Avoid files:
-      #   #   - libopenblas.so
+        # Include files like:
+        #   - libopenblasp-r0.3.5.so
+        #   - libopenblas_vortexp-r0.3.5.so
+        #   - libopenblas.so.0
+        # Avoid files:
+        #   - libopenblas.so
         - if: unix
           then:
             - lib/libopenblas${{ SYMBOLSUFFIX }}*p*${{ shlib_ext }}
@@ -103,7 +103,7 @@ outputs:
           run:
             - python *
         script:
-          - if: osx and build_platform == "osx-64"
+          - if: osx
             then: nm -g ${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${{ shlib_ext }} | grep dsecnd
           - if: unix
             then: python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}${{ shlib_ext }}']"
