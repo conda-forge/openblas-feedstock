@@ -52,6 +52,7 @@ outputs:
         env:
           SYMBOLSUFFIX: ${{ SYMBOLSUFFIX }}
           INTERFACE64: ${{ INTERFACE64 }}
+          PKG_VERSION: ${{ version }}
 
   - package:
       name: libopenblas${{ name_suffix }}
