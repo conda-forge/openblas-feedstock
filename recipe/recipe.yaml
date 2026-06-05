@@ -2,6 +2,7 @@ schema_version: 1
 
 context:
   version: "0.3.33"
+  upper_bound: "0.3.34.a0"
   build_number: 0
   string_prefix: ${{ "openmp" if USE_OPENMP == 1 else "pthreads" }}
   shlib_ext: ${{ ".so" if linux else ".dylib" if osx else ".dll" if win else "" }}
@@ -92,7 +93,7 @@ outputs:
       run_exports:
         - ${{ pin_subpackage("libopenblas" ~ name_suffix) }}
       run_constraints:
-        - ${{ pin_compatible("openblas" ~ name_suffix, upper_bound="x.x.x") }}
+        - ${{ "openblas" ~ name_suffix }} < ${{ upper_bound }}
     tests:
       - package_contents:
           files:
