@@ -1,5 +1,3 @@
-INTERFACE64:
-- '0'
 SYMBOLSUFFIX:
 - ''
 USE_OPENMP:
@@ -24,7 +22,3 @@ perl:
 - 5.32.1
 target_platform:
 - win-64
-zip_keys:
-- - SYMBOLSUFFIX
-  - name_suffix
-  - INTERFACE64
