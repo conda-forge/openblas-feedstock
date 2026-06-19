@@ -1,9 +1,6 @@
 {% set version = "0.3.33" %}
 {% set build_number = 1 %}
 
-# ensure INTERFACE64 variable gets detected by conda-build
-# [INTERFACE64 == "foobar"]
-
 package:
   name: openblas-split
   version: {{ version }}
@@ -19,6 +16,10 @@ build:
   number: {{ build_number }}
   string: openmp_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 1]
   string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
+  force_use_keys:
+    - INTERFACE64   # [unix]
+    - SYMBOLSUFFIX
+    - name_suffix
 
 requirements:
   build:

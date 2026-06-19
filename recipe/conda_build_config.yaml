@@ -14,7 +14,7 @@ USE_OPENMP:
   - "0"
   - "1"
 
-zip_keys:
-  - - SYMBOLSUFFIX
-    - name_suffix
-    - INTERFACE64
+zip_keys:           # [unix]
+  - - SYMBOLSUFFIX  # [unix]
+    - name_suffix   # [unix]
+    - INTERFACE64   # [unix]
