@@ -90,6 +90,34 @@ Current build status
                 </a>
               </td>
             </tr><tr>
+              <td>osx_arm64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP0name_suffix</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP0name_suffix" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_arm64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP1name_suffix</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP1name_suffix" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_arm64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_arm64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openblas-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
               <td>win_64_USE_OPENMP0</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=716&branchName=main">
