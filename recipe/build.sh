@@ -53,6 +53,9 @@ elif [[ "${target_platform}" == osx-arm64 ]]; then
   TARGET="VORTEX"
   BINARY="64"
   DYNAMIC_ARCH=0
+else
+  echo "Unknown platform ${target_platform}"
+  exit 1
 fi
 
 QUIET_MAKE=0
