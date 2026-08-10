@@ -175,67 +175,119 @@ outputs:
         - lapack-netlib/LICENSE
       summary: ${{ "An optimized BLAS library (ILP64 interface) based on GotoBLAS2 1.13 BSD version" if SYMBOLSUFFIX == "64_" else "An optimized BLAS library based on GotoBLAS2 1.13 BSD version" }}
 
-  - name: openblas
+  - package:
+      name: openblas
+    inherit:
+      from: openblas-build
+      run_exports: false
     build:
-      skip: true  # [INTERFACE64 != "0"]
-      string: openmp_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 1]
-      string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
-      track_features:
-        # On Windows and Linux, pthreads was the original threading model,
-        # so we use it as a default by weighing down the openmp variant.
-        - openblas_threading_openmp     # [(not osx) and USE_OPENMP == 1]
-        # On macOS, OpenMP was the original threading model,
-        # so we use it as a default by weighing down the pthreads variant.
-        - openblas_threading_pthreads   # [osx and USE_OPENMP == 0]
-    files:
-      - include/*.h                                       # [not win]
-      - lib/libopenblas{{ SYMBOLSUFFIX }}*.a              # [not win]
-      - lib/libopenblas{{ SYMBOLSUFFIX }}{{ SHLIB_EXT }}  # [not win]
-      - lib/pkgconfig/openblas.pc                         # [not win]
-      - lib/cmake/openblas/*                              # [not win]
-      - Library/include/openblas                          # [win]
-      - Library/lib/openblas{{ SYMBOLSUFFIX }}.lib        # [win]
-      - Library/lib/pkgconfig/openblas.pc                 # [win]
-      - Library/share/cmake/OpenBLAS                      # [win]
+      skip: INTERFACE64 != "0"
+      string: ${{ "openmp" if USE_OPENMP == "1" else "pthreads" }}_h${{ hash }}_${{ build_number }}
+      variant:
+        down_prioritize_variant: ${{ 1 if (not osx and USE_OPENMP == "1") or (osx and USE_OPENMP == "0") else 0 }}
+      files:
+        - if: unix
+          then:
+            - include/*.h
+            - lib/libopenblas${{ SYMBOLSUFFIX }}*.a
+            - lib/libopenblas${{ SYMBOLSUFFIX }}.${{ "dylib" if osx else "so" }}
+            - lib/pkgconfig/openblas${{ "64" if SYMBOLSUFFIX == "64_" else "" }}.pc
+            - lib/cmake/openblas/*
+        - if: win
+          then:
+            - Library/include/openblas
+            - Library/lib/openblas${{ SYMBOLSUFFIX }}.lib
+            - Library/lib/pkgconfig/openblas.pc
+            - Library/share/cmake/OpenBLAS
     requirements:
       run:
-        - {{ pin_subpackage("libopenblas", exact=True) }}
-    test:
-      commands:
-        - test -f ${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}.a                       # [not win]
-        - test -f ${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}{{ SHLIB_EXT }}          # [not win]
-        - if not exist %PREFIX%\\Library\\lib\\openblas{{ SYMBOLSUFFIX }}.lib exit 1  # [win]
+        - ${{ pin_subpackage("libopenblas", exact=True) }}
+    tests:
+      - package_contents:
+          include:
+            - if: unix
+              then:
+                - cblas.h
+                - lapacke.h
+                - openblas_config.h
+          files:
+            - if: unix
+              then:
+                - lib/libopenblas${{ SYMBOLSUFFIX }}.a
+                - lib/libopenblas${{ SYMBOLSUFFIX }}.${{ "dylib" if osx else "so" }}
+                - lib/pkgconfig/openblas${{ "64" if SYMBOLSUFFIX == "64_" else "" }}.pc
+            - if: win
+              then:
+                - Library/include/openblas/cblas.h
+                - Library/include/openblas/lapacke.h
+                - Library/include/openblas/openblas_config.h
+                - Library/lib/openblas${{ SYMBOLSUFFIX }}.lib
+                - Library/lib/pkgconfig/openblas.pc
+    about:
+      homepage: http://www.openblas.net/
+      repository: https://github.com/OpenMathLib/OpenBLAS
+      license: BSD-3-Clause
+      license_file:
+        - LICENSE
+        - lapack-netlib/LICENSE
+      summary: ${{ "An optimized BLAS library (ILP64 interface) based on GotoBLAS2 1.13 BSD version" if SYMBOLSUFFIX == "64_" else "An optimized BLAS library based on GotoBLAS2 1.13 BSD version" }}
 
-  - name: openblas-ilp64
+  - package:
+      name: openblas-ilp64
+    inherit:
+      from: openblas-build
+      run_exports: false
     build:
-      skip: true  # [INTERFACE64 != "1"]
-      string: openmp_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 1]
-      string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
-      track_features:
-        # On Windows and Linux, pthreads was the original threading model,
-        # so we use it as a default by weighing down the openmp variant.
-        - openblas_threading_openmp     # [(not osx) and USE_OPENMP == 1]
-        # On macOS, OpenMP was the original threading model,
-        # so we use it as a default by weighing down the pthreads variant.
-        - openblas_threading_pthreads   # [osx and USE_OPENMP == 0]
-    files:
-      - include/*.h                                       # [not win]
-      - lib/libopenblas{{ SYMBOLSUFFIX }}*.a              # [not win]
-      - lib/libopenblas{{ SYMBOLSUFFIX }}{{ SHLIB_EXT }}  # [not win]
-      - lib/pkgconfig/openblas.pc                         # [not win]
-      - lib/cmake/openblas/*                              # [not win]
-      - Library/include/openblas                          # [win]
-      - Library/lib/openblas{{ SYMBOLSUFFIX }}.lib        # [win]
-      - Library/lib/pkgconfig/openblas.pc                 # [win]
-      - Library/share/cmake/OpenBLAS                      # [win]
+      skip: INTERFACE64 != "1"
+      string: ${{ "openmp" if USE_OPENMP == "1" else "pthreads" }}_h${{ hash }}_${{ build_number }}
+      variant:
+        down_prioritize_variant: ${{ 1 if (not osx and USE_OPENMP == "1") or (osx and USE_OPENMP == "0") else 0 }}
+      files:
+        - if: unix
+          then:
+            - include/*.h
+            - lib/libopenblas${{ SYMBOLSUFFIX }}*.a
+            - lib/libopenblas${{ SYMBOLSUFFIX }}.${{ "dylib" if osx else "so" }}
+            - lib/pkgconfig/openblas${{ "64" if SYMBOLSUFFIX == "64_" else "" }}.pc
+            - lib/cmake/openblas/*
+        - if: win
+          then:
+            - Library/include/openblas
+            - Library/lib/openblas${{ SYMBOLSUFFIX }}.lib
+            - Library/lib/pkgconfig/openblas.pc
+            - Library/share/cmake/OpenBLAS
     requirements:
       run:
-        - {{ pin_subpackage("libopenblas-ilp64", exact=True) }}
-    test:
-      commands:
-        - test -f ${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}.a                       # [not win]
-        - test -f ${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}{{ SHLIB_EXT }}          # [not win]
-        - if not exist %PREFIX%\\Library\\lib\\openblas{{ SYMBOLSUFFIX }}.lib exit 1  # [win]
+        - ${{ pin_subpackage("libopenblas-ilp64", exact=True) }}
+    tests:
+      - package_contents:
+          include:
+            - if: unix
+              then:
+                - cblas.h
+                - lapacke.h
+                - openblas_config.h
+          files:
+            - if: unix
+              then:
+                - lib/libopenblas${{ SYMBOLSUFFIX }}.a
+                - lib/libopenblas${{ SYMBOLSUFFIX }}.${{ "dylib" if osx else "so" }}
+                - lib/pkgconfig/openblas${{ "64" if SYMBOLSUFFIX == "64_" else "" }}.pc
+            - if: win
+              then:
+                - Library/include/openblas/cblas.h
+                - Library/include/openblas/lapacke.h
+                - Library/include/openblas/openblas_config.h
+                - Library/lib/openblas${{ SYMBOLSUFFIX }}.lib
+                - Library/lib/pkgconfig/openblas.pc
+    about:
+      homepage: http://www.openblas.net/
+      repository: https://github.com/OpenMathLib/OpenBLAS
+      license: BSD-3-Clause
+      license_file:
+        - LICENSE
+        - lapack-netlib/LICENSE
+      summary: ${{ "An optimized BLAS library (ILP64 interface) based on GotoBLAS2 1.13 BSD version" if SYMBOLSUFFIX == "64_" else "An optimized BLAS library based on GotoBLAS2 1.13 BSD version" }}
 
 about:
   homepage: http://www.openblas.net/
