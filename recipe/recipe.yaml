@@ -100,10 +100,18 @@ outputs:
               then: Library/bin/openblas${{ SYMBOLSUFFIX }}.dll
       - if: unix
         then:
+          files:
+            recipe:
+              - test_openblas.c
           requirements:
             build:
               - binutils
+              - ${{ stdlib('c') }}
+              - ${{ compiler('c') }}
           script:
+            - $CC test_openblas.c ${{ "-Dopenblas_get_config=openblas_get_config64_" if SYMBOLSUFFIX == "64_" else "" }} -L$PREFIX/lib -Wl,-rpath,$PREFIX/lib -Wl,-l:libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}.${{ "dylib" if osx else "so" }} -o test_openblas
+            - if: build_platform == target_platform
+              then: ./test_openblas
             - if: osx
               then: nm -g ${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}.dylib | grep dsecnd
     about:
@@ -160,10 +168,18 @@ outputs:
               then: Library/bin/openblas${{ SYMBOLSUFFIX }}.dll
       - if: unix
         then:
+          files:
+            recipe:
+              - test_openblas.c
           requirements:
             build:
               - binutils
+              - ${{ stdlib('c') }}
+              - ${{ compiler('c') }}
           script:
+            - $CC test_openblas.c ${{ "-Dopenblas_get_config=openblas_get_config64_" if SYMBOLSUFFIX == "64_" else "" }} -L$PREFIX/lib -Wl,-rpath,$PREFIX/lib -Wl,-l:libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}.${{ "dylib" if osx else "so" }} -o test_openblas
+            - if: build_platform == target_platform
+              then: ./test_openblas
             - if: osx
               then: nm -g ${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}.dylib | grep dsecnd
     about:
