@@ -38,8 +38,9 @@ requirements:
   run:
 
 outputs:
-  - name: libopenblas{{ name_suffix }}
+  - name: libopenblas
     build:
+      skip: true  # [INTERFACE64 != "0"]
       string: openmp_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 1]
       string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
       track_features:
@@ -50,7 +51,7 @@ outputs:
         # so we use it as a default by weighing down the pthreads variant.
         - openblas_threading_pthreads   # [osx and USE_OPENMP == 0]
       run_exports:
-        - {{ pin_subpackage("libopenblas" ~ name_suffix) }}
+        - {{ pin_subpackage("libopenblas") }}
     requirements:
       build:
         - {{ stdlib("c") }}
@@ -58,7 +59,7 @@ outputs:
         - {{ compiler("fortran") }}
         - llvm-openmp                   # [USE_OPENMP == 1]
       run_constrained:
-        - {{ pin_subpackage("openblas" ~ name_suffix, max_pin="x.x.x") }}
+        - {{ pin_subpackage("openblas", max_pin="x.x.x") }}
     files:
       # Include files like
       #   - libopenblasp-r0.3.5.so
@@ -79,8 +80,51 @@ outputs:
         - python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}p-r{{ version }}{{ SHLIB_EXT }}']"  # [not win]
         - if not exist %PREFIX%\\Library\\bin\\openblas{{ SYMBOLSUFFIX }}.dll exit 1                                            # [win]
 
-  - name: openblas{{ name_suffix }}
+  - name: libopenblas-ilp64
     build:
+      skip: true  # [INTERFACE64 != "1"]
+      string: openmp_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 1]
+      string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
+      track_features:
+        # On Windows and Linux, pthreads was the original threading model,
+        # so we use it as a default by weighing down the openmp variant.
+        - openblas_threading_openmp     # [(not osx) and USE_OPENMP == 1]
+        # On macOS, OpenMP was the original threading model,
+        # so we use it as a default by weighing down the pthreads variant.
+        - openblas_threading_pthreads   # [osx and USE_OPENMP == 0]
+      run_exports:
+        - {{ pin_subpackage("libopenblas-ilp64") }}
+    requirements:
+      build:
+        - {{ stdlib("c") }}
+        - {{ compiler("c") }}
+        - {{ compiler("fortran") }}
+        - llvm-openmp                   # [USE_OPENMP == 1]
+      run_constrained:
+        - {{ pin_subpackage("openblas-ilp64", max_pin="x.x.x") }}
+    files:
+      # Include files like
+      #   - libopenblasp-r0.3.5.so
+      #   - libopenblas_vortexp-r0.3.5.so
+      #   - libopenblas.so.0
+      # Avoid files
+      #   - libopenblas.so
+      - lib/libopenblas{{ SYMBOLSUFFIX }}*p*{{ SHLIB_EXT }}  # [not win]
+      - lib/libopenblas{{ SYMBOLSUFFIX }}.so.*               # [linux]
+      - lib/libopenblas{{ SYMBOLSUFFIX }}.*.dylib            # [osx]
+      - Library/bin/openblas{{ SYMBOLSUFFIX }}.dll           # [win]
+    test:
+      requires:
+        - python *
+      commands:
+        - test -f ${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}p-r{{ version }}{{ SHLIB_EXT }}                                    # [not win]
+        - nm -g ${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}p-r{{ version }}{{ SHLIB_EXT }} | grep dsecnd                        # [osx and build_platform=="osx-64"]
+        - python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}p-r{{ version }}{{ SHLIB_EXT }}']"  # [not win]
+        - if not exist %PREFIX%\\Library\\bin\\openblas{{ SYMBOLSUFFIX }}.dll exit 1                                            # [win]
+
+  - name: openblas
+    build:
+      skip: true  # [INTERFACE64 != "0"]
       string: openmp_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 1]
       string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
       track_features:
@@ -102,7 +146,38 @@ outputs:
       - Library/share/cmake/OpenBLAS                      # [win]
     requirements:
       run:
-        - {{ pin_subpackage("libopenblas" ~ name_suffix, exact=True) }}
+        - {{ pin_subpackage("libopenblas", exact=True) }}
+    test:
+      commands:
+        - test -f ${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}.a                       # [not win]
+        - test -f ${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}{{ SHLIB_EXT }}          # [not win]
+        - if not exist %PREFIX%\\Library\\lib\\openblas{{ SYMBOLSUFFIX }}.lib exit 1  # [win]
+
+  - name: openblas-ilp64
+    build:
+      skip: true  # [INTERFACE64 != "1"]
+      string: openmp_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 1]
+      string: pthreads_h{{ PKG_HASH }}_{{ build_number }}  # [USE_OPENMP == 0]
+      track_features:
+        # On Windows and Linux, pthreads was the original threading model,
+        # so we use it as a default by weighing down the openmp variant.
+        - openblas_threading_openmp     # [(not osx) and USE_OPENMP == 1]
+        # On macOS, OpenMP was the original threading model,
+        # so we use it as a default by weighing down the pthreads variant.
+        - openblas_threading_pthreads   # [osx and USE_OPENMP == 0]
+    files:
+      - include/*.h                                       # [not win]
+      - lib/libopenblas{{ SYMBOLSUFFIX }}*.a              # [not win]
+      - lib/libopenblas{{ SYMBOLSUFFIX }}{{ SHLIB_EXT }}  # [not win]
+      - lib/pkgconfig/openblas.pc                         # [not win]
+      - lib/cmake/openblas/*                              # [not win]
+      - Library/include/openblas                          # [win]
+      - Library/lib/openblas{{ SYMBOLSUFFIX }}.lib        # [win]
+      - Library/lib/pkgconfig/openblas.pc                 # [win]
+      - Library/share/cmake/OpenBLAS                      # [win]
+    requirements:
+      run:
+        - {{ pin_subpackage("libopenblas-ilp64", exact=True) }}
     test:
       commands:
         - test -f ${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}.a                       # [not win]
