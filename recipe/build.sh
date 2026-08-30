@@ -38,6 +38,12 @@ elif [[ "${target_platform}" == linux-64 ]]; then
   BUILD_BFLOAT16=1
   BINARY="64"
   DYNAMIC_ARCH=1
+elif [[ "${target_platform}" == linux-riscv64 ]]; then
+  # RISCV64_GENERIC is the baseline; DYNAMIC_ARCH adds the RVV 1.0 kernels
+  # (RISCV64_ZVL128B/ZVL256B), dispatched at runtime via the hwprobe syscall.
+  TARGET="RISCV64_GENERIC"
+  BINARY="64"
+  DYNAMIC_ARCH=1
 elif [[ "${target_platform}" == osx-64 ]]; then
   TARGET="CORE2"
   BUILD_BFLOAT16=1
@@ -47,6 +53,9 @@ elif [[ "${target_platform}" == osx-arm64 ]]; then
   TARGET="VORTEX"
   BINARY="64"
   DYNAMIC_ARCH=0
+else
+  echo "Unknown platform ${target_platform}"
+  exit 1
 fi
 
 QUIET_MAKE=0
