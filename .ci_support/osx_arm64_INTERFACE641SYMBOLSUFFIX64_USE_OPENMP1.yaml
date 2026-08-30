@@ -7,11 +7,11 @@ MACOSX_SDK_VERSION:
 SYMBOLSUFFIX:
 - '64_'
 USE_OPENMP:
-- '0'
+- '1'
 c_compiler:
 - clang
 c_compiler_version:
-- '19'
+- '21'
 c_stdlib:
 - macosx_deployment_target
 c_stdlib_version:
@@ -23,22 +23,17 @@ channel_targets:
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
-- '14'
+- '15'
 llvm_openmp:
-- '19'
+- '21'
 macos_machine:
-- x86_64-apple-darwin13.4.0
-name_suffix:
-- -ilp64
-openblas:
-- 0.3.*
+- arm64-apple-darwin20.0.0
 perl:
 - 5.32.1
 target_platform:
-- osx-64
+- osx-arm64
 zip_keys:
 - - SYMBOLSUFFIX
-  - name_suffix
   - INTERFACE64
 - - c_compiler_version
   - fortran_compiler_version
