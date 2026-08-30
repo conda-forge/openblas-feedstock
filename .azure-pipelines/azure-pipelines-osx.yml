@@ -8,8 +8,8 @@ jobs:
     vmImage: $(VMIMAGE)
   strategy:
     matrix:
-      osx_64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP0name_suffix:
-        CONFIG: osx_64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP0name_suffix
+      osx_64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP0:
+        CONFIG: osx_64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP0
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
         build_workspace_dir: ~/miniforge3/conda-bld
@@ -18,8 +18,8 @@ jobs:
         resize_partitions: false
         store_build_artifacts: false
         tools_install_dir: ~/miniforge3
-      osx_64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP1name_suffix:
-        CONFIG: osx_64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP1name_suffix
+      osx_64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP1:
+        CONFIG: osx_64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP1
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
         build_workspace_dir: ~/miniforge3/conda-bld
@@ -28,8 +28,8 @@ jobs:
         resize_partitions: false
         store_build_artifacts: false
         tools_install_dir: ~/miniforge3
-      osx_64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64:
-        CONFIG: osx_64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64
+      osx_64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP0:
+        CONFIG: osx_64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP0
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
         build_workspace_dir: ~/miniforge3/conda-bld
@@ -38,8 +38,8 @@ jobs:
         resize_partitions: false
         store_build_artifacts: false
         tools_install_dir: ~/miniforge3
-      osx_64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64:
-        CONFIG: osx_64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64
+      osx_64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP1:
+        CONFIG: osx_64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP1
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
         build_workspace_dir: ~/miniforge3/conda-bld
@@ -48,8 +48,8 @@ jobs:
         resize_partitions: false
         store_build_artifacts: false
         tools_install_dir: ~/miniforge3
-      osx_arm64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP0name_suffix:
-        CONFIG: osx_arm64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP0name_suffix
+      osx_arm64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP0:
+        CONFIG: osx_arm64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP0
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15-arm64
         build_workspace_dir: ~/miniforge3/conda-bld
@@ -58,8 +58,8 @@ jobs:
         resize_partitions: false
         store_build_artifacts: false
         tools_install_dir: ~/miniforge3
-      osx_arm64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP1name_suffix:
-        CONFIG: osx_arm64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP1name_suffix
+      osx_arm64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP1:
+        CONFIG: osx_arm64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP1
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15-arm64
         build_workspace_dir: ~/miniforge3/conda-bld
@@ -68,8 +68,8 @@ jobs:
         resize_partitions: false
         store_build_artifacts: false
         tools_install_dir: ~/miniforge3
-      osx_arm64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64:
-        CONFIG: osx_arm64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64
+      osx_arm64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP0:
+        CONFIG: osx_arm64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP0
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15-arm64
         build_workspace_dir: ~/miniforge3/conda-bld
@@ -78,8 +78,8 @@ jobs:
         resize_partitions: false
         store_build_artifacts: false
         tools_install_dir: ~/miniforge3
-      osx_arm64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64:
-        CONFIG: osx_arm64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64
+      osx_arm64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP1:
+        CONFIG: osx_arm64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP1
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15-arm64
         build_workspace_dir: ~/miniforge3/conda-bld

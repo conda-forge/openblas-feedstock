@@ -1,0 +1,324 @@
+schema_version: 1
+
+context:
+  version: "0.3.34"
+  build_number: 1
+  next_version: "0.3.35"
+
+recipe:
+  name: openblas-split
+  version: ${{ version }}
+
+source:
+  url: https://github.com/OpenMathLib/OpenBLAS/archive/v${{ version }}.tar.gz
+  sha256: cd7e129868320cc2d033afa920e31202dfe0b8066a5b66661900ccc0f197dfed
+  patches:
+    - if: build_platform != target_platform
+      then: patches/0001-don-t-run-test_fork-in-cross-compilation.patch
+
+build:
+  number: ${{ build_number }}
+  variant:
+    use_keys:
+      - INTERFACE64
+
+outputs:
+  - staging:
+      name: openblas-build
+    build:
+      script:
+        file: build
+        env:
+          INTERFACE64: ${{ INTERFACE64 }}
+          SYMBOLSUFFIX: ${{ SYMBOLSUFFIX }}
+          USE_OPENMP: ${{ USE_OPENMP }}
+    requirements:
+      build:
+        - ${{ stdlib('c') }}
+        - ${{ compiler('c') }}
+        - ${{ compiler('fortran') }}
+        - perl
+        - if: unix
+          then: make
+        - if: win
+          then:
+            - cmake
+            - ninja
+        - if: osx
+          then: objconv
+        - if: USE_OPENMP == "1"
+          then: llvm-openmp
+        # Following is needed because the Fortran compiler add an rpath to the BUILD_PREFIX
+        - if: linux and USE_OPENMP == "1"
+          then: _openmp_mutex * *_llvm
+      host:
+        - if: win and USE_OPENMP == "1"
+          then: llvm-openmp-fortran
+
+  - package:
+      name: libopenblas
+    inherit:
+      from: openblas-build
+      run_exports: false
+    build:
+      skip: INTERFACE64 != "0"
+      string: ${{ "openmp" if USE_OPENMP == "1" else "pthreads" }}_h${{ hash }}_${{ build_number }}
+      variant:
+        down_prioritize_variant: ${{ 1 if (not osx and USE_OPENMP == "1") or (osx and USE_OPENMP == "0") else 0 }}
+      files:
+        - if: unix
+          then: lib/libopenblas${{ SYMBOLSUFFIX }}*p*.${{ "dylib" if osx else "so" }}
+        - if: linux
+          then: lib/libopenblas${{ SYMBOLSUFFIX }}.so.*
+        - if: osx
+          then: lib/libopenblas${{ SYMBOLSUFFIX }}.*.dylib
+        - if: win
+          then: Library/bin/openblas${{ SYMBOLSUFFIX }}.dll
+    requirements:
+      build:
+        - ${{ stdlib('c') }}
+        - ${{ compiler('c') }}
+        - ${{ compiler('fortran') }}
+        - if: USE_OPENMP == "1"
+          then: llvm-openmp
+      run_exports:
+        - ${{ pin_subpackage("libopenblas") }}
+      run_constraints:
+        - openblas >=${{ version }},<${{ next_version }}.0a0
+    tests:
+      - package_contents:
+          files:
+            - if: linux
+              then:
+                - lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}.so
+                - lib/libopenblas${{ SYMBOLSUFFIX }}.so.0
+            - if: osx
+              then:
+                - lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}.dylib
+                - lib/libopenblas${{ SYMBOLSUFFIX }}.0.dylib
+            - if: win
+              then: Library/bin/openblas${{ SYMBOLSUFFIX }}.dll
+      - if: unix
+        then:
+          files:
+            recipe:
+              - test_openblas.c
+          requirements:
+            build:
+              - binutils
+              - ${{ stdlib('c') }}
+              - ${{ compiler('c') }}
+          script:
+            - $CC test_openblas.c ${{ "-Dopenblas_get_config=openblas_get_config64_" if SYMBOLSUFFIX == "64_" else "" }} -L$PREFIX/lib -Wl,-rpath,$PREFIX/lib -Wl,-l:libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}.${{ "dylib" if osx else "so" }} -o test_openblas
+            - if: build_platform == target_platform
+              then: ./test_openblas
+            - if: osx
+              then: nm -g ${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}.dylib | grep dsecnd
+    about:
+      homepage: http://www.openblas.net/
+      repository: https://github.com/OpenMathLib/OpenBLAS
+      license: BSD-3-Clause
+      license_file:
+        - LICENSE
+        - lapack-netlib/LICENSE
+      summary: ${{ "An optimized BLAS library (ILP64 interface) based on GotoBLAS2 1.13 BSD version" if SYMBOLSUFFIX == "64_" else "An optimized BLAS library based on GotoBLAS2 1.13 BSD version" }}
+
+  - package:
+      name: libopenblas-ilp64
+    inherit:
+      from: openblas-build
+      run_exports: false
+    build:
+      skip: INTERFACE64 != "1"
+      string: ${{ "openmp" if USE_OPENMP == "1" else "pthreads" }}_h${{ hash }}_${{ build_number }}
+      variant:
+        down_prioritize_variant: ${{ 1 if (not osx and USE_OPENMP == "1") or (osx and USE_OPENMP == "0") else 0 }}
+      files:
+        - if: unix
+          then: lib/libopenblas${{ SYMBOLSUFFIX }}*p*.${{ "dylib" if osx else "so" }}
+        - if: linux
+          then: lib/libopenblas${{ SYMBOLSUFFIX }}.so.*
+        - if: osx
+          then: lib/libopenblas${{ SYMBOLSUFFIX }}.*.dylib
+        - if: win
+          then: Library/bin/openblas${{ SYMBOLSUFFIX }}.dll
+    requirements:
+      build:
+        - ${{ stdlib('c') }}
+        - ${{ compiler('c') }}
+        - ${{ compiler('fortran') }}
+        - if: USE_OPENMP == "1"
+          then: llvm-openmp
+      run_exports:
+        - ${{ pin_subpackage("libopenblas-ilp64") }}
+      run_constraints:
+        - openblas-ilp64 >=${{ version }},<${{ next_version }}.0a0
+    tests:
+      - package_contents:
+          files:
+            - if: linux
+              then:
+                - lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}.so
+                - lib/libopenblas${{ SYMBOLSUFFIX }}.so.0
+            - if: osx
+              then:
+                - lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}.dylib
+                - lib/libopenblas${{ SYMBOLSUFFIX }}.0.dylib
+            - if: win
+              then: Library/bin/openblas${{ SYMBOLSUFFIX }}.dll
+      - if: unix
+        then:
+          files:
+            recipe:
+              - test_openblas.c
+          requirements:
+            build:
+              - binutils
+              - ${{ stdlib('c') }}
+              - ${{ compiler('c') }}
+          script:
+            - $CC test_openblas.c ${{ "-Dopenblas_get_config=openblas_get_config64_" if SYMBOLSUFFIX == "64_" else "" }} -L$PREFIX/lib -Wl,-rpath,$PREFIX/lib -Wl,-l:libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}.${{ "dylib" if osx else "so" }} -o test_openblas
+            - if: build_platform == target_platform
+              then: ./test_openblas
+            - if: osx
+              then: nm -g ${PREFIX}/lib/libopenblas${{ SYMBOLSUFFIX }}p-r${{ version }}.dylib | grep dsecnd
+    about:
+      homepage: http://www.openblas.net/
+      repository: https://github.com/OpenMathLib/OpenBLAS
+      license: BSD-3-Clause
+      license_file:
+        - LICENSE
+        - lapack-netlib/LICENSE
+      summary: ${{ "An optimized BLAS library (ILP64 interface) based on GotoBLAS2 1.13 BSD version" if SYMBOLSUFFIX == "64_" else "An optimized BLAS library based on GotoBLAS2 1.13 BSD version" }}
+
+  - package:
+      name: openblas
+    inherit:
+      from: openblas-build
+      run_exports: false
+    build:
+      skip: INTERFACE64 != "0"
+      string: ${{ "openmp" if USE_OPENMP == "1" else "pthreads" }}_h${{ hash }}_${{ build_number }}
+      variant:
+        down_prioritize_variant: ${{ 1 if (not osx and USE_OPENMP == "1") or (osx and USE_OPENMP == "0") else 0 }}
+      files:
+        - if: unix
+          then:
+            - include/*.h
+            - lib/libopenblas${{ SYMBOLSUFFIX }}*.a
+            - lib/libopenblas${{ SYMBOLSUFFIX }}.${{ "dylib" if osx else "so" }}
+            - lib/pkgconfig/openblas${{ "64" if SYMBOLSUFFIX == "64_" else "" }}.pc
+            - lib/cmake/openblas/*
+        - if: win
+          then:
+            - Library/include/openblas
+            - Library/lib/openblas${{ SYMBOLSUFFIX }}.lib
+            - Library/lib/pkgconfig/openblas.pc
+            - Library/share/cmake/OpenBLAS
+    requirements:
+      run:
+        - ${{ pin_subpackage("libopenblas", exact=True) }}
+    tests:
+      - package_contents:
+          include:
+            - if: unix
+              then:
+                - cblas.h
+                - lapacke.h
+                - openblas_config.h
+          files:
+            - if: unix
+              then:
+                - lib/libopenblas${{ SYMBOLSUFFIX }}.a
+                - lib/libopenblas${{ SYMBOLSUFFIX }}.${{ "dylib" if osx else "so" }}
+                - lib/pkgconfig/openblas${{ "64" if SYMBOLSUFFIX == "64_" else "" }}.pc
+            - if: win
+              then:
+                - Library/include/openblas/cblas.h
+                - Library/include/openblas/lapacke.h
+                - Library/include/openblas/openblas_config.h
+                - Library/lib/openblas${{ SYMBOLSUFFIX }}.lib
+                - Library/lib/pkgconfig/openblas.pc
+    about:
+      homepage: http://www.openblas.net/
+      repository: https://github.com/OpenMathLib/OpenBLAS
+      license: BSD-3-Clause
+      license_file:
+        - LICENSE
+        - lapack-netlib/LICENSE
+      summary: ${{ "An optimized BLAS library (ILP64 interface) based on GotoBLAS2 1.13 BSD version" if SYMBOLSUFFIX == "64_" else "An optimized BLAS library based on GotoBLAS2 1.13 BSD version" }}
+
+  - package:
+      name: openblas-ilp64
+    inherit:
+      from: openblas-build
+      run_exports: false
+    build:
+      skip: INTERFACE64 != "1"
+      string: ${{ "openmp" if USE_OPENMP == "1" else "pthreads" }}_h${{ hash }}_${{ build_number }}
+      variant:
+        down_prioritize_variant: ${{ 1 if (not osx and USE_OPENMP == "1") or (osx and USE_OPENMP == "0") else 0 }}
+      files:
+        - if: unix
+          then:
+            - include/*.h
+            - lib/libopenblas${{ SYMBOLSUFFIX }}*.a
+            - lib/libopenblas${{ SYMBOLSUFFIX }}.${{ "dylib" if osx else "so" }}
+            - lib/pkgconfig/openblas${{ "64" if SYMBOLSUFFIX == "64_" else "" }}.pc
+            - lib/cmake/openblas/*
+        - if: win
+          then:
+            - Library/include/openblas
+            - Library/lib/openblas${{ SYMBOLSUFFIX }}.lib
+            - Library/lib/pkgconfig/openblas.pc
+            - Library/share/cmake/OpenBLAS
+    requirements:
+      run:
+        - ${{ pin_subpackage("libopenblas-ilp64", exact=True) }}
+    tests:
+      - package_contents:
+          include:
+            - if: unix
+              then:
+                - cblas.h
+                - lapacke.h
+                - openblas_config.h
+          files:
+            - if: unix
+              then:
+                - lib/libopenblas${{ SYMBOLSUFFIX }}.a
+                - lib/libopenblas${{ SYMBOLSUFFIX }}.${{ "dylib" if osx else "so" }}
+                - lib/pkgconfig/openblas${{ "64" if SYMBOLSUFFIX == "64_" else "" }}.pc
+            - if: win
+              then:
+                - Library/include/openblas/cblas.h
+                - Library/include/openblas/lapacke.h
+                - Library/include/openblas/openblas_config.h
+                - Library/lib/openblas${{ SYMBOLSUFFIX }}.lib
+                - Library/lib/pkgconfig/openblas.pc
+    about:
+      homepage: http://www.openblas.net/
+      repository: https://github.com/OpenMathLib/OpenBLAS
+      license: BSD-3-Clause
+      license_file:
+        - LICENSE
+        - lapack-netlib/LICENSE
+      summary: ${{ "An optimized BLAS library (ILP64 interface) based on GotoBLAS2 1.13 BSD version" if SYMBOLSUFFIX == "64_" else "An optimized BLAS library based on GotoBLAS2 1.13 BSD version" }}
+
+about:
+  homepage: http://www.openblas.net/
+  repository: https://github.com/OpenMathLib/OpenBLAS
+  license: BSD-3-Clause
+  license_file:
+    - LICENSE
+    - lapack-netlib/LICENSE
+  summary: An optimized BLAS library based on GotoBLAS2 1.13 BSD version
+
+extra:
+  recipe-maintainers:
+    - gillins
+    - groutr
+    - jakirkham
+    - isuruf
+    - h-vetinari
+  feedstock-name: openblas
