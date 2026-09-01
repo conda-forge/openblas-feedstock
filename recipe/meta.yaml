@@ -25,7 +25,8 @@ requirements:
     - {{ stdlib("c") }}
     - {{ compiler("c") }}
     - {{ compiler("fortran") }}
-    - perl
+    - perl                    # [target_platform != "win-arm64"]
+    - m2-perl                 # [target_platform == "win-arm64"]
     - make                    # [not win]
     - cmake                   # [win]
     - ninja                   # [win]
@@ -73,11 +74,13 @@ outputs:
     test:
       requires:
         - python *
+        - {{ compiler("c") }}  # [win and arm64]
       commands:
         - test -f ${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}p-r{{ version }}{{ SHLIB_EXT }}                                    # [not win]
         - nm -g ${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}p-r{{ version }}{{ SHLIB_EXT }} | grep dsecnd                        # [osx and build_platform=="osx-64"]
         - python -c "import ctypes; ctypes.cdll['${PREFIX}/lib/libopenblas{{ SYMBOLSUFFIX }}p-r{{ version }}{{ SHLIB_EXT }}']"  # [not win]
         - if not exist %PREFIX%\\Library\\bin\\openblas{{ SYMBOLSUFFIX }}.dll exit 1                                            # [win]
+        - dumpbin /headers "%PREFIX%\\Library\\bin\\openblas{{ SYMBOLSUFFIX }}.dll" | findstr /I /C:"AA64 machine (ARM64)"      # [win and arm64]
 
   - name: openblas{{ name_suffix }}
     build:
