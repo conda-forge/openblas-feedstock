@@ -1,0 +1,39 @@
+From 96d60aa6a80ecdf3b10af044ced6926deee0c846 Mon Sep 17 00:00:00 2001
+From: Martin Kroeker <martin@ruby.chemie.uni-freiburg.de>
+Date: Mon, 20 Jul 2026 00:14:23 +0200
+Subject: [PATCH] Fix version check and prefix llvm backend option
+
+---
+ cmake/system.cmake | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
+
+diff --git a/cmake/system.cmake b/cmake/system.cmake
+index ae81fe808d..66ba99b9be 100644
+--- a/cmake/system.cmake
++++ b/cmake/system.cmake
+@@ -368,22 +368,20 @@ if (${TARGET} STREQUAL NEOVERSEV1)
+   if (${TARGET} STREQUAL ARMV9SME)
+       set (KERNEL_DEFINITIONS  "${KERNEL_DEFINITIONS} -march=armv9-a+sme -O3")
+ 	  if (${CMAKE_SYSTEM_NAME} STREQUAL Windows AND ${CMAKE_C_COMPILER_ID} MATCHES "Clang")
+-	  set (KERNEL_DEFINITIONS  "${KERNEL_DEFINITIONS} --aarch64-stack-hazard-size=0")
++	  set (KERNEL_DEFINITIONS  "${KERNEL_DEFINITIONS} -mllvm --aarch64-stack-hazard-size=0")
+ 	  endif()
+   endif()
+   if (${TARGET} STREQUAL VORTEXM4)
+       set (KERNEL_DEFINITIONS  "${KERNEL_DEFINITIONS} -march=armv8.4-a+sme -O3")
+ 	  if (${CMAKE_SYSTEM_NAME} STREQUAL Windows AND ${CMAKE_C_COMPILER_ID} MATCHES "Clang")
+-	  set (KERNEL_DEFINITIONS  "${KERNEL_DEFINITIONS} --aarch64-stack-hazard-size=0")
++	  set (KERNEL_DEFINITIONS  "${KERNEL_DEFINITIONS} -mllvm --aarch64-stack-hazard-size=0")
+ 	  endif()
+   endif()
+   if (${TARGET} STREQUAL A64FX)
+     if (${CMAKE_C_COMPILER_ID} STREQUAL "PGI" AND NOT NO_SVE)
+       set (KERNEL_DEFINITIONS  "${KERNEL_DEFINITIONS} -Msve-intrinsics -march=armv8.2-a+sve -mtune=a64fx")
+     else ()
+-	  set (GCC_VERSION 0.0)
+-      execute_process(COMMAND ${CMAKE_C_COMPILER} -dumpversion OUTPUT_VARIABLE GCC_VERSION)
+-      if (${GCC_VERSION} VERSION_GREATER 10.4 OR ${GCC_VERSION} VERSION_EQUAL 10.4)
++	  if (CMAKE_C_COMPILER_VERSION VERSION_GREATER 10.4 OR CMAKE_C_COMPILER_VERSION VERSION_EQUAL 10.4)
+         set (KERNEL_DEFINITIONS  "${KERNEL_DEFINITIONS} -march=armv8.2-a+sve -mtune=a64fx")
+       else ()
+         message(FATAL_ERROR "Compiler $${CMAKE_C_COMPILER} {GCC_VERSION} does not support A64FX.")

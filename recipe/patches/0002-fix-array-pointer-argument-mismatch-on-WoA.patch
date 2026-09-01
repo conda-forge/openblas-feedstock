@@ -1,0 +1,34 @@
+From 3f55cbce38cb791acf522ddff85006bbc837759f Mon Sep 17 00:00:00 2001
+From: Martin Kroeker <martin@ruby.chemie.uni-freiburg.de>
+Date: Fri, 17 Jul 2026 14:31:37 +0200
+Subject: [PATCH] Fix array/pointer argument mismatch on WoA
+
+---
+ cpuid_arm64.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/cpuid_arm64.c b/cpuid_arm64.c
+index c5dcaf6843..874af7800a 100644
+--- a/cpuid_arm64.c
++++ b/cpuid_arm64.c
+@@ -426,13 +426,13 @@ int detect(void)
+ 	if (errcode != ERROR_SUCCESS) wprintf(L"Error reading cpuname from registry:%x\n",errcode);
+ //wprintf(stderr,L"%s\n",(PWSTR)valstring);
+ 	RegCloseKey(reghandle);
+-	if (strstr(valstring, "Snapdragon(R) X Elite")) {
++	if (strstr(pvalstring, "Snapdragon(R) X Elite")) {
+ 		aliased = 1;
+ 		return CPU_NEOVERSEN1;
+ 	}
+-	if (strstr(valstring, "Ampere(R) Altra")) return CPU_NEOVERSEN1;
+-	if (strstr(valstring, "Snapdragon (TM) 8cx Gen 3")) return CPU_CORTEXX1;
+-	if (strstr(valstring, "Snapdragon Compute Platform")) return CPU_CORTEXX1;
++	if (strstr(pvalstring, "Ampere(R) Altra")) return CPU_NEOVERSEN1;
++	if (strstr(pvalstring, "Snapdragon (TM) 8cx Gen 3")) return CPU_CORTEXX1;
++	if (strstr(pvalstring, "Snapdragon Compute Platform")) return CPU_CORTEXX1;
+ #endif
+ #endif
+ 	return CPU_ARMV8;	
+-- 
+2.51.0
+
