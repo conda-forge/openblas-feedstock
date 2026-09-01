@@ -16,6 +16,8 @@ source:
     - patches/0001-don-t-run-test_fork-in-cross-compilation.patch  # [build_platform != target_platform]
     # Included upstream immediately after the 0.3.34 release.
     - patches/0002-fix-array-pointer-argument-mismatch-on-WoA.patch  # [win and arm64]
+    # Avoid invoking GCC-only -dumpversion when CMake selected clang-cl.
+    - patches/0003-fix-cmake-compiler-version-check.patch  # [win and arm64]
 
 build:
   number: {{ build_number }}
