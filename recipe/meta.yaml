@@ -14,6 +14,8 @@ source:
   patches:
     # don't run test_fork in emulation, it has a tendency to hang indefinitely
     - patches/0001-don-t-run-test_fork-in-cross-compilation.patch  # [build_platform != target_platform]
+    # Included upstream immediately after the 0.3.34 release.
+    - patches/0002-fix-array-pointer-argument-mismatch-on-WoA.patch  # [win and arm64]
 
 build:
   number: {{ build_number }}
