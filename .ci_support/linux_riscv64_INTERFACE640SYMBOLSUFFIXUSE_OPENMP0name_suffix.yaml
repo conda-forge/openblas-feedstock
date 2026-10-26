@@ -1,3 +1,5 @@
+DOCKER_PLATFORM:
+- linux/riscv64
 INTERFACE64:
 - '0'
 SYMBOLSUFFIX:
@@ -17,7 +19,7 @@ channel_sources:
 channel_targets:
 - conda-forge main
 docker_image:
-- quay.io/condaforge/linux-anvil-x86_64:alma10
+- quay.io/condaforge/linux-anvil-riscv64:rocky10
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
