@@ -176,7 +176,7 @@ jobs:
             os: ubuntu
             pagefile_size: 0
             resize_partitions: False
-            runs_on: ['ubuntu-24.04-riscv']
+            runs_on: ['ubuntu-24.04-riscv', 'ur']
             tools_install_dir: ~/miniforge3
           - CONFIG: linux_riscv64_INTERFACE640SYMBOLSUFFIXUSE_OPENMP1name_suffix
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-riscv64:rocky10
@@ -188,7 +188,7 @@ jobs:
             os: ubuntu
             pagefile_size: 0
             resize_partitions: False
-            runs_on: ['ubuntu-24.04-riscv']
+            runs_on: ['ubuntu-24.04-riscv', 'ur']
             tools_install_dir: ~/miniforge3
           - CONFIG: linux_riscv64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP0name_suffix-ilp64
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-riscv64:rocky10
@@ -200,7 +200,7 @@ jobs:
             os: ubuntu
             pagefile_size: 0
             resize_partitions: False
-            runs_on: ['ubuntu-24.04-riscv']
+            runs_on: ['ubuntu-24.04-riscv', 'ur']
             tools_install_dir: ~/miniforge3
           - CONFIG: linux_riscv64_INTERFACE641SYMBOLSUFFIX64_USE_OPENMP1name_suffix-ilp64
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-riscv64:rocky10
@@ -212,7 +212,7 @@ jobs:
             os: ubuntu
             pagefile_size: 0
             resize_partitions: False
-            runs_on: ['ubuntu-24.04-riscv']
+            runs_on: ['ubuntu-24.04-riscv', 'ur']
             tools_install_dir: ~/miniforge3
           - CONFIG: win_64_USE_OPENMP0
             STORE_BUILD_ARTIFACTS: False
